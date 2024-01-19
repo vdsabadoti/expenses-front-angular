@@ -1,0 +1,23 @@
+<div class="flow-root">
+  <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+      <li class="py-3 sm:py-4">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img class="w-8 h-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/3418/3418886.png" alt="Neil image">
+          </div>
+          <div class="flex-1 min-w-0 ms-4">
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
+              {{ participant.nickname }}
+            </p>
+            <input type="number" id="number-input" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+          </div>
+          <div class="flex-1 min-w-0 ms-4 text-base font-semibold text-gray-900 dark:text-black">
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+              {{ participant.nickname }}
+            </p>
+            <button class="flex-1 min-w-0 ms-4 text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">ADD</button>
+          </div>
+        </div>
+      </li>
+  </ul>
+</div>

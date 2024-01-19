@@ -1,0 +1,11 @@
+<p>expense-detail works!</p>
+<p>{{ expense.label }}</p>
+@if (message$ | async; as message) {
+  <p> {{ message }}</p>
+}
+@if (expense$ | async; as expense) {
+  <p> {{ expense.expenseName }}</p>
+}
+
+
+
