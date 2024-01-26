@@ -3,16 +3,16 @@ import {Participant} from "./participant";
 import {Line} from "./line";
 export class Expense {
   idExpense:number;
-  balance:number;
-  budgetByMonth:number;
+  balance:number | undefined;
+  budgetByMonth:number | undefined ;
   expenseName:string;
   description:string;
   owner:User;
   participantList:Array<Participant>;
-  lineList:Array<Line>;
+  lineList:Array<Line> | undefined;
 
-  constructor(idExpense:number, balance:number, budgetByMonth:number, expenseName:string, description:string,
-              owner:User, participantList:Array<Participant>, lineList:Array<Line>) {
+  constructor(idExpense:number, balance:number | undefined, budgetByMonth:number | undefined, expenseName:string, description:string,
+              owner:User, participantList:Array<Participant>, lineList:Array<Line> | undefined) {
     this.idExpense = idExpense;
     this.balance = balance;
     this.budgetByMonth =budgetByMonth;
