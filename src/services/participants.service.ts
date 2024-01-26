@@ -1,31 +1,29 @@
 import { Injectable } from '@angular/core';
 import {Participant} from "../class/participant";
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticipantsService {
 
-  private participants: Array<any> = [];
-  private participantZero: Participant = new Participant(1, undefined, 10, 500, undefined);
-  private participantsOfANewExpense: BehaviorSubject<Array<Participant>> = new BehaviorSubject<Array<Participant>>([this.participantZero]);
-  public readonly data = this.participantsOfANewExpense.asObservable();
+  private _participantsOfANewExpense: BehaviorSubject<Participant[]> = new BehaviorSubject<Participant[]>([]);
+  public readonly data: Observable<Participant[]> = this._participantsOfANewExpense.asObservable();
 
   constructor() { }
 
-  public newExpense() : void {
-    this.participantsOfANewExpense.next([]);
+  public eraseParticipantsForLaterExpense() : void {
+    this._participantsOfANewExpense.next([]);
   }
 
   public addParticipantToThisNewExpense(participant:Participant) : void {
-    let participantsSnapshot = this.participantsOfANewExpense.getValue();
-    participantsSnapshot.push(participant);
-    this.participantsOfANewExpense.next(participantsSnapshot);
+    let participantsAlreadyIn = this._participantsOfANewExpense.getValue();
+    participantsAlreadyIn.push(participant);
+    this._participantsOfANewExpense.next(participantsAlreadyIn);
   }
 
   public listParticipantsOfThisNewExpense() : Array<Participant> {
-    return this.participantsOfANewExpense.getValue();
+    return this._participantsOfANewExpense.getValue();
   }
 
   public getParticipantsForTest(): Participant[] {

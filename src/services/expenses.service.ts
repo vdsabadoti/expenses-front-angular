@@ -22,6 +22,11 @@ export class ExpensesService {
     return this.expense;
   }
 
+  public createExpense(){
+    //CREATE EXPENSE IN DB
+    this.expenses.push({id: 3, label: 'Test'})
+  }
+
   public setExpenseDetail(id:number) : void {
     let index:number = this.expenses.findIndex(item => item.id === id);
     this.expense = this.expenses[index];

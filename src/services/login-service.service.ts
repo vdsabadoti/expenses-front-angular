@@ -5,7 +5,18 @@ import { Injectable } from '@angular/core';
 })
 export class LoginServiceService {
 
-  private users: Array<any> = [];
+  private users: Array<any> = [
+    {
+      id: 1, nickname: 'Mulan',
+      quote: 'The flower that blooms in adversity is the rarest and most beautiful of all',
+      image: 'https://recreio.uol.com.br/media/uploads/disney/mulan_capa.jpg'
+    },
+    {
+      id: 2, nickname: 'Spiderman',
+      quote: 'With great power comes great responsibility',
+      image: 'https://assetsio.reedpopcdn.com/Spider-Banner_AVVWjOb.jpg?width=880&quality=80&format=jpg&dpr=2&auto=webp'
+    },
+  ];
   private userOnline: number = 0;
   public loggedIn:boolean = false;
 

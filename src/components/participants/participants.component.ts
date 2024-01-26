@@ -4,14 +4,16 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {AddParticipantsLineComponent} from "../add-participants-line/add-participants-line.component";
 import {ParticipantsService} from "../../services/participants.service";
 import {AsyncPipe} from "@angular/common";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-participants',
   standalone: true,
-  imports: [
-    AddParticipantsLineComponent,
-    AsyncPipe
-  ],
+    imports: [
+        AddParticipantsLineComponent,
+        AsyncPipe,
+        ReactiveFormsModule
+    ],
   templateUrl: './participants.component.html',
   styleUrl: './participants.component.css'
 })
