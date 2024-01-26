@@ -2,6 +2,8 @@ import {Component, inject, Input} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {ParticipantsService} from "../../services/participants.service";
 import {Participant} from "../../class/participant";
+import {UserService} from "../../services/user.service";
+import {User} from "../../class/user";
 
 @Component({
   selector: 'app-add-participants-line',
@@ -13,14 +15,17 @@ import {Participant} from "../../class/participant";
   styleUrl: './add-participants-line.component.css'
 })
 export class AddParticipantsLineComponent {
-  @Input() user!: any;
+  @Input() user!: User;
   budget:number = 0;
   private participantsService = inject(ParticipantsService);
+  private userService = inject(UserService);
 
   public addParticipant(userid:number){
     this.participantsService.addParticipantToThisNewExpense(
       new Participant(userid, this.user, 0, this.budget, undefined)
     )
+    //this.userService.updateUsersAvailable(this.user); THE PROBLEM IS HERE !!!!!
+    //console.log(this.user);
 }
 
 }

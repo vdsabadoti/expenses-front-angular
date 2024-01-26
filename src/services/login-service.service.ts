@@ -7,12 +7,12 @@ export class LoginServiceService {
 
   private users: Array<any> = [
     {
-      id: 1, nickname: 'Mulan',
+      id: 1, username: 'Mulan',
       quote: 'The flower that blooms in adversity is the rarest and most beautiful of all',
       image: 'https://recreio.uol.com.br/media/uploads/disney/mulan_capa.jpg'
     },
     {
-      id: 2, nickname: 'Spiderman',
+      id: 2, username: 'Spiderman',
       quote: 'With great power comes great responsibility',
       image: 'https://assetsio.reedpopcdn.com/Spider-Banner_AVVWjOb.jpg?width=880&quality=80&format=jpg&dpr=2&auto=webp'
     },
@@ -21,18 +21,17 @@ export class LoginServiceService {
   public loggedIn:boolean = false;
 
   constructor() {
-    this.createUsers();
   }
 
   private createUsers() : void {
     this.users = [
       {
-        id: 1, nickname: 'Mulan',
+        id: 1, username: 'Mulan',
         quote: 'The flower that blooms in adversity is the rarest and most beautiful of all',
         image: 'https://recreio.uol.com.br/media/uploads/disney/mulan_capa.jpg'
       },
       {
-        id: 2, nickname: 'Spiderman',
+        id: 2, username: 'Spiderman',
         quote: 'With great power comes great responsibility',
         image: 'https://assetsio.reedpopcdn.com/Spider-Banner_AVVWjOb.jpg?width=880&quality=80&format=jpg&dpr=2&auto=webp'
       },
@@ -57,4 +56,6 @@ export class LoginServiceService {
   public authenticationSuccessfull() : void {
     this.loggedIn = true;
   }
+
+
 }

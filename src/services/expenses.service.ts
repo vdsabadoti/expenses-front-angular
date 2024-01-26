@@ -25,6 +25,8 @@ export class ExpensesService {
   public createExpense(){
     //CREATE EXPENSE IN DB
     this.expenses.push({id: 3, label: 'Test'})
+    //IF OK => set addedParticipants to zero (participants service)
+    //IF OK => set allusersbackinthegame (users service)
   }
 
   public setExpenseDetail(id:number) : void {

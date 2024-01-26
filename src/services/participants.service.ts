@@ -17,6 +17,7 @@ export class ParticipantsService {
   }
 
   public addParticipantToThisNewExpense(participant:Participant) : void {
+    console.log(participant.user)
     let participantsAlreadyIn = this._participantsOfANewExpense.getValue();
     participantsAlreadyIn.push(participant);
     this._participantsOfANewExpense.next(participantsAlreadyIn);
@@ -27,10 +28,7 @@ export class ParticipantsService {
   }
 
   public getParticipantsForTest(): Participant[] {
-    return [
-      new Participant(1, undefined, 10, 500, undefined),
-      new Participant(1, undefined, 10, 100, undefined)
-    ]
+    return []
   }
 
   private createParticipants() : Array<any> {
