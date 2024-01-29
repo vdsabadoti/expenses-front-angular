@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Participant} from "../class/participant";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {LoginServiceService} from "./login-service.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 export class ParticipantsService {
 
   private _participantsOfANewExpense: BehaviorSubject<Participant[]> = new BehaviorSubject<Participant[]>([]);
-  public readonly data: Observable<Participant[]> = this._participantsOfANewExpense.asObservable();
+  public readonly $data: Observable<Participant[]> = this._participantsOfANewExpense.asObservable();
+  private loginService = inject(LoginServiceService);
 
   constructor() { }
 
@@ -28,7 +30,10 @@ export class ParticipantsService {
   }
 
   public getParticipantsForTest(): Participant[] {
-    return []
+    return [
+      new Participant(1, this.loginService.getUserOnline(), 100, 100, undefined),
+      new Participant(1, this.loginService.getUserOnline(), 100, 100, undefined),
+    ];
   }
 
   private createParticipants() : Array<any> {

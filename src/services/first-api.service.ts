@@ -16,7 +16,7 @@ export class FirstApiService {
     return this.http.get(this.url);
   }
 
-  callOneExpese() : Observable<Expense> {
+  callOneExpense() : Observable<Expense> {
     return this.http.get<Expense>('http://localhost:8080/expense');
   }
 

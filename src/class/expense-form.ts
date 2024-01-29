@@ -1,8 +1,8 @@
 export class ExpenseForm {
 
-  public label:string | undefined;
-  public description:string | undefined ;
-  constructor(label:string | undefined , description:string | undefined) {
+  public label:string;
+  public description:string ;
+  constructor(label:string , description:string) {
     this.label = label;
     this.description = description;
   }

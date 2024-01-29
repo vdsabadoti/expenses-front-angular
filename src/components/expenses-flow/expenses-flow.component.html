@@ -4,16 +4,18 @@
         <thead>
         <tr>
           <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Expenses</th>
+          <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">Balance</th>
           <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
         </tr>
         </thead>
         <tbody>
-        @for (expense of expenses; track expense.label) {
+        @for (expense of expenses; track expense.expenseName) {
           <tr>
-            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ expense.label }}</td>
+            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ expense.expenseName }}</td>
+            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ expense.balance }}</td>
             <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
               <a routerLink="/expenses/detail" routerLinkActive="active" ariaCurrentWhenActive="page">
-                <button (click)="setExpenseAtService(expense.id)" class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">GO</button>
+                <button (click)="setExpenseAtService(expense.idExpense)" class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">GO</button>
               </a>
             </td>
           </tr>

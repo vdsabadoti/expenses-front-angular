@@ -24,8 +24,8 @@ export class AddParticipantsLineComponent {
     this.participantsService.addParticipantToThisNewExpense(
       new Participant(userid, this.user, 0, this.budget, undefined)
     )
-    //this.userService.updateUsersAvailable(this.user); THE PROBLEM IS HERE !!!!!
-    //console.log(this.user);
+    console.log(this.user);
+    this.userService.updateUsersAvailable(this.user); //THE PROBLEM IS HERE !!!!!
 }
 
 }

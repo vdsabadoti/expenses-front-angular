@@ -10,21 +10,22 @@ export class UserService {
 
   private loginService = inject(LoginServiceService);
   private _usersAvailable:BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.loginService.getUsers());
-  public readonly usersAvailable: Observable<User[]> = this._usersAvailable.asObservable();
+  public readonly $usersAvailable: Observable<User[]> = this._usersAvailable.asObservable();
 
   constructor() {
   }
 
   public updateUsersAvailable(user:User){
-    let usersAvailableSnapshot = this._usersAvailable.getValue();
-    let indexOfUserToDelete = usersAvailableSnapshot.map(e => e.username).indexOf(user.username);
-    delete usersAvailableSnapshot[indexOfUserToDelete];
-    this._usersAvailable.next(usersAvailableSnapshot);
+    const usersAvailableSnapshot = this._usersAvailable.getValue();
+    const itemsWithoutDeleted = usersAvailableSnapshot.filter((u) => u.username !== user.username);
+    //let indexOfUserToDelete = usersAvailableSnapshot.map(e => e.username).indexOf(user.username);
+    //delete usersAvailableSnapshot[indexOfUserToDelete];
+    this._usersAvailable.next(itemsWithoutDeleted);
     console.log(this._usersAvailable);
   }
 
   public getUsersAvailable(): Observable<User[]> {
-    return this.usersAvailable;
+    return this.$usersAvailable;
   }
 
   public allUsersAreBackInTheGame() {

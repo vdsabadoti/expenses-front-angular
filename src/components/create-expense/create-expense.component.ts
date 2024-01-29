@@ -5,6 +5,7 @@ import {ExpensesService} from "../../services/expenses.service";
 import {ExpenseForm} from "../../class/expense-form";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-expense',
@@ -15,23 +16,19 @@ import {CommonModule} from "@angular/common";
 })
 export class CreateExpenseComponent {
 
-  public model:ExpenseForm = new ExpenseForm(undefined, undefined);
+  public model:ExpenseForm = new ExpenseForm('', '');
   private participantsService = inject(ParticipantsService);
   private expensesService : ExpensesService = inject(ExpensesService);
-  constructor() {
-    //CREATE EXPENSE -> new empty list of participants
-    //at the service layer, so we can add the participants
-    //later
-    //this.participantsService.newExpense();
+  constructor(private router:Router) {
   }
 
   public createExpense(){
 
   }
 
-  public createNewExpense(newExpense:any){
-    console.log('button clicked');
-    this.expensesService.createExpense();
+  public createNewExpense(newExpense:ExpenseForm){
+    this.expensesService.createExpense(newExpense);
+    this.router.navigate(['/expenses/detail']);
   }
 
 }

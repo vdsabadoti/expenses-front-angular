@@ -19,7 +19,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 })
 export class ParticipantsComponent {
   private participantsService = inject(ParticipantsService);
-  public lstOfAddedParticipants: Observable<Participant[]> = this.participantsService.data;
+  public lstOfAddedParticipants: Observable<Participant[]> = this.participantsService.$data;
   constructor() {
   }
 

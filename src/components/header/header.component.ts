@@ -16,7 +16,7 @@ export class HeaderComponent {
   public idUser:number = 0;
 
   constructor() {
-    this.idUser = this.loginService.getUserOnline();
+    this.idUser = this.loginService.getUserOnline().idUser;
   }
 
 

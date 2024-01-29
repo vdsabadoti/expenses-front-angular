@@ -22,7 +22,7 @@ export class PasswordComponent {
   }
 
   public getUserOnline() : void {
-    this.onlineUser = this.loginService.getUserOnline();
+    this.onlineUser = this.loginService.getUserOnline().idUser;
   }
 
   public passwordControlFunction() : void {
