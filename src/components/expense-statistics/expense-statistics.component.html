@@ -1,8 +1,18 @@
 @if (expense; as expense) {
+
   <div>
     <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
       {{expense.expenseName}}
     </h5>
     <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{expense.description}}</p>
+    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{expense.budgetByMonth}}</p>
+  </div>
+  <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+  <div>
+    <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
+      {{expense.expenseName}}
+    </h5>
+    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{expense.description}}</p>
+    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{expense.budgetByMonth}}</p>
   </div>
 }

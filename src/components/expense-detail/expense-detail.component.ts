@@ -19,16 +19,13 @@ export class ExpenseDetailComponent {
 
   private expenseService = inject(ExpensesService);
   private firstApiService = inject(FirstApiService);
-  public message$:Observable<string>;
-  public oldExpense: any;
+  public message$:Observable<any>;
+  //public oldExpense: any;
   public expense$:Observable<Expense>;
 
   constructor() {
-    this.oldExpense = this.expenseService.getExpense();
+    //this.oldExpense = this.expenseService.getExpense();
     this.message$ = this.firstApiService.callJavaApp();
     this.expense$ = this.firstApiService.callOneExpense();
   }
-
-
-
 }

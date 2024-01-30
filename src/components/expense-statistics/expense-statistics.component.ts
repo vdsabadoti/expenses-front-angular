@@ -15,8 +15,8 @@ export class ExpenseStatisticsComponent {
   @Input() expense!: Expense;
 
   constructor() {
-    let budgetByMonth : number = this.expense.budgetByMonth;
-    let balance: number = this.expense.balance;
+    let budgetByMonth : number = 10;
+    let balance: number = 10;
   }
 
 }
