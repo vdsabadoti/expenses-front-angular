@@ -2,7 +2,7 @@ import {Expense} from "./expense";
 
 export class User {
   idUser:number;
-  username:string | undefined;
+  username:string;
   mail:string | undefined;
   lstExpenses:Expense[] | undefined;
   password:string | undefined;
@@ -11,7 +11,7 @@ export class User {
 
   constructor(
     idUser:number,
-    username:string | undefined,
+    username:string,
     mail:string | undefined,
     lstExpenses:Expense[] | undefined,
     password:string | undefined,

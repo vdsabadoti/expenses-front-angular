@@ -40,10 +40,10 @@ export class ExpensesService {
     this.participantsService.listParticipantsOfThisNewExpense().forEach(
       (p)=> {totalBudgetByMonth += p.budgetByMonth}
     );
-    this.expenses.push(
+    /*this.expenses.push(
       new Expense(1, 0, totalBudgetByMonth, newExpense.label, newExpense.description,
         this.loginService.getUsers()[0], this.participantsService.listParticipantsOfThisNewExpense(), new Array<Line>())
-    );
+    );*/
     //IF OK => set addedParticipants to zero (participants service)
     this.participantsService.eraseParticipantsForLaterExpense();
     //IF OK => set allusersbackinthegame (users service)

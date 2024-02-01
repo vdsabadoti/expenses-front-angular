@@ -5,6 +5,7 @@ import {ExpensesFlowComponent} from "../components/expenses-flow/expenses-flow.c
 import {ExpenseParentComponent} from "../components/expense-parent/expense-parent.component";
 import {ExpenseDetailComponent} from "../components/expense-detail/expense-detail.component";
 import {CreateExpenseComponent} from "../components/create-expense/create-expense.component";
+import {ApiTesterComponent} from "../components/api-tester/api-tester.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -14,5 +15,6 @@ export const routes: Routes = [
     { path : '', component: ExpensesFlowComponent},
     { path : 'detail', component: ExpenseDetailComponent }
   ]},
-  { path: 'create', component : CreateExpenseComponent}
+  { path: 'create', component : CreateExpenseComponent},
+  { path : 'testAPI', component : ApiTesterComponent }
 ];

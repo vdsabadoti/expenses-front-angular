@@ -1,44 +1,25 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {User} from "../class/user";
+import {UserApiService} from "./user-api.service";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginServiceService {
 
-  private users: User[] = [
-    {
-      idUser: 1, username: 'Mulan', mail: '', lstExpenses: [], password: '',
-      quote: 'The flower that blooms in adversity is the rarest and most beautiful of all',
-      image: 'https://recreio.uol.com.br/media/uploads/disney/mulan_capa.jpg'
-    },
-    {
-      idUser: 2, username: 'Spiderman', mail: '', lstExpenses: [], password: '',
-      quote: 'With great power comes great responsibility',
-      image: 'https://assetsio.reedpopcdn.com/Spider-Banner_AVVWjOb.jpg?width=880&quality=80&format=jpg&dpr=2&auto=webp'
-    },
-  ];
+  private userApiService = inject(UserApiService);
+  private users: User[] = [];
   private userOnline: number = 1;
   public loggedIn:boolean = false;
 
   constructor() {
+    this.userApiService.getAllUsers().subscribe(value => {
+      this.users = value
+      console.log(value); //works well
+    });
   }
-
-  private createUsers() : void {
-    this.users = [
-      {
-        idUser: 1, username: 'Mulan', mail: '', lstExpenses: [], password: '',
-        quote: 'The flower that blooms in adversity is the rarest and most beautiful of all',
-        image: 'https://recreio.uol.com.br/media/uploads/disney/mulan_capa.jpg'
-      },
-      {
-        idUser: 2, username: 'Spiderman', mail: '', lstExpenses: [], password: '',
-        quote: 'With great power comes great responsibility',
-        image: 'https://assetsio.reedpopcdn.com/Spider-Banner_AVVWjOb.jpg?width=880&quality=80&format=jpg&dpr=2&auto=webp'
-      },
-    ]
-  }
-    public getUsers() : Array<any> {
+    public getUsers() : User[]{
       return this.users;
     }
 
@@ -47,7 +28,7 @@ export class LoginServiceService {
     }
 
     public getUserOnline() : User {
-      return this.users[this.userOnline-1];
+      return this.users[0];
     }
 
   public isUserAuthenticated() : boolean {

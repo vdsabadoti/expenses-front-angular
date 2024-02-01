@@ -16,6 +16,11 @@ export class FirstApiService {
     return this.http.get(this.url);
   }
 
+  callExpenseById(id:number) : Observable<String> {
+    let url = this.url + 'moto?id=' + id.toString();
+    return this.http.get<String>(url);
+  }
+
   callOneExpense() : Observable<Expense> {
     return this.http.get<Expense>('http://localhost:8080/expense');
   }

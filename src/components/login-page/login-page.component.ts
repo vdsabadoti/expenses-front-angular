@@ -1,6 +1,8 @@
 import {Component, inject} from '@angular/core';
 import {LoginServiceService} from "../../services/login-service.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {User} from "../../class/user";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-login-page',
@@ -15,8 +17,9 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 export class LoginPageComponent {
 
   private loginService = inject(LoginServiceService);
-  public users:Array<any> = [];
+  public users:User[];
   public user:string = "https://assetsio.reedpopcdn.com/Spider-Banner_AVVWjOb.jpg?width=880&quality=80&format=jpg&dpr=2&auto=webp";
+
 
   constructor() {
     this.users = this.loginService.getUsers();

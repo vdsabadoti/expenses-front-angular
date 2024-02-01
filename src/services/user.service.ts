@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {LoginServiceService} from "./login-service.service";
 import {User} from "../class/user";
 import {BehaviorSubject, Observable} from "rxjs";
+import {UserApiService} from "./user-api.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class UserService {
 
   private loginService = inject(LoginServiceService);
+  private userApiService = inject(UserApiService);
+  //private _usersAvailable:BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.userApiService.getAllUsers());
   private _usersAvailable:BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.loginService.getUsers());
   public readonly $usersAvailable: Observable<User[]> = this._usersAvailable.asObservable();
 
@@ -28,8 +31,9 @@ export class UserService {
     return this.$usersAvailable;
   }
 
-  public allUsersAreBackInTheGame() {
-    this._usersAvailable.next(this.loginService.getUsers());
+  public async allUsersAreBackInTheGame() {
+    let usersFromDataBase:User[] = this.loginService.getUsers();
+    this._usersAvailable.next(usersFromDataBase);
   }
 
 }
