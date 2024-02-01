@@ -12,25 +12,26 @@ import {Line} from "../class/line";
 })
 export class ExpensesService {
   //EXPENSES FROM THE USER : TO HYDRATE WITH EXPENSES FROM DB
-  private expenses: Array<Expense>;
+  private expenses: Array<Expense> = [];
   private expense: any;
   private participantsService = inject(ParticipantsService);
   private usersService = inject(UserService);
   private loginService = inject(LoginServiceService);
 
   constructor() {
+    /*
     this.expenses = [new Expense(2, 0, 0, 'Tennis', 'kill',
       this.loginService.getUsers()[0], this.participantsService.getParticipantsForTest(), new Array<Line>()),
       new Expense(1, 0, 0, 'Love', 'kill',
         this.loginService.getUsers()[0], this.participantsService.getParticipantsForTest(), new Array<Line>())
-    ];
+    ];*/
   }
 
-  public getExpenses() : Array<any> {
+  public getExpenses() : Expense[] {
     return this.expenses;
   }
 
-  public getExpense() : any {
+  public getExpense() : Expense {
     return this.expense;
   }
 
@@ -40,14 +41,14 @@ export class ExpensesService {
     this.participantsService.listParticipantsOfThisNewExpense().forEach(
       (p)=> {totalBudgetByMonth += p.budgetByMonth}
     );
-    /*this.expenses.push(
+    this.expenses.push(
       new Expense(1, 0, totalBudgetByMonth, newExpense.label, newExpense.description,
         this.loginService.getUsers()[0], this.participantsService.listParticipantsOfThisNewExpense(), new Array<Line>())
-    );*/
+    );
     //IF OK => set addedParticipants to zero (participants service)
     this.participantsService.eraseParticipantsForLaterExpense();
     //IF OK => set allusersbackinthegame (users service)
-    this.usersService.allUsersAreBackInTheGame();
+    await this.usersService.allUsersAreBackInTheGame();
     console.log(this.expenses);
   }
 

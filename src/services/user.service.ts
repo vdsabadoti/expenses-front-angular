@@ -11,11 +11,12 @@ export class UserService {
 
   private loginService = inject(LoginServiceService);
   private userApiService = inject(UserApiService);
-  //private _usersAvailable:BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.userApiService.getAllUsers());
-  private _usersAvailable:BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.loginService.getUsers());
-  public readonly $usersAvailable: Observable<User[]> = this._usersAvailable.asObservable();
+  private _usersAvailable:BehaviorSubject<User[]>;
+  public readonly $usersAvailable: Observable<User[]>;
 
   constructor() {
+    this._usersAvailable = new BehaviorSubject<User[]>(this.loginService.getUsers());
+    this.$usersAvailable = this._usersAvailable.asObservable();
   }
 
   public updateUsersAvailable(user:User){

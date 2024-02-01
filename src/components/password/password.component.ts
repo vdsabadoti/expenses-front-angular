@@ -27,7 +27,7 @@ export class PasswordComponent {
 
   public passwordControlFunction() : void {
     if (this.passwordControl === this.password){
-      this.loginService.authenticationSuccessfull();
+      this.loginService.authenticationSuccessful();
     }
   }
 

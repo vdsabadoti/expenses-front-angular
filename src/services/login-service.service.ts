@@ -1,7 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {User} from "../class/user";
 import {UserApiService} from "./user-api.service";
-import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class LoginServiceService {
 
   constructor() {
     this.userApiService.getAllUsers().subscribe(value => {
-      this.users = value
+      this.users = value;
       console.log(value); //works well
     });
   }
@@ -28,14 +27,14 @@ export class LoginServiceService {
     }
 
     public getUserOnline() : User {
-      return this.users[0];
+      return this.users[this.userOnline];
     }
 
   public isUserAuthenticated() : boolean {
     return this.loggedIn;
   }
 
-  public authenticationSuccessfull() : void {
+  public authenticationSuccessful() : void {
     this.loggedIn = true;
   }
 
