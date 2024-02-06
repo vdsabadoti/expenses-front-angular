@@ -1,24 +1,23 @@
 import {inject, Injectable} from '@angular/core';
 import {User} from "../class/user";
 import {UserApiService} from "./user-api.service";
+import {UserService} from "./user.service";
+import {map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginServiceService {
 
-  private userApiService = inject(UserApiService);
-  private users: User[] = [];
+  private userService = inject(UserService);
+  private users: Observable<User[]>;
   private userOnline: number = 1;
   public loggedIn:boolean = false;
 
   constructor() {
-    this.userApiService.getAllUsers().subscribe(value => {
-      this.users = value;
-      console.log(value); //works well
-    });
+    this.users = this.userService.getUsersFromDatabaseAsObservable();
   }
-    public getUsers() : User[]{
+    public getUsers() : Observable<User[]>{
       return this.users;
     }
 
@@ -26,8 +25,8 @@ export class LoginServiceService {
       this.userOnline = id;
     }
 
-    public getUserOnline() : User {
-      return this.users[this.userOnline];
+    public getUserOnline() : Observable<User> {
+      return this.users.pipe(map((items: User[]) => items[this.userOnline]));
     }
 
   public isUserAuthenticated() : boolean {
@@ -36,6 +35,10 @@ export class LoginServiceService {
 
   public authenticationSuccessful() : void {
     this.loggedIn = true;
+  }
+
+  public getIdFromOnlineUser() : number {
+    return this.userOnline;
   }
 
 

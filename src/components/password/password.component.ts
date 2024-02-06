@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {LoginServiceService} from "../../services/login-service.service";
 import {FormsModule} from "@angular/forms";
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-password',
@@ -13,16 +14,12 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 export class PasswordComponent {
 
   private loginService = inject(LoginServiceService);
-  public onlineUser:number = 0;
+  public onlineUser:Observable<number> = new Observable<number>();
   public passwordControl:string = '';
   private password:string = 'corsaires';
 
   constructor() {
-    this.getUserOnline();
-  }
-
-  public getUserOnline() : void {
-    this.onlineUser = this.loginService.getUserOnline().idUser;
+    this.onlineUser = this.loginService.getUserOnline().pipe(map(user => {return user.idUser}));
   }
 
   public passwordControlFunction() : void {

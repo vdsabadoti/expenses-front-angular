@@ -19,10 +19,9 @@ import {User} from "../../class/user";
 export class AddParticipantsComponent {
 
   private userService= inject(UserService);
-  public users: Observable<User[]> = this.userService.$usersAvailable;
+  public users = this.userService._usersAvailable;
 
   constructor() {
-    console.log(this.users);
   }
 
 }

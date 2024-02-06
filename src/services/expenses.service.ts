@@ -6,6 +6,8 @@ import {ExpenseForm} from "../class/expense-form";
 import {User} from "../class/user";
 import {LoginServiceService} from "./login-service.service";
 import {Line} from "../class/line";
+import {ExpenseApiService} from "./expense-api.service";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,7 @@ export class ExpensesService {
   private participantsService = inject(ParticipantsService);
   private usersService = inject(UserService);
   private loginService = inject(LoginServiceService);
+  private expenseApiService = inject(ExpenseApiService);
 
   constructor() {
     /*
@@ -27,8 +30,8 @@ export class ExpensesService {
     ];*/
   }
 
-  public getExpenses() : Expense[] {
-    return this.expenses;
+  public getExpenses(idUser:number) : Observable<Expense[]> {
+    return this.expenseApiService.getExpensesFromUser(idUser);
   }
 
   public getExpense() : Expense {
@@ -41,10 +44,7 @@ export class ExpensesService {
     this.participantsService.listParticipantsOfThisNewExpense().forEach(
       (p)=> {totalBudgetByMonth += p.budgetByMonth}
     );
-    this.expenses.push(
-      new Expense(1, 0, totalBudgetByMonth, newExpense.label, newExpense.description,
-        this.loginService.getUsers()[0], this.participantsService.listParticipantsOfThisNewExpense(), new Array<Line>())
-    );
+    //TODO : create expense
     //IF OK => set addedParticipants to zero (participants service)
     this.participantsService.eraseParticipantsForLaterExpense();
     //IF OK => set allusersbackinthegame (users service)

@@ -29,13 +29,6 @@ export class ParticipantsService {
     return this._participantsOfANewExpense.getValue();
   }
 
-  public getParticipantsForTest(): Participant[] {
-    return [
-      new Participant(1, this.loginService.getUserOnline(), 100, 100, undefined),
-      new Participant(1, this.loginService.getUserOnline(), 100, 100, undefined),
-    ];
-  }
-
   private createParticipants() : Array<any> {
     return [
       { userId : 1, expenseId : 1, budget: 100 },

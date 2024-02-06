@@ -9,8 +9,8 @@
       Add all
     </a>
   </div>
-  @if (users | async; as users) {
-  @for (item of users; track item ){
+  @if (users | async; as users ) {
+  @for (item of users | async; track item.idUser){
   <app-add-participants-line [user] ="item"></app-add-participants-line>
   }
   }
