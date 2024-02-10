@@ -7,18 +7,17 @@ import {User} from "../class/user";
 import {LoginServiceService} from "./login-service.service";
 import {Line} from "../class/line";
 import {ExpenseApiService} from "./expense-api.service";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpensesService {
   //EXPENSES FROM THE USER : TO HYDRATE WITH EXPENSES FROM DB
-  private expenses: Array<Expense> = [];
-  private expense: any;
+  private expenses: Observable<Expense[]> | undefined;
+  private expense: Observable<Expense> | undefined;
   private participantsService = inject(ParticipantsService);
   private usersService = inject(UserService);
-  private loginService = inject(LoginServiceService);
   private expenseApiService = inject(ExpenseApiService);
 
   constructor() {
@@ -31,10 +30,11 @@ export class ExpensesService {
   }
 
   public getExpenses(idUser:number) : Observable<Expense[]> {
-    return this.expenseApiService.getExpensesFromUser(idUser);
+    this.expenses = this.expenseApiService.getExpensesFromUser(idUser);
+    return this.expenses;
   }
 
-  public getExpense() : Expense {
+  public getExpense() : Observable<Expense> | undefined {
     return this.expense;
   }
 
@@ -53,7 +53,6 @@ export class ExpensesService {
   }
 
   public setExpenseDetail(id:number) : void {
-    let index:number = this.expenses.findIndex(item => item.idExpense === id);
-    this.expense = this.expenses[index];
+    this.expense = this.expenseApiService.getExpenseById(id);
   }
 }

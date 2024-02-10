@@ -1,18 +1,49 @@
 @if (expense; as expense) {
+<div class="grid grid-cols-6 justify-items-center">
+  <div class="col-start-1 col-end-2 text-2xl font-bold align-items-center " xmlns:x-on="http://www.w3.org/1999/xhtml">
+    <button (click)="setMonthUp()" class="p-2 border rounded-full hover:bg-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+  </div>
+  <div class="col-start-2 col-end-6 align-items-center">
+      <span class="text-base">{{ monthList[month]}}  </span>
+      <span class="text-base">{{ year}} </span>
+  </div>
+  <div class="col-start-6 col-end-7 align-items-center">
+    <button (click)="setMonthDown()" class="p-2 border rounded-full hover:bg-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+  </div>
+  </div>
 
-  <div>
-    <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
-      {{expense.expenseName}}
-    </h5>
-    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{expense.description}}</p>
-    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{expense.budgetByMonth}}</p>
+  <div style="text-align:center">
+    <apx-chart
+      [series]="chartOptions.series"
+      [colors]="chartOptions.colors"
+      [plotOptions]="chartOptions.plotOptions"
+      [labels]="chartOptions.labels"
+      [chart]="chartOptions.chart"
+      [grid]="chartOptions.grid"
+      [legend]="chartOptions.legend"
+      [tooltip]="chartOptions.tooltip"
+      [yaxis]="chartOptions.yaxis"
+      [title]="chartOptions.title"
+    ></apx-chart>
   </div>
-  <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <div>
-    <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
-      {{expense.expenseName}}
-    </h5>
-    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{expense.description}}</p>
-    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{expense.budgetByMonth}}</p>
-  </div>
+  @for (participant of expense.participantList ; track participant.idParticipant){
+      <div>
+        <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
+          {{participant.user.username}}
+        </h5>
+        <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
+          {{participant.budgetByMonth}}
+        </h5>
+        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{participant.balance}}</p>
+        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">(balance)</p>
+      </div>
+    }
 }

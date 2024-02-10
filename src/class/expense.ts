@@ -9,10 +9,10 @@ export class Expense {
   description:string;
   owner:User;
   participantList:Array<Participant>;
-  lineList:Array<Line> | undefined;
+  lineList:Array<Line>;
 
   constructor(idExpense:number, balance:number, budgetByMonth:number, expenseName:string, description:string,
-              owner:User, participantList:Array<Participant>, lineList:Array<Line> | undefined) {
+              owner:User, participantList:Array<Participant>, lineList:Array<Line>) {
     this.idExpense = idExpense;
     this.balance = balance;
     this.budgetByMonth =budgetByMonth;
