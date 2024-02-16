@@ -61,4 +61,8 @@ export class ExpensesService {
     return this.expenseApiService.getLineDetails(expenseLineId);
   }
 
+  public getLine(lineId:number) : Observable<Line> {
+    return this.expenseApiService.getLine(lineId);
+  }
+
 }

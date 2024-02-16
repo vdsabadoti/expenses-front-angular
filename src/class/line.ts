@@ -1,5 +1,6 @@
 import {Participant} from "./participant";
 import {LineDetail} from "./line-detail";
+import {User} from "./user";
 
 export class Line {
 
@@ -7,16 +8,18 @@ export class Line {
   value:number;
   date:Date;
   label:string;
-  payor:Participant;
+  payor:User;
   lineDetailList: LineDetail[] | undefined;
+  debtOrRefund:number;
 
   constructor(
     idLine:number,
   value:number,
   date:Date,
   label:string,
-  payor:Participant,
-  lineDetailList: LineDetail[] | undefined
+  payor:User,
+  lineDetailList: LineDetail[] | undefined,
+    debtOrRefund:number
   ) {
     this.idLine = idLine;
     this.value =value;
@@ -24,6 +27,7 @@ export class Line {
     this.label = label;
     this.payor = payor;
     this.lineDetailList = lineDetailList;
+    this.debtOrRefund = debtOrRefund;
   }
 
 }

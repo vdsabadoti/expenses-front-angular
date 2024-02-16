@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Expense} from "../../class/expense";
 import {AsyncPipe} from "@angular/common";
 import {ChartComponent, NgApexchartsModule} from "ng-apexcharts";
@@ -12,31 +12,33 @@ import {ChartComponent, NgApexchartsModule} from "ng-apexcharts";
   templateUrl: './expense-statistics.component.html',
   styleUrl: './expense-statistics.component.css'
 })
-export class ExpenseStatisticsComponent {
+export class ExpenseStatisticsComponent implements OnInit {
   @Input() expense!: Expense;
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: any;
-  public month:number = new Date().getMonth();
-  public year:number = new Date().getFullYear();
-  public monthList:String[] =
-    ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  public budgetByMonthList: number[] = [];
+  public participantsList: string[] = [];
+
 
   constructor() {
-    //CREATE ARRAY FOR EACH DATA OF THE SIZE
-    //OF PARTICIPANTS LIST
-    /*
-    const budgetByMonthList = [];
-    const participantsList = [];
-    const balanceList = [];
+  }
+
+  ngOnInit() {
+    let totalMonthBalance = 0;
+    let totalMonthBudget = 0;
     //GET VALUES FROM PARTICIPANTS LIST
     for (let participant of this.expense.participantList) {
-      balanceList.push(10);
-      budgetByMonthList.push(participant.budgetByMonth);
-      participantsList.push(participant);
-    }*/
+      let balance = 30; //TODO replace by participant API : calculate a balance for the month
+      this.budgetByMonthList.push(balance / participant.budgetByMonth * 100);
+      this.participantsList.push(participant.user.username);
+      totalMonthBalance += balance;
+      totalMonthBudget += participant.budgetByMonth;
+    }
+    this.budgetByMonthList.push(totalMonthBalance / totalMonthBudget * 100);
+    this.participantsList.push('Total');
 
     this.chartOptions = {
-      series: [10, 20, 30],
+      series: this.budgetByMonthList,
       colors: ["#1C64F2", "#16BDCA", "#FDBA8C"],
       chart: {
         height: "380px",
@@ -70,7 +72,7 @@ export class ExpenseStatisticsComponent {
           bottom: -20,
         },
       },
-      labels: ["Done", "In progress", "To do"],
+      labels: this.participantsList,
       legend: {
         show: true,
         position: "bottom",
@@ -92,21 +94,4 @@ export class ExpenseStatisticsComponent {
       }
     }
   }
-
-  public setMonthUp(){
-    if (this.month >= 11) {
-      this.year++;
-      this.month = -1;
-    }
-    this.month++;
-  }
-
-  public setMonthDown(){
-    if (this.month <= 0){
-      this.year--;
-      this.month = 12;
-    }
-    this.month--;
-  }
-
 }

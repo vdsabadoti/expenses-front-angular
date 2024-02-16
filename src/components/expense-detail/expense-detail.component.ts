@@ -24,6 +24,10 @@ export class ExpenseDetailComponent {
   public message$:Observable<any>;
   //public oldExpense: any;
   public expense$:Observable<Expense> | undefined;
+  @Input() month: number = new Date().getMonth();
+  @Input() year: number = new Date().getFullYear();
+  public monthList: String[] =
+    ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
   constructor() {
     //this.oldExpense = this.expenseService.getExpense();
@@ -31,4 +35,21 @@ export class ExpenseDetailComponent {
     //this.expense$ = this.firstApiService.callOneExpense();
     this.expense$ = this.expenseService.getExpense();
   }
+
+  public setMonthUp(){
+    if (this.month >= 11) {
+      this.year++;
+      this.month = -1;
+    }
+    this.month++;
+  }
+
+  public setMonthDown(){
+    if (this.month <= 0){
+      this.year--;
+      this.month = 12;
+    }
+    this.month--;
+  }
+
 }
