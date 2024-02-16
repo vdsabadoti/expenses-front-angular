@@ -1,7 +1,7 @@
 <div class="flow-root">
   <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
     <li class="py-3 sm:py-4">
-      @for (item of lstOfAddedParticipants | async ; track item.budgetByMonth){
+      @for (item of lstOfAddedParticipants$ | async ; track item.budgetByMonth){
         <div class="flex items-center">
             <div class="flex-shrink-0">
               <p class="text-sm font-medium text-gray-900 truncate dark:text-black">

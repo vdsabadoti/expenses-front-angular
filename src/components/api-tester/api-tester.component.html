@@ -1,9 +1,9 @@
 <p>api-tester works!</p>
 <p>{{expenseById | async }}</p>
-@if (oneUserObservable | async; as user) {
+@if (oneUserObservable$ | async; as user) {
   <p>{{ user.username }}</p>
 }
-@if (oneUserObservableFromObservableArray | async; as user) {
+@if (oneUserObservableFromObservableArray$ | async; as user) {
   <p>{{ user.username }}</p>
 }
 @if (expensesObservableList | async; as expenses) {
@@ -34,7 +34,7 @@
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-10 mx-auto">
     <div class="flex flex-wrap -mx-4 -mb-10 text-center">
-      @for (item of usersObservable | async ; track item.idUser){
+      @for (item of usersObservable$ | async ; track item.idUser){
         <div class="sm:w-1/2 mb-10 px-4">
           <div class="rounded-lg h-64 overflow-hidden">
             <img alt="content" class="object-cover object-center h-full w-full" [src]="item.image">

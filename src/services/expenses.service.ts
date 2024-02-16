@@ -8,6 +8,7 @@ import {LoginServiceService} from "./login-service.service";
 import {Line} from "../class/line";
 import {ExpenseApiService} from "./expense-api.service";
 import {map, Observable} from "rxjs";
+import {LineDetail} from "../class/line-detail";
 
 @Injectable({
   providedIn: 'root'
@@ -55,4 +56,9 @@ export class ExpensesService {
   public setExpenseDetail(id:number) : void {
     this.expense = this.expenseApiService.getExpenseById(id);
   }
+
+  public getLineDetails(expenseLineId:number): Observable<LineDetail[]>{
+    return this.expenseApiService.getLineDetails(expenseLineId);
+  }
+
 }

@@ -34,9 +34,9 @@ export class ApiTesterComponent {
 
   //TESTING USERS AS OBSERVABLES OR NOT
   public users: User[] = [];
-  public usersObservable: Observable<User[]> | undefined;
-  public oneUserObservable: Observable<User> | undefined;
-  public oneUserObservableFromObservableArray: Observable<User> | undefined;
+  public usersObservable$: Observable<User[]> | undefined;
+  public oneUserObservable$: Observable<User> | undefined;
+  public oneUserObservableFromObservableArray$: Observable<User> | undefined;
   public oneUser : User | undefined;
 
   //REAL LIFE
@@ -48,17 +48,17 @@ export class ApiTesterComponent {
 
   public showUsers() {
     this.users = this.userService.getUsersFromDataBase();
-    this.usersObservable = this.userService.getUsersFromDatabaseAsObservable();
+    this.usersObservable$ = this.userService.getUsersFromDatabaseAsObservable();
     console.log('Users from DB : ')
     console.log(this.users);
     console.log('Users from DB as observable : ')
-    console.log(this.usersObservable);
+    console.log(this.usersObservable$);
   }
 
   public async showOneUser() {
     //TRANSFORM OBSERVABLE OF ARRAY INTO OBSERVABLE OF ITEM
-    this.oneUserObservableFromObservableArray = this.userService.getUsersFromDatabaseAsObservable().pipe(map((items: User[]) => items[0]));
-    this.oneUserObservable = this.userService.getUserFromDatabaseAsObservable(2);
+    this.oneUserObservableFromObservableArray$ = this.userService.getUsersFromDatabaseAsObservable().pipe(map((items: User[]) => items[0]));
+    this.oneUserObservable$ = this.userService.getUserFromDatabaseAsObservable(2);
   }
 
   public showExpenses(){

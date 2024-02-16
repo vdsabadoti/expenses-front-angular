@@ -9,7 +9,7 @@
         </tr>
         </thead>
         <tbody>
-        @if (expenses | async ; as expenses) {
+        @if (expenses$ | async ; as expenses) {
           @for (expense of expenses; track expense.expenseName) {
             <tr>
               <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ expense.expenseName }}</td>

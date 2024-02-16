@@ -19,12 +19,12 @@ import {AsyncPipe} from "@angular/common";
 })
 export class ExpensesFlowComponent {
 
-  public expenses: Observable<Expense[]>;
+  public expenses$: Observable<Expense[]>;
   private expensesService = inject(ExpensesService);
   private loginService = inject(LoginServiceService);
 
   constructor() {
-    this.expenses = this.expensesService.getExpenses(this.loginService.getIdFromOnlineUser());
+    this.expenses$ = this.expensesService.getExpenses(this.loginService.getIdFromOnlineUser());
   }
 
   public setExpenseAtService(id:number) : void {

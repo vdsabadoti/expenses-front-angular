@@ -6,12 +6,13 @@ import {AsyncPipe} from "@angular/common";
 import {Expense} from "../../class/expense";
 import {Line} from "../../class/line";
 import {ExpenseStatisticsComponent} from "../expense-statistics/expense-statistics.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-expense-detail',
   standalone: true,
   imports: [
-    AsyncPipe, ExpenseStatisticsComponent
+    AsyncPipe, ExpenseStatisticsComponent, RouterLink
   ],
   templateUrl: './expense-detail.component.html',
   styleUrl: './expense-detail.component.css'
