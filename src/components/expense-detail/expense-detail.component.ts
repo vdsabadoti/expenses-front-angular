@@ -20,20 +20,18 @@ import {RouterLink} from "@angular/router";
 export class ExpenseDetailComponent {
 
   private expenseService = inject(ExpensesService);
-  private firstApiService = inject(FirstApiService);
-  public message$:Observable<any>;
   //public oldExpense: any;
   public expense$:Observable<Expense> | undefined;
+  public lines$:Observable<Line[]> | undefined;
   @Input() month: number = new Date().getMonth();
   @Input() year: number = new Date().getFullYear();
   public monthList: String[] =
     ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
   constructor() {
-    //this.oldExpense = this.expenseService.getExpense();
-    this.message$ = this.firstApiService.callJavaApp();
     //this.expense$ = this.firstApiService.callOneExpense();
     this.expense$ = this.expenseService.getExpense();
+    this.lines$ = this.expenseService.filterLinesByMonthAndYear(this.month, this.year);
   }
 
   public setMonthUp(){
@@ -42,6 +40,7 @@ export class ExpenseDetailComponent {
       this.month = -1;
     }
     this.month++;
+    this.lines$ = this.expenseService.filterLinesByMonthAndYear(this.month, this.year);
   }
 
   public setMonthDown(){
@@ -50,6 +49,7 @@ export class ExpenseDetailComponent {
       this.month = 12;
     }
     this.month--;
+    this.lines$ = this.expenseService.filterLinesByMonthAndYear(this.month, this.year);
   }
 
 }

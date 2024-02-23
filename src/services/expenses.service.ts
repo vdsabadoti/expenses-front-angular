@@ -22,12 +22,6 @@ export class ExpensesService {
   private expenseApiService = inject(ExpenseApiService);
 
   constructor() {
-    /*
-    this.expenses = [new Expense(2, 0, 0, 'Tennis', 'kill',
-      this.loginService.getUsers()[0], this.participantsService.getParticipantsForTest(), new Array<Line>()),
-      new Expense(1, 0, 0, 'Love', 'kill',
-        this.loginService.getUsers()[0], this.participantsService.getParticipantsForTest(), new Array<Line>())
-    ];*/
   }
 
   public getExpenses(idUser:number) : Observable<Expense[]> {
@@ -55,6 +49,18 @@ export class ExpensesService {
 
   public setExpenseDetail(id:number) : void {
     this.expense = this.expenseApiService.getExpenseById(id);
+  }
+
+  public filterLinesByMonthAndYear(month:number, year:number) : Observable<Line[]> | undefined {
+    const lineList : Observable<Line[]> | undefined = this.expense?.pipe(
+      (map(expenses => {
+        return expenses.lineList.filter(line => (
+          new Date(line.date).getMonth() == month && new Date(line.date).getFullYear() == year
+        ));
+      })
+    ));
+    console.log(lineList);
+    return lineList;
   }
 
   public getLineDetails(expenseLineId:number): Observable<LineDetail[]>{
