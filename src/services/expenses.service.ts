@@ -19,6 +19,7 @@ export class ExpensesService {
   private expense: Observable<Expense> | undefined;
   private participantsService = inject(ParticipantsService);
   private usersService = inject(UserService);
+  private loginService = inject(LoginServiceService);
   private expenseApiService = inject(ExpenseApiService);
 
   constructor() {
@@ -34,16 +35,41 @@ export class ExpensesService {
   }
 
   public async createExpense(newExpense:ExpenseForm){
-    //CREATE EXPENSE IN DB
+    //TODO : create expense
+
+    //INIT VARIABLES : budget by month and user
     let totalBudgetByMonth = 0;
+    let userOnline : User;
+
+    //GET USER ONLINE
+    this.loginService.getUserOnline().subscribe(data => {
+      if (data != undefined) {
+        userOnline = data
+      }
+    })
+
+    //CALCULATE budget by month according to participants
     this.participantsService.listParticipantsOfThisNewExpense().forEach(
       (p)=> {totalBudgetByMonth += p.budgetByMonth}
     );
-    //TODO : create expense
+
+    //CREATE EXPENSE with above data
+    /*
+    let expense = new Expense(0, totalBudgetByMonth, newExpense.label, newExpense.description,
+      userOnline, this.participantsService.listParticipantsOfThisNewExpense(), []
+      );
+     */
+
+    //CREATE EXPENSE THANKS TO SERVICE
+    // --> create api call with Expense object ... callback function with OK or ERROR ->
+
     //IF OK => set addedParticipants to zero (participants service)
     this.participantsService.eraseParticipantsForLaterExpense();
     //IF OK => set allusersbackinthegame (users service)
     await this.usersService.allUsersAreBackInTheGame();
+
+    //IF ERROR -> think about it
+
     console.log(this.expenses);
   }
 

@@ -2,7 +2,7 @@ import {User} from "./user";
 import {Participant} from "./participant";
 import {Line} from "./line";
 export class Expense {
-  idExpense:number;
+  idExpense:number | undefined;
   balance:number;
   budgetByMonth:number;
   expenseName:string;
@@ -11,9 +11,8 @@ export class Expense {
   participantList:Array<Participant>;
   lineList:Array<Line>;
 
-  constructor(idExpense:number, balance:number, budgetByMonth:number, expenseName:string, description:string,
+  constructor(balance:number, budgetByMonth:number, expenseName:string, description:string,
               owner:User, participantList:Array<Participant>, lineList:Array<Line>) {
-    this.idExpense = idExpense;
     this.balance = balance;
     this.budgetByMonth =budgetByMonth;
     this.expenseName = expenseName;
@@ -22,4 +21,5 @@ export class Expense {
     this.participantList = participantList;
     this.lineList = lineList;
   }
+
 }
