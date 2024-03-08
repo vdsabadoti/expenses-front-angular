@@ -63,6 +63,19 @@ export class ExpensesService {
     return lineList;
   }
 
+  public filterLinesByMonthAndYearTest(month:number, year:number) : Line[] | undefined {
+    let lineList;
+    this.expense?.subscribe(
+      (expenses => {
+        lineList = expenses.lineList.filter(line => (
+            new Date(line.date).getMonth() == month && new Date(line.date).getFullYear() == year
+          ));
+        })
+      );
+    console.log(lineList);
+    return lineList;
+  }
+
   public getLineDetails(expenseLineId:number): Observable<LineDetail[]>{
     return this.expenseApiService.getLineDetails(expenseLineId);
   }

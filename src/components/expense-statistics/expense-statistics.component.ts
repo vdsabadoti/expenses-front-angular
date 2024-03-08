@@ -66,11 +66,11 @@ export class ExpenseStatisticsComponent implements OnInit, OnChanges {
 
       console.log('Line for :')
       console.log(participant.user.username)
+
       for (let line of this.lines){
         console.log(line);
         console.log('Details :')
         if (line.lineDetailList?.length !== undefined){
-
           for(let detail of line.lineDetailList){
             console.log(detail);
             if (detail.user.idUser == participant.user.idUser )

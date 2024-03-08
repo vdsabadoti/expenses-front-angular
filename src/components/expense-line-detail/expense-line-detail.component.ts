@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {AsyncPipe} from "@angular/common";
+import {AsyncPipe, DatePipe} from "@angular/common";
 import {ExpenseStatisticsComponent} from "../expense-statistics/expense-statistics.component";
 import {ExpensesService} from "../../services/expenses.service";
 import {map, Observable, pipe} from "rxjs";
@@ -11,10 +11,11 @@ import {Line} from "../../class/line";
 @Component({
   selector: 'app-expense-line-detail',
   standalone: true,
-    imports: [
-        AsyncPipe,
-        ExpenseStatisticsComponent
-    ],
+  imports: [
+    AsyncPipe,
+    ExpenseStatisticsComponent,
+    DatePipe
+  ],
   templateUrl: './expense-line-detail.component.html',
   styleUrl: './expense-line-detail.component.css'
 })
