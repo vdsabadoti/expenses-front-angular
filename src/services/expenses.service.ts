@@ -73,7 +73,7 @@ export class ExpensesService {
     console.log(this.expenses);
   }
 
-  public setExpenseDetail(id:number) : void {
+  public setExpenseDetail(id:number | undefined) : void {
     this.expense = this.expenseApiService.getExpenseById(id);
   }
 

@@ -23,7 +23,7 @@ export class ExpenseApiService {
     return this.http.get<Expense[]>(url);
   }
 
-  public getExpenseById(idExpense:number): Observable<Expense> {
+  public getExpenseById(idExpense:number | undefined): Observable<Expense> {
     let url:string = ExpenseApiService.URL + ExpenseApiService.GET_EXPENSE_BY_ID + idExpense;
     return this.http.get<Expense>(url);
   }

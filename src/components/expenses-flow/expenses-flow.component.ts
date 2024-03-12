@@ -27,7 +27,7 @@ export class ExpensesFlowComponent {
     this.expenses$ = this.expensesService.getExpenses(this.loginService.getIdFromOnlineUser());
   }
 
-  public setExpenseAtService(id:number) : void {
+  public setExpenseAtService(id:number | undefined) : void {
     this.expensesService.setExpenseDetail(id);
   }
 
