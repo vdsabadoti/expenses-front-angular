@@ -16,10 +16,10 @@ import {Expense} from "../../class/expense";
     GroupStatisticsComponent,
     DatePipe
   ],
-  templateUrl: './expense-detail.component.html',
-  styleUrl: './expense-detail.component.css'
+  templateUrl: './detail.component.html',
+  styleUrl: './detail.component.css'
 })
-export class ExpenseDetailComponent {
+export class DetailComponent {
 
   private expenseService = inject(GroupService);
   public group$:Observable<Group> | undefined;

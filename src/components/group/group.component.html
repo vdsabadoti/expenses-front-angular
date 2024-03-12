@@ -1,13 +1,13 @@
 <div class="max-w-sm mx-auto">
-@if (group$ | async ; as expense){
+@if (group$ | async ; as groups){
   <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
 
     <div class="grid grid-cols-2 justify-items-stretch">
       <div>
         <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
-          {{expense.name}}
+          {{groups.name}}
         </h5>
-        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{expense.description}}</p>
+        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{groups.description}}</p>
       </div>
       <div class="place-self-end">
         <button class="flex mx-auto mt-6 text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">+</button>
@@ -38,7 +38,7 @@
 
   @if (expenses$ | async; as expenses){
   <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-  <app-expense-statistics [group]="expense" [expenses]="expenses"></app-expense-statistics>
+  <app-expense-statistics [group]="groups" [expenses]="expenses"></app-expense-statistics>
   </div>
 
   <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">

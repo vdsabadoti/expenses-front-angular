@@ -14,10 +14,10 @@ import {RouterLink} from "@angular/router";
   imports: [
     AsyncPipe, GroupStatisticsComponent, RouterLink
   ],
-  templateUrl: './expense.component.html',
-  styleUrl: './expense.component.css'
+  templateUrl: './group.component.html',
+  styleUrl: './group.component.css'
 })
-export class ExpenseComponent {
+export class GroupComponent {
 
   private expenseService = inject(GroupService);
   //public oldExpense: any;
