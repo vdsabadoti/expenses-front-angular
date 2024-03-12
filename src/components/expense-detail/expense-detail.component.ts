@@ -31,7 +31,7 @@ export class ExpenseDetailComponent {
     this.group$ = this.expenseService.getGroup();
     this.route.queryParamMap.subscribe((paramMap) => {
       // read param from paramMap
-      this.id = paramMap.get('idLine');
+      this.id = paramMap.get('id');
       // use parameter...
     });
     this.details$ = this.expenseService.getDetails(Number(this.id));

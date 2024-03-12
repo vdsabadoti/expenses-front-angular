@@ -1,22 +1,22 @@
 <div class="max-w-sm mx-auto">
-  @if (group$ | async; as expense){
+  @if (group$ | async; as group){
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       <div class="grid grid-cols-1 justify-items-stretch">
         <div>
-          @if (expense$ | async; as line){
+          @if (expense$ | async; as expense){
           <div class="inline justify-between">
             <div>
               <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
-                {{ line.label }}
+                {{ expense.label }}
               </h5>
             </div>
             <div>
               <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
-                  {{ line.date | date : 'dd/MM/yyyy' }}
+                  {{ expense.date | date : 'dd/MM/yyyy' }}
               </h5>
             </div>
           </div>
-          <p>{{ line.value }} &euro; payed by {{ line.payor.username }} </p>
+          <p>{{ expense.value }} &euro; payed by {{ expense.payor.username }} </p>
           }
         </div>
       </div>

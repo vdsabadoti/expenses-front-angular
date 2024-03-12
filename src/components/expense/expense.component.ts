@@ -21,8 +21,8 @@ export class ExpenseComponent {
 
   private expenseService = inject(GroupService);
   //public oldExpense: any;
-  public expense$:Observable<Group> | undefined;
-  public lines$:Observable<Expense[]> | undefined;
+  public group$:Observable<Group> | undefined;
+  public expenses$:Observable<Expense[]> | undefined;
   @Input() month: number = new Date().getMonth();
   @Input() year: number = new Date().getFullYear();
   public monthList: String[] =
@@ -30,8 +30,8 @@ export class ExpenseComponent {
 
   constructor() {
     //this.expense$ = this.firstApiService.callOneExpense();
-    this.expense$ = this.expenseService.getGroup();
-    this.lines$ = this.expenseService.filterExpensesByMonthAndYear(this.month, this.year);
+    this.group$ = this.expenseService.getGroup();
+    this.expenses$ = this.expenseService.filterExpensesByMonthAndYear(this.month, this.year);
   }
 
   public setMonthUp(){
@@ -40,7 +40,7 @@ export class ExpenseComponent {
       this.month = -1;
     }
     this.month++;
-    this.lines$ = this.expenseService.filterExpensesByMonthAndYear(this.month, this.year);
+    this.expenses$ = this.expenseService.filterExpensesByMonthAndYear(this.month, this.year);
   }
 
   public setMonthDown(){
@@ -49,7 +49,7 @@ export class ExpenseComponent {
       this.month = 12;
     }
     this.month--;
-    this.lines$ = this.expenseService.filterExpensesByMonthAndYear(this.month, this.year);
+    this.expenses$ = this.expenseService.filterExpensesByMonthAndYear(this.month, this.year);
   }
 
 }

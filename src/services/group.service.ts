@@ -73,7 +73,7 @@ export class GroupService {
     console.log(this.groups);
   }
 
-  public setGroupDetail(id:number | undefined) : void {
+  public setGroupDetail(id:number) : void {
     this.group = this.groupApiService.getGroupById(id);
   }
 

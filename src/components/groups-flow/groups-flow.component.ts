@@ -27,7 +27,7 @@ export class GroupsFlowComponent {
     this.groups$ = this.expensesService.getGroups(this.loginService.getIdFromOnlineUser());
   }
 
-  public setGroupAtService(id:number | undefined) : void {
+  public setGroupAtService(id:number) : void {
     this.expensesService.setGroupDetail(id);
   }
 
