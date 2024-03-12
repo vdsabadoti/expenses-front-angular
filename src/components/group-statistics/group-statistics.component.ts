@@ -1,9 +1,9 @@
 import {Component, inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {Expense} from "../../class/expense";
+import {Group} from "../../class/group";
 import {AsyncPipe} from "@angular/common";
 import {ChartComponent, NgApexchartsModule} from "ng-apexcharts";
-import {Line} from "../../class/line";
-import {ExpensesService} from "../../services/expenses.service";
+import {Expense} from "../../class/expense";
+import {GroupService} from "../../services/group.service";
 import {map} from "rxjs";
 import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
@@ -13,15 +13,15 @@ import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
   imports: [
     AsyncPipe, NgApexchartsModule
   ],
-  templateUrl: './expense-statistics.component.html',
-  styleUrl: './expense-statistics.component.css'
+  templateUrl: './group-statistics.component.html',
+  styleUrl: './group-statistics.component.css'
 })
-export class ExpenseStatisticsComponent implements OnInit, OnChanges {
-  @Input() expense!: Expense;
-  @Input() lines!: Line[];
+export class GroupStatisticsComponent implements OnInit, OnChanges {
+  @Input() group!: Group;
+  @Input() expenses!: Expense[];
   @ViewChild("chart") chart: ChartComponent | undefined;
 
-  private expensesService = inject(ExpensesService);
+  private expensesService = inject(GroupService);
 
   public chartOptions: any;
   public budgetByMonthList: number[] = [];
@@ -41,11 +41,11 @@ export class ExpenseStatisticsComponent implements OnInit, OnChanges {
     console.log('========================================')
     console.log('NgOnChanges')
     console.log('========================================')
-    for (let line of this.lines){
-        this.expensesService.getLineDetails(line.idLine).subscribe(
+    for (let expense of this.expenses){
+        this.expensesService.getDetails(expense.id).subscribe(
           list => {
-            line.lineDetailList = list;
-            console.log('getLineDetails :')
+            expense.detailList = list;
+            console.log('get details :')
             console.log(list)
           }
         );
@@ -61,19 +61,19 @@ export class ExpenseStatisticsComponent implements OnInit, OnChanges {
     let totalMonthBudget = 0;
 
     //GET VALUES FROM PARTICIPANTS LIST
-    for (let participant of this.expense.participantList) {
+    for (let participant of this.group.participantList) {
       let balance = 0;
 
       console.log('Line for :')
       console.log(participant.user.username)
 
-      for (let line of this.lines){
-        console.log(line);
+      for (let expense of this.expenses){
+        console.log(expense);
         console.log('Details :')
-        if (line.lineDetailList?.length !== undefined){
-          for(let detail of line.lineDetailList){
+        if (expense.detailList?.length !== undefined){
+          for(let detail of expense.detailList){
             console.log(detail);
-            if (detail.user.idUser == participant.user.idUser )
+            if (detail.user.id == participant.user.id )
               totalMonthBalance += detail.value;
             balance += detail.value;
           }

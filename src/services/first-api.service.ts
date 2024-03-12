@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Expense} from "../class/expense";
+import {Group} from "../class/group";
 
 
 @Injectable({
@@ -21,8 +21,8 @@ export class FirstApiService {
     return this.http.get<String>(url);
   }
 
-  callOneExpense() : Observable<Expense> {
-    return this.http.get<Expense>('http://localhost:8080/expense');
+  callOneExpense() : Observable<Group> {
+    return this.http.get<Group>('http://localhost:8080/expense');
   }
 
 }

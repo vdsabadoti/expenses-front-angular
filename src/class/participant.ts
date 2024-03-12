@@ -1,23 +1,23 @@
 import {User} from "./user";
-import {Expense} from "./expense";
+import {Group} from "./group";
 export class Participant {
 
-  idParticipant:number;
+  id:number;
   user:User;
   balance:number;
   budgetByMonth:number;
-  expense: Expense | undefined;
+  group: Group | undefined;
 
-  constructor(idParticipant:number,  user:User, balance:number,  budgetByMonth:number, expense: Expense | undefined) {
-    this.idParticipant = idParticipant;
+  constructor(idParticipant:number,  user:User, balance:number,  budgetByMonth:number, expense: Group | undefined) {
+    this.id = idParticipant;
     this.user = user;
     this.balance = balance;
     this.budgetByMonth = budgetByMonth;
-    this.expense = expense;
+    this.group = expense;
   }
 
-  public setExpense(expense:Expense) : void {
-    this.expense = expense;
+  public setExpense(expense:Group) : void {
+    this.group = expense;
 }
 
 }

@@ -1,25 +1,33 @@
-import {User} from "./user";
 import {Participant} from "./participant";
-import {Line} from "./line";
-export class Expense {
-  idExpense:number | undefined;
-  balance:number;
-  budgetByMonth:number;
-  expenseName:string;
-  description:string;
-  owner:User;
-  participantList:Array<Participant>;
-  lineList:Array<Line>;
+import {Detail} from "./detail";
+import {User} from "./user";
 
-  constructor(balance:number, budgetByMonth:number, expenseName:string, description:string,
-              owner:User, participantList:Array<Participant>, lineList:Array<Line>) {
-    this.balance = balance;
-    this.budgetByMonth =budgetByMonth;
-    this.expenseName = expenseName;
-    this.description = description;
-    this.owner = owner;
-    this.participantList = participantList;
-    this.lineList = lineList;
+export class Expense {
+
+  id:number;
+  value:number;
+  date:Date;
+  label:string;
+  payor:User;
+  detailList: Detail[] | undefined;
+  debtOrRefund:number;
+
+  constructor(
+    idLine:number,
+  value:number,
+  date:Date,
+  label:string,
+  payor:User,
+  lineDetailList: Detail[] | undefined,
+    debtOrRefund:number
+  ) {
+    this.id = idLine;
+    this.value =value;
+    this.date = date;
+    this.label = label;
+    this.payor = payor;
+    this.detailList = lineDetailList;
+    this.debtOrRefund = debtOrRefund;
   }
 
 }

@@ -1,7 +1,7 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {Participant} from "../../class/participant";
 import {BehaviorSubject, Observable} from "rxjs";
-import {AddParticipantsLineComponent} from "../add-participants-line/add-participants-line.component";
+import {AddParticipantsGroupComponent} from "../add-participants-group/add-participants-group.component";
 import {ParticipantsService} from "../../services/participants.service";
 import {AsyncPipe} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -10,7 +10,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   selector: 'app-participants',
   standalone: true,
     imports: [
-        AddParticipantsLineComponent,
+        AddParticipantsGroupComponent,
         AsyncPipe,
         ReactiveFormsModule
     ],

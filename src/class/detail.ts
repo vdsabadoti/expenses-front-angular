@@ -1,8 +1,8 @@
 import {User} from "./user";
 
-export class LineDetail {
+export class Detail {
 
-  idLineDetail:number;
+  id:number;
   user:User;
   value:number;
 
@@ -10,7 +10,7 @@ export class LineDetail {
     idLineDetail:number,
     user:User,
     value:number) {
-    this.idLineDetail = idLineDetail;
+    this.id = idLineDetail;
     this.user = user;
     this.value = value;
   }

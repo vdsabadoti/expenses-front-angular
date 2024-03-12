@@ -8,33 +8,25 @@ import {LoginServiceService} from "./login-service.service";
 })
 export class ParticipantsService {
 
-  private _participantsOfANewExpense: BehaviorSubject<Participant[]> = new BehaviorSubject<Participant[]>([]);
-  public readonly $data: Observable<Participant[]> = this._participantsOfANewExpense.asObservable();
+  private _participantsOfANewGroup: BehaviorSubject<Participant[]> = new BehaviorSubject<Participant[]>([]);
+  public readonly $data: Observable<Participant[]> = this._participantsOfANewGroup.asObservable();
   private loginService = inject(LoginServiceService);
 
   constructor() { }
 
-  public eraseParticipantsForLaterExpense() : void {
-    this._participantsOfANewExpense.next([]);
+  public eraseParticipantsForLaterGroup() : void {
+    this._participantsOfANewGroup.next([]);
   }
 
-  public addParticipantToThisNewExpense(participant:Participant) : void {
+  public addParticipantToThisNewGroup(participant:Participant) : void {
     console.log(participant.user)
-    let participantsAlreadyIn = this._participantsOfANewExpense.getValue();
+    let participantsAlreadyIn = this._participantsOfANewGroup.getValue();
     participantsAlreadyIn.push(participant);
-    this._participantsOfANewExpense.next(participantsAlreadyIn);
+    this._participantsOfANewGroup.next(participantsAlreadyIn);
   }
 
-  public listParticipantsOfThisNewExpense() : Array<Participant> {
-    return this._participantsOfANewExpense.getValue();
-  }
-
-  private createParticipants() : Array<any> {
-    return [
-      { userId : 1, expenseId : 1, budget: 100 },
-      { userId : 2, expenseId : 1, budget: 100 },
-      { userId : 1, expenseId : 2, budget: 100 }
-    ]
+  public listParticipantsOfThisNewGroup() : Array<Participant> {
+    return this._participantsOfANewGroup.getValue();
   }
 
 }

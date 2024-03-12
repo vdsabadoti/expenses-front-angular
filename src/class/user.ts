@@ -1,10 +1,10 @@
-import {Expense} from "./expense";
+import {Group} from "./group";
 
 export class User {
-  idUser:number;
+  id:number;
   username:string;
   mail:string | undefined;
-  lstExpenses:Expense[] | undefined;
+  groupsList:Group[] | undefined;
   password:string | undefined;
   quote:string| undefined;
   image:string| undefined;
@@ -13,15 +13,15 @@ export class User {
     idUser:number,
     username:string,
     mail:string | undefined,
-    lstExpenses:Expense[] | undefined,
+    lstExpenses:Group[] | undefined,
     password:string | undefined,
     quote:string| undefined,
     image:string| undefined
   ) {
-    this.idUser = idUser;
+    this.id = idUser;
     this.mail = mail;
     this.password = password;
-    this.lstExpenses = lstExpenses;
+    this.groupsList = lstExpenses;
     this.username = username;
     this.quote = quote;
     this.image = image;

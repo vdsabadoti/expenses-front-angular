@@ -6,8 +6,8 @@ import {User} from "../../class/user";
 import {UserService} from "../../services/user.service";
 import {UserApiService} from "../../services/user-api.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {Expense} from "../../class/expense";
-import {ExpensesService} from "../../services/expenses.service";
+import {Group} from "../../class/group";
+import {GroupService} from "../../services/group.service";
 
 @Component({
   selector: 'app-api-tester',
@@ -27,7 +27,7 @@ export class ApiTesterComponent {
 
   //SERVICES
   private userService = inject(UserService);
-  private expenseService = inject(ExpensesService);
+  private expenseService = inject(GroupService);
 
   //VARIABLES
   public readonly expenseById: Observable<String>;
@@ -40,7 +40,7 @@ export class ApiTesterComponent {
   public oneUser : User | undefined;
 
   //REAL LIFE
-  public expensesObservableList: Observable<Expense[]> | undefined;
+  public expensesObservableList: Observable<Group[]> | undefined;
 
   constructor() {
     this.expenseById = this.firstApiService.callExpenseById(400);
@@ -62,7 +62,7 @@ export class ApiTesterComponent {
   }
 
   public showExpenses(){
-    this.expensesObservableList = this.expenseService.getExpenses(1);
+    this.expensesObservableList = this.expenseService.getGroups(1);
     console.log(this.expensesObservableList);
   }
 }

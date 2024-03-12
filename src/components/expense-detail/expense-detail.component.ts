@@ -1,55 +1,41 @@
-import {Component, inject, Input} from '@angular/core';
-import {ExpensesService} from "../../services/expenses.service";
-import {FirstApiService} from "../../services/first-api.service";
-import {Observable} from "rxjs";
-import {AsyncPipe} from "@angular/common";
+import {Component, inject} from '@angular/core';
+import {AsyncPipe, DatePipe} from "@angular/common";
+import {GroupStatisticsComponent} from "../group-statistics/group-statistics.component";
+import {GroupService} from "../../services/group.service";
+import {map, Observable, pipe} from "rxjs";
+import {Group} from "../../class/group";
+import {Detail} from "../../class/detail";
+import {ActivatedRoute} from "@angular/router";
 import {Expense} from "../../class/expense";
-import {Line} from "../../class/line";
-import {ExpenseStatisticsComponent} from "../expense-statistics/expense-statistics.component";
-import {RouterLink} from "@angular/router";
 
 @Component({
-  selector: 'app-expense-detail',
+  selector: 'app-expense-line-detail',
   standalone: true,
   imports: [
-    AsyncPipe, ExpenseStatisticsComponent, RouterLink
+    AsyncPipe,
+    GroupStatisticsComponent,
+    DatePipe
   ],
   templateUrl: './expense-detail.component.html',
   styleUrl: './expense-detail.component.css'
 })
 export class ExpenseDetailComponent {
 
-  private expenseService = inject(ExpensesService);
-  //public oldExpense: any;
+  private expenseService = inject(GroupService);
+  public group$:Observable<Group> | undefined;
+  public details$:Observable<Detail[]> | undefined;
   public expense$:Observable<Expense> | undefined;
-  public lines$:Observable<Line[]> | undefined;
-  @Input() month: number = new Date().getMonth();
-  @Input() year: number = new Date().getFullYear();
-  public monthList: String[] =
-    ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  public id: string | null | undefined ;
 
-  constructor() {
-    //this.expense$ = this.firstApiService.callOneExpense();
-    this.expense$ = this.expenseService.getExpense();
-    this.lines$ = this.expenseService.filterLinesByMonthAndYear(this.month, this.year);
-  }
-
-  public setMonthUp(){
-    if (this.month >= 11) {
-      this.year++;
-      this.month = -1;
-    }
-    this.month++;
-    this.lines$ = this.expenseService.filterLinesByMonthAndYear(this.month, this.year);
-  }
-
-  public setMonthDown(){
-    if (this.month <= 0){
-      this.year--;
-      this.month = 12;
-    }
-    this.month--;
-    this.lines$ = this.expenseService.filterLinesByMonthAndYear(this.month, this.year);
+  constructor(private route: ActivatedRoute) {
+    this.group$ = this.expenseService.getGroup();
+    this.route.queryParamMap.subscribe((paramMap) => {
+      // read param from paramMap
+      this.id = paramMap.get('idLine');
+      // use parameter...
+    });
+    this.details$ = this.expenseService.getDetails(Number(this.id));
+    this.expense$ = this.expenseService.getExpense(Number(this.id));
   }
 
 }

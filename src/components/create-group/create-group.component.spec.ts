@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExpenseDetailComponent } from './expense-detail.component';
+import { CreateGroupComponent } from './create-group.component';
 
-describe('ExpenseLineDetailComponent', () => {
-  let component: ExpenseDetailComponent;
-  let fixture: ComponentFixture<ExpenseDetailComponent>;
+describe('CreateExpenseComponent', () => {
+  let component: CreateGroupComponent;
+  let fixture: ComponentFixture<CreateGroupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExpenseDetailComponent]
+      imports: [CreateGroupComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ExpenseDetailComponent);
+    fixture = TestBed.createComponent(CreateGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

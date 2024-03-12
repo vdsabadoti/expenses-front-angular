@@ -1,8 +1,8 @@
 import {Component, inject} from '@angular/core';
 import {AddParticipantsComponent} from "../add-participants/add-participants.component";
 import {ParticipantsService} from "../../services/participants.service";
-import {ExpensesService} from "../../services/expenses.service";
-import {ExpenseForm} from "../../class/expense-form";
+import {GroupService} from "../../services/group.service";
+import {GroupForm} from "../../class/group-form";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {Router} from "@angular/router";
@@ -11,23 +11,19 @@ import {Router} from "@angular/router";
   selector: 'app-create-expense',
   standalone: true,
   imports: [AddParticipantsComponent, CommonModule, FormsModule],
-  templateUrl: './create-expense.component.html',
-  styleUrl: './create-expense.component.css'
+  templateUrl: './create-group.component.html',
+  styleUrl: './create-group.component.css'
 })
-export class CreateExpenseComponent {
+export class CreateGroupComponent {
 
-  public model:ExpenseForm = new ExpenseForm('', '');
+  public model:GroupForm = new GroupForm('', '');
   private participantsService = inject(ParticipantsService);
-  private expensesService : ExpensesService = inject(ExpensesService);
+  private expensesService : GroupService = inject(GroupService);
   constructor(private router:Router) {
   }
 
-  public createExpense(){
-
-  }
-
-  public createNewExpense(newExpense:ExpenseForm){
-    this.expensesService.createExpense(newExpense);
+  public createNewGroup(newExpense:GroupForm){
+    this.expensesService.createGroup(newExpense);
     this.router.navigate(['/expenses/detail']);
   }
 

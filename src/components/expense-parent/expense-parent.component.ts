@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import {ExpensesFlowComponent} from "../expenses-flow/expenses-flow.component";
+import {GroupsFlowComponent} from "../groups-flow/groups-flow.component";
 import {RouterOutlet} from "@angular/router";
-import {ExpenseDetailComponent} from "../expense-detail/expense-detail.component";
+import {ExpenseComponent} from "../expense/expense.component";
 
 @Component({
   selector: 'app-expense-parent',
   standalone: true,
-  imports: [ExpensesFlowComponent, RouterOutlet, ExpenseDetailComponent],
+  imports: [GroupsFlowComponent, RouterOutlet, ExpenseComponent],
   templateUrl: './expense-parent.component.html',
   styleUrl: './expense-parent.component.css'
 })

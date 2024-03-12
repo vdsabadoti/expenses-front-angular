@@ -1,4 +1,4 @@
-export class ExpenseForm {
+export class GroupForm {
 
   public label:string;
   public description:string ;

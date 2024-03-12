@@ -11,17 +11,17 @@ import {User} from "../../class/user";
   imports: [
     FormsModule
   ],
-  templateUrl: './add-participants-line.component.html',
-  styleUrl: './add-participants-line.component.css'
+  templateUrl: './add-participants-group.component.html',
+  styleUrl: './add-participants-group.component.css'
 })
-export class AddParticipantsLineComponent {
+export class AddParticipantsGroupComponent {
   @Input() user!: User;
   budget:number = 0;
   private participantsService = inject(ParticipantsService);
   private userService = inject(UserService);
 
   public addParticipant(userid:number){
-    this.participantsService.addParticipantToThisNewExpense(
+    this.participantsService.addParticipantToThisNewGroup(
       new Participant(userid, this.user, 0, this.budget, undefined)
     )
     console.log(this.user);

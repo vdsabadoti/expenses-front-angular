@@ -19,7 +19,7 @@ export class PasswordComponent {
   private password:string = 'corsaires';
 
   constructor() {
-    this.onlineUser = this.loginService.getUserOnline().pipe(map(user => {return user.idUser}));
+    this.onlineUser = this.loginService.getUserOnline().pipe(map(user => {return user.id}));
   }
 
   public passwordControlFunction() : void {
