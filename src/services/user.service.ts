@@ -25,7 +25,6 @@ export class UserService {
     const usersAvailableSnapshot: Observable<User[]> = this._usersAvailable.getValue();
     const itemsWithoutDeleted: Observable<User[]> =
       usersAvailableSnapshot.pipe(map(users => users.filter(user => user.username != userToDelete.username)));
-    console.log(itemsWithoutDeleted);
     this._usersAvailable.next(itemsWithoutDeleted);
   }
 

@@ -24,7 +24,6 @@ export class AddParticipantsGroupComponent {
     this.participantsService.addParticipantToThisNewGroup(
       new Participant(userid, this.user, 0, this.budget, undefined)
     )
-    console.log(this.user);
     this.userService.updateUsersAvailable(this.user); //THE PROBLEM IS HERE !!!!!
 }
 

@@ -16,6 +16,7 @@ export class GroupApiService {
   private static GET_GROUP_BY_ID:string = 'getsingleexpense?id=';
   private static GET_DETAILS:string = 'getlinedetail?id='
   private static GET_EXPENSE:string = 'getline?id=';
+  private static CREATE_GROUP:string = 'creategroup';
   constructor(public http: HttpClient) { }
 
   public getGroupsFromUser(idUser:number): Observable<Group[]> {
@@ -36,6 +37,12 @@ export class GroupApiService {
   public getExpense(expenseId:number): Observable<Expense> {
     let url = GroupApiService.URL + GroupApiService.GET_EXPENSE + expenseId;
     return this.http.get<Expense>(url);
+  }
+
+  public createGroup(group:Group){
+    let url = GroupApiService.URL + GroupApiService.CREATE_GROUP
+    console.log(group);
+    this.http.post<String>(url, group);
   }
 
 }

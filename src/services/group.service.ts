@@ -21,8 +21,15 @@ export class GroupService {
   private usersService = inject(UserService);
   private loginService = inject(LoginServiceService);
   private groupApiService = inject(GroupApiService);
+  private userOnline: User | undefined;
 
   constructor() {
+    //GET USER ONLINE TO CREATE GROUP
+    this.loginService.getUserOnline().subscribe(data => {
+      if (data != undefined) {
+        this.userOnline = data
+      }
+    })
   }
 
   public getGroups(idUser:number) : Observable<Group[]> {
@@ -35,30 +42,24 @@ export class GroupService {
   }
 
   public async createGroup(newExpense:GroupForm){
-    //TODO : create expense
+    //TODO : create group
 
-    //INIT VARIABLES : budget by month and user
+    //INIT VARIABLES : budget by month, user and group
     let totalBudgetByMonth = 0;
     let userOnline : User;
-
-    //GET USER ONLINE
-    this.loginService.getUserOnline().subscribe(data => {
-      if (data != undefined) {
-        userOnline = data
-      }
-    })
+    let group : Group;
+    let participants = this.participantsService.listParticipantsOfThisNewGroup()
 
     //CALCULATE budget by month according to participants
-    this.participantsService.listParticipantsOfThisNewGroup().forEach(
-      (p)=> {totalBudgetByMonth += p.budgetByMonth}
-    );
-
-    //CREATE EXPENSE with above data
-    /*
-    let expense = new Expense(0, totalBudgetByMonth, newExpense.label, newExpense.description,
-      userOnline, this.participantsService.listParticipantsOfThisNewExpense(), []
+        participants.forEach(
+          (p)=> {totalBudgetByMonth += p.budgetByMonth}
+        );
+    if (this.userOnline != undefined) {
+      group = new Group(0, totalBudgetByMonth, newExpense.label, newExpense.description,
+        this.userOnline, participants, []
       );
-     */
+      this.groupApiService.createGroup(group);
+    }
 
     //CREATE EXPENSE THANKS TO SERVICE
     // --> create api call with Expense object ... callback function with OK or ERROR ->
@@ -70,7 +71,6 @@ export class GroupService {
 
     //IF ERROR -> think about it
 
-    console.log(this.groups);
   }
 
   public setGroupDetail(id:number) : void {
@@ -85,7 +85,6 @@ export class GroupService {
         ));
       })
     ));
-    console.log(expensesList);
     return expensesList;
   }
 

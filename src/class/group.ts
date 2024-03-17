@@ -8,11 +8,11 @@ export class Group {
   name:string;
   description:string;
   owner:User;
-  participantList:Array<Participant>;
-  expensesList:Array<Expense>;
+  participantList:Participant[];
+  expensesList:Expense[];
 
   constructor(balance:number, budgetByMonth:number, expenseName:string, description:string,
-              owner:User, participantList:Array<Participant>, lineList:Array<Expense>) {
+              owner:User, participantList:Participant[], lineList:Expense[]) {
     this.balance = balance;
     this.budgetByMonth =budgetByMonth;
     this.name = expenseName;

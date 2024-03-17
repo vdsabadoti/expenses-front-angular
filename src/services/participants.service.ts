@@ -19,13 +19,12 @@ export class ParticipantsService {
   }
 
   public addParticipantToThisNewGroup(participant:Participant) : void {
-    console.log(participant.user)
     let participantsAlreadyIn = this._participantsOfANewGroup.getValue();
     participantsAlreadyIn.push(participant);
     this._participantsOfANewGroup.next(participantsAlreadyIn);
   }
 
-  public listParticipantsOfThisNewGroup() : Array<Participant> {
+  public listParticipantsOfThisNewGroup() : Participant[] {
     return this._participantsOfANewGroup.getValue();
   }
 
