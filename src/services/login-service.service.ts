@@ -10,14 +10,20 @@ import {map, Observable} from "rxjs";
 export class LoginServiceService {
 
   private userService = inject(UserService);
-  private users: Observable<User[]>;
+  private users$: Observable<User[]>;
+  private users: User[] | undefined;
   private userOnline: number = 1;
   public loggedIn:boolean = false;
 
   constructor() {
-    this.users = this.userService.getUsersFromDatabaseAsObservable();
+    this.users$ = this.userService.getUsersFromDatabaseAsObservable();
+    this.userService.getUsersFromDatabaseAsObservable().subscribe(it =>
+    this.users = it)
   }
     public getUsers() : Observable<User[]>{
+      return this.users$;
+    }
+    public getUsersAvailable() : User[]| undefined{
       return this.users;
     }
 
@@ -26,7 +32,7 @@ export class LoginServiceService {
     }
 
     public getUserOnline() : Observable<User> {
-      return this.users.pipe(map((items: User[]) => items[this.userOnline]));
+      return this.users$.pipe(map((items: User[]) => items[this.userOnline]));
     }
 
   public isUserAuthenticated() : boolean {
