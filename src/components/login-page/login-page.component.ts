@@ -30,6 +30,7 @@ export class LoginPageComponent {
   }
 
   public updateUserOnline(id:number) : void {
+    console.log("Id is " +  id)
     this.loginService.setUserOnline(id);
   }
 

@@ -14,9 +14,11 @@ export class HeaderComponent {
 
   private loginService = inject(LoginServiceService);
   public idUser:number = 0;
+  public applicationName: string;
 
   constructor() {
     //this.idUser = this.loginService.getUserOnline().idUser;
+    this.applicationName = "Group Expenses App"
   }
 
 

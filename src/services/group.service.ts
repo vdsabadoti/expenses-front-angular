@@ -9,6 +9,7 @@ import {Expense} from "../class/expense";
 import {GroupApiService} from "./group-api.service";
 import {map, Observable} from "rxjs";
 import {Detail} from "../class/detail";
+import {Participant} from "../class/participant";
 
 @Injectable({
   providedIn: 'root'
@@ -34,34 +35,27 @@ export class GroupService {
     return this.group;
   }
 
-  public async createGroup(newExpense:GroupForm){
+  public async createGroup(newExpense:GroupForm, userOnline: User | undefined){
     //TODO : create expense
 
     //INIT VARIABLES : budget by month and user
     let totalBudgetByMonth = 0;
-    let userOnline : User;
+    let participants : Participant[];
 
-    //GET USER ONLINE
-    this.loginService.getUserOnline().subscribe(data => {
-      if (data != undefined) {
-        userOnline = data
-      }
-    })
+    //GET PARTICIPANTS
+    participants = this.participantsService.listParticipantsOfThisNewGroup();
 
     //CALCULATE budget by month according to participants
-    this.participantsService.listParticipantsOfThisNewGroup().forEach(
+    participants.forEach(
       (p)=> {totalBudgetByMonth += p.budgetByMonth}
     );
 
-    //CREATE EXPENSE with above data
-    /*
-    let expense = new Expense(0, totalBudgetByMonth, newExpense.label, newExpense.description,
-      userOnline, this.participantsService.listParticipantsOfThisNewExpense(), []
+    if (userOnline != undefined){
+      let group = new Group(0, totalBudgetByMonth, newExpense.label, newExpense.description,
+        userOnline, participants, []
       );
-     */
-
-    //CREATE EXPENSE THANKS TO SERVICE
-    // --> create api call with Expense object ... callback function with OK or ERROR ->
+      this.groupApiService.createGroup(group);
+    }
 
     //IF OK => set addedParticipants to zero (participants service)
     this.participantsService.eraseParticipantsForLaterGroup();
