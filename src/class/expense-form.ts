@@ -7,7 +7,7 @@ export class ExpenseForm {
   value:number;
   date:Date;
   label:string;
-  payor:Participant ;
+  payorId:number ;
   detailList: Detail[] | undefined;
   debtOrRefund:boolean;
 
@@ -15,7 +15,7 @@ export class ExpenseForm {
     value:number,
     date:Date,
     label:string,
-    payor: Participant,
+    payor: number,
     detailList: Detail[] | undefined,
     debtOrRefund:boolean
   ) {
@@ -23,7 +23,7 @@ export class ExpenseForm {
     this.value =value;
     this.date = date;
     this.label = label;
-    this.payor = payor;
+    this.payorId = payor;
     this.detailList = detailList;
     this.debtOrRefund = debtOrRefund;
   }

@@ -91,4 +91,8 @@ export class GroupService {
     return this.groupApiService.getExpense(expenseId);
   }
 
+  public createExpense(expense:Expense, groupId:number){
+    this.groupApiService.createExpense(expense, groupId);
+  }
+
 }

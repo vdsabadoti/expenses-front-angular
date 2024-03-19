@@ -46,7 +46,7 @@ export class CreateExpenseComponent {
         let detail = new Detail(0, participant.user, 0);
         this.details.push(detail);
       }
-      this.expense = new ExpenseForm(0, new Date(),'',this.group.participantList[0], this.details, false)
+      this.expense = new ExpenseForm(0, new Date(),'',1 , this.details, false)
       console.log(this.details)
     })
 
@@ -65,15 +65,20 @@ export class CreateExpenseComponent {
     if (this.toggle){
       debtToNumber = 0;
     }
-    if (this.expense) {
+    if ((this.expense != undefined) && (this.group != undefined)) {
+      let payorId = this.expense.payorId;
+      let payor = this.group.participantList.find(participant => participant.id == payorId);
       this.newExpense = new Expense(
         0,
         this.expense.value,
         this.expense.date,
         this.expense.label,
-        this.expense.payor.user,
+        payor?.user,
         this.expense.detailList,
         debtToNumber)
+        if (this.group?.id){
+          this.groupService.createExpense(this.newExpense, this.group.id);
+        }
     }
     console.log(this.newExpense);
   }
@@ -88,7 +93,6 @@ export class CreateExpenseComponent {
       let individualAmount = this.expense?.value / this.details.length;
       for (let detail of this.details) {
         detail.value = individualAmount;
-
       }
     }
   }
