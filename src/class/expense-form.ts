@@ -1,22 +1,23 @@
 import {User} from "./user";
 import {Detail} from "./detail";
+import {Participant} from "./participant";
 
 export class ExpenseForm {
 
   value:number;
   date:Date;
   label:string;
-  payor:User;
+  payor:Participant ;
   detailList: Detail[] | undefined;
-  debtOrRefund:number;
+  debtOrRefund:boolean;
 
   constructor(
     value:number,
     date:Date,
     label:string,
-    payor:User,
+    payor: Participant,
     detailList: Detail[] | undefined,
-    debtOrRefund:number
+    debtOrRefund:boolean
   ) {
 
     this.value =value;

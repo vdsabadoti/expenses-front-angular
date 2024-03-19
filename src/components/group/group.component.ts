@@ -52,4 +52,8 @@ export class GroupComponent {
     this.expenses$ = this.expenseService.filterExpensesByMonthAndYear(this.month, this.year);
   }
 
+
+  setGroup() {
+
+  }
 }

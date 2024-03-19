@@ -31,8 +31,8 @@ export class CreateGroupComponent {
     })
   }
 
-  public createNewGroup(newExpense:GroupForm){
-    this.expensesService.createGroup(newExpense, this.userOnline);
+  public createNewGroup(newGroup:GroupForm){
+    this.expensesService.createGroup(newGroup, this.userOnline);
     this.router.navigate(['/expenses/detail']);
   }
 
