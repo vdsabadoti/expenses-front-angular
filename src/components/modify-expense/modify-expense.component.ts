@@ -80,17 +80,17 @@ export class ModifyExpenseComponent implements OnInit {
 
   }
 
-  createNewExpense(){
-    /*
+  saveExpense(){
+    let expenseId = Number(this.id);
     let debtToNumber = 1; // 1 = debt
     if (this.toggle){
       debtToNumber = 0;
     }
-    if ((this.expenseToUpdate != undefined) && (this.group != undefined)) {
-      let payorId = this.expenseToUpdate.payorId;
-      let payor = this.group.participantList.find(participant => participant.id == payorId);
+    if ((this.expenseToUpdate != undefined) && (this.group != undefined) && (this.expense != undefined)) {
+      let payorId = this.expense.payor?.id;
+      let payor = this.group.participantList.find(participant => participant.user.id == payorId);
       this.newExpense = new Expense(
-        0,
+        expenseId,
         this.expenseToUpdate.value,
         this.expenseToUpdate.date,
         this.expenseToUpdate.label,
@@ -98,19 +98,15 @@ export class ModifyExpenseComponent implements OnInit {
         this.expenseToUpdate.detailList,
         debtToNumber)
         if (this.group?.id){
-          this.groupService.createExpense(this.newExpense, this.group.id);
+          this.groupService.updateExpense(this.newExpense, this.group.id);
         }
     }
     console.log(this.newExpense);
-
-     */
   }
 
   debtOrRefund() {
-    /*
     console.log('change')
     this.toggle = !this.toggle;
-    */
   }
 
   dispathValues() {

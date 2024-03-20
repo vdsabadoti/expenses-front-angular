@@ -12,6 +12,7 @@ import {ModifyExpenseComponent} from "../components/modify-expense/modify-expens
 import {authGuard} from "./auths/auth.guard";
 
 export const routes: Routes = [
+  { path: '', component: LoginPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path : 'password', component: PasswordComponent },
   { path : 'expenses', component: GroupParentComponent, canActivate: [authGuard],

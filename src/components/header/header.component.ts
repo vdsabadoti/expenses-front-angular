@@ -30,5 +30,8 @@ export class HeaderComponent {
     })
   }
 
+  logout(){
+    this.guardService.logout();
+  }
 
 }
