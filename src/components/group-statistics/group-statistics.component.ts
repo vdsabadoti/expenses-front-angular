@@ -30,32 +30,21 @@ export class GroupStatisticsComponent implements OnInit, OnChanges {
 
 
   constructor() {
-    console.log('========================================')
-    console.log('Constructor')
-    console.log('========================================')
   }
   ngOnChanges(changes:SimpleChanges): void {
 
-    //HYDRATE LINE WITH LINE DETAILS LIST THANKS TO SUBSCRIPTION
+    //HYDRATE EXPENSES WITH DETAILS THANKS TO SUBSCRIPTION
     //TODO : instead of hydrating here, hydrate @Input lines so the information is already loaded for this component
-    console.log('========================================')
-    console.log('NgOnChanges')
-    console.log('========================================')
     for (let expense of this.expenses){
         this.expensesService.getDetails(expense.id).subscribe(
           list => {
             expense.detailList = list;
-            console.log('get details :')
-            console.log(list)
           }
         );
       }
     }
 
   ngOnInit() {
-    console.log('========================================')
-    console.log('NgOnInit')
-    console.log('========================================')
 
     let totalMonthBalance = 0;
     let totalMonthBudget = 0;
@@ -64,22 +53,17 @@ export class GroupStatisticsComponent implements OnInit, OnChanges {
     for (let participant of this.group.participantList) {
       let balance = 0;
 
-      console.log('Line for :')
-      console.log(participant.user.username)
-
       for (let expense of this.expenses){
-        console.log(expense);
-        console.log('Details :')
+
         if (expense.detailList?.length !== undefined){
           for(let detail of expense.detailList){
-            console.log(detail);
-            if (detail.user.id == participant.user.id )
+            if (detail.user.id == participant.user.id ){
               totalMonthBalance += detail.value;
-            balance += detail.value;
+              balance += detail.value;
+            }
           }
         }
       }
-
       this.budgetByMonthList.push(balance / participant.budgetByMonth * 100);
       this.participantsList.push(participant.user.username);
       totalMonthBudget += participant.budgetByMonth;
