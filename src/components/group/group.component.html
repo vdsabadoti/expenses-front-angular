@@ -1,23 +1,25 @@
 <div class="max-w-sm mx-auto">
-@if (group$ | async ; as groups){
+@if (group$ | async ; as group){
   <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
 
     <div class="grid grid-cols-2 justify-items-stretch">
       <div>
         <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
-          {{groups.name}}
+          {{group.name}}
         </h5>
-        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{groups.description}}</p>
+        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{group.description}}</p>
       </div>
       <div class="place-self-end">
-        <button class="flex mx-auto mt-6 text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">+</button>
+        <a routerLink="newexpense">
+          <img src="https://cdn1.iconfinder.com/data/icons/finance-essentials-vol-02-2/44/add-include-amount-coins-money-512.png" alt="" width="50px" height="50px">
+        </a>
       </div>
     </div>
     <div class="grid grid-cols-6 justify-items-center mt-4">
       <div class="col-start-1 col-end-2 text-2xl font-bold align-items-center " xmlns:x-on="http://www.w3.org/1999/xhtml">
-        <button (click)="setMonthUp()" class="p-2 border rounded-full hover:bg-gray-100">
+        <button (click)="setMonthDown()" class="p-2 border rounded-full hover:bg-gray-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
       </div>
@@ -26,9 +28,9 @@
         <span class="text-base">{{ year}} </span>
       </div>
       <div class="col-start-6 col-end-7 align-items-center">
-        <button (click)="setMonthDown()" class="p-2 border rounded-full hover:bg-gray-100">
+        <button (click)="setMonthUp()" class="p-2 border rounded-full hover:bg-gray-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
           </svg>
         </button>
       </div>
@@ -38,12 +40,12 @@
 
   @if (expenses$ | async; as expenses){
   <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-  <app-expense-statistics [group]="groups" [expenses]="expenses"></app-expense-statistics>
+  <app-expense-statistics [group]="group" [expenses]="expenses"></app-expense-statistics>
   </div>
 
   <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
     <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
-      Filtered Expenses
+      Monthly expenses
     </h5>
     <ul class="my-4 space-y-3">
       @for (expense of expenses; track expense.id){
@@ -56,13 +58,10 @@
         </li>
       }
     </ul>
-    <div>
-      <a href="#" class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
-        Delete</a>
-    </div>
   </div>
   }
 }
 </div>
+
 
 

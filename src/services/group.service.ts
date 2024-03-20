@@ -9,6 +9,7 @@ import {Expense} from "../class/expense";
 import {GroupApiService} from "./group-api.service";
 import {map, Observable} from "rxjs";
 import {Detail} from "../class/detail";
+import {Participant} from "../class/participant";
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +22,8 @@ export class GroupService {
   private usersService = inject(UserService);
   private loginService = inject(LoginServiceService);
   private groupApiService = inject(GroupApiService);
-  private userOnline: User | undefined;
 
   constructor() {
-    //GET USER ONLINE TO CREATE GROUP
-    this.loginService.getUserOnline().subscribe(data => {
-      if (data != undefined) {
-        this.userOnline = data
-      }
-    })
   }
 
   public getGroups(idUser:number) : Observable<Group[]> {
@@ -41,40 +35,43 @@ export class GroupService {
     return this.group;
   }
 
-  public async createGroup(newExpense:GroupForm){
-    //TODO : create group
+  public async createGroup(newExpense:GroupForm, userOnline: User | undefined){
+    //TODO : create expense
 
-    //INIT VARIABLES : budget by month, user and group
+    //INIT VARIABLES : budget by month and user
     let totalBudgetByMonth = 0;
-    let userOnline : User;
-    let group : Group;
-    let participants = this.participantsService.listParticipantsOfThisNewGroup()
+    let participants : Participant[];
+
+    //GET PARTICIPANTS
+    participants = this.participantsService.listParticipantsOfThisNewGroup();
 
     //CALCULATE budget by month according to participants
-        participants.forEach(
-          (p)=> {totalBudgetByMonth += p.budgetByMonth}
-        );
-    if (this.userOnline != undefined) {
-      group = new Group(0, totalBudgetByMonth, newExpense.label, newExpense.description,
-        this.userOnline, participants, []
+    participants.forEach(
+      (p)=> {totalBudgetByMonth += p.budgetByMonth}
+    );
+
+    if (userOnline != undefined){
+      let group = new Group(0, totalBudgetByMonth, newExpense.label, newExpense.description,
+        userOnline, participants, []
       );
       this.groupApiService.createGroup(group);
     }
 
-    //CREATE EXPENSE THANKS TO SERVICE
-    // --> create api call with Expense object ... callback function with OK or ERROR ->
-
     //IF OK => set addedParticipants to zero (participants service)
-    this.participantsService.eraseParticipantsForLaterGroup();
     //IF OK => set allusersbackinthegame (users service)
-    await this.usersService.allUsersAreBackInTheGame();
+    await this.resetParticipants();
 
     //IF ERROR -> think about it
 
+    console.log(this.groups);
   }
 
   public setGroupDetail(id:number) : void {
     this.group = this.groupApiService.getGroupById(id);
+  }
+
+  public setExpenseToModify(expenseId:number) : void {
+    //this.expense = this.groupApiService.getExpense(1)
   }
 
   public filterExpensesByMonthAndYear(month:number, year:number) : Observable<Expense[]> | undefined {
@@ -85,6 +82,7 @@ export class GroupService {
         ));
       })
     ));
+    console.log(expensesList);
     return expensesList;
   }
 
@@ -94,6 +92,21 @@ export class GroupService {
 
   public getExpense(expenseId:number) : Observable<Expense> {
     return this.groupApiService.getExpense(expenseId);
+  }
+
+  public createExpense(expense:Expense, groupId:number){
+    this.groupApiService.createExpense(expense, groupId);
+  }
+
+  public updateExpense(expense:Expense, groupId:number){
+    this.groupApiService.createExpense(expense, groupId);
+  }
+
+   public async resetParticipants(){
+    //IF OK => set addedParticipants to zero (participants service)
+    this.participantsService.eraseParticipantsForLaterGroup();
+    //IF OK => set allusersbackinthegame (users service)
+    await this.usersService.allUsersAreBackInTheGame();
   }
 
 }

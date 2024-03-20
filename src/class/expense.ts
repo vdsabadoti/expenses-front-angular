@@ -8,7 +8,7 @@ export class Expense {
   value:number;
   date:Date;
   label:string;
-  payor:User;
+  payor:User | undefined;
   detailList: Detail[] | undefined;
   debtOrRefund:number;
 
@@ -17,7 +17,7 @@ export class Expense {
   value:number,
   date:Date,
   label:string,
-  payor:User,
+  payor:User | undefined,
   lineDetailList: Detail[] | undefined,
     debtOrRefund:number
   ) {

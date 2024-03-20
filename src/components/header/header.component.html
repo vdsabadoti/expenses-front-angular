@@ -4,14 +4,17 @@
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
       </svg>
-      <span class="ml-3 text-xl">Expenses App</span>
+      <span class="ml-3 text-xl">{{ applicationName }}</span>
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"> Login </a>
-      &nbsp;&nbsp;
-      <a routerLink="/expenses" routerLinkActive="active" ariaCurrentWhenActive="page"> Expenses </a>
+      &nbsp;&nbsp;@if (loggedUserBoolean){
+      <a routerLink="/expenses" routerLinkActive="active" ariaCurrentWhenActive="page"> Groups </a>
       &nbsp;&nbsp;
       <a routerLink="/create" routerLinkActive="active" ariaCurrentWhenActive="page"> Create </a>
+      &nbsp;&nbsp;
+      <a (click)="logout()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"> Logout </a>
+    }
+
     </nav>
   </div>
 </header>

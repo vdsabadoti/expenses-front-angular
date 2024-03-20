@@ -3,6 +3,7 @@ import {User} from "../class/user";
 import {UserApiService} from "./user-api.service";
 import {UserService} from "./user.service";
 import {map, Observable} from "rxjs";
+import {GuardService} from "../app/auths/guard.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,11 @@ import {map, Observable} from "rxjs";
 export class LoginServiceService {
 
   private userService = inject(UserService);
+  private guardService = inject(GuardService)
+
   private users$: Observable<User[]>;
   private users: User[] | undefined;
-  private userOnline: number = 1;
-  public loggedIn:boolean = false;
+  private userOnline: number = 0;
 
   constructor() {
     this.users$ = this.userService.getUsersFromDatabaseAsObservable();
@@ -35,12 +37,9 @@ export class LoginServiceService {
       return this.users$.pipe(map((items: User[]) => items[this.userOnline]));
     }
 
-  public isUserAuthenticated() : boolean {
-    return this.loggedIn;
-  }
 
   public authenticationSuccessful() : void {
-    this.loggedIn = true;
+    this.guardService.login();
   }
 
   public getIdFromOnlineUser() : number {

@@ -6,6 +6,9 @@ import {GroupForm} from "../../class/group-form";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {Router} from "@angular/router";
+import {User} from "../../class/user";
+import {UserService} from "../../services/user.service";
+import {LoginServiceService} from "../../services/login-service.service";
 
 @Component({
   selector: 'app-create-expense',
@@ -18,13 +21,24 @@ export class CreateGroupComponent {
 
   public model:GroupForm = new GroupForm('', '');
   private participantsService = inject(ParticipantsService);
+  private loginService = inject(LoginServiceService);
   private expensesService : GroupService = inject(GroupService);
+  private userOnline : User | undefined;
   constructor(private router:Router) {
+    this.loginService.getUserOnline().subscribe(it =>
+    {
+      this.userOnline = it;
+    })
   }
 
-  public createNewGroup(newExpense:GroupForm){
-    this.expensesService.createGroup(newExpense);
-    this.router.navigate(['/expenses/detail']);
+  public createNewGroup(newGroup:GroupForm){
+    this.expensesService.createGroup(newGroup, this.userOnline);
+    this.router.navigate(['/expenses']);
+  }
+
+  public cancelCreation(){
+    this.expensesService.resetParticipants().then();
+    this.router.navigate(['/expenses']).then();
   }
 
 }

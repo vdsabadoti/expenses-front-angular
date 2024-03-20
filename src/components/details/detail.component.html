@@ -1,9 +1,9 @@
 <div class="max-w-sm mx-auto">
   @if (group$ | async; as group){
+    @if (expense$ | async; as expense){
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       <div class="grid grid-cols-1 justify-items-stretch">
         <div>
-          @if (expense$ | async; as expense){
           <div class="inline justify-between">
             <div>
               <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
@@ -16,8 +16,7 @@
               </h5>
             </div>
           </div>
-          <p>{{ expense.value }} &euro; payed by {{ expense.payor.username }} </p>
-          }
+          <p>{{ expense.value }} &euro; payed by {{ expense.payor?.username }} </p>
         </div>
       </div>
     </div>
@@ -36,7 +35,7 @@
       </ul>
       <div class="grid grid-cols-2 justify-items-stretch p-2">
         <div>
-          <a href="#">
+          <a routerLink="modifyexpense" [queryParams]="{ id: expense.id }">
             <p class="text-left text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">Modify</p>
           </a>
         </div>
@@ -48,5 +47,6 @@
         </div>
       </div>
     </div>
+  }
   }
 </div>
