@@ -49,15 +49,6 @@ export class CreateExpenseComponent {
       this.expense = new ExpenseForm(0, new Date(),'',1 , this.details, false)
       console.log(this.details)
     })
-
-
-    //GET THE LIST OF PARTICIPANTS OF THE GROUP
-    // this.participants =
-    //CREATE A NEW EXPENSE IF CREATION MODE, UPLOAD A EXPENSE IF MODIFICATION MODE
-    // this.expense = new ExpenseForm(0,new Date,'', this.loginService.getUserOnline() ,'','')
-    //////// CREATE AS MANY DETAILS AS PARTICIPANTS IF CREATION MODE, UPLOAD DETAILS IF MODIFICATION MODE
-    //CREATION MODE => FOR EACH PARTICIPANT, NEW DETAIL WITH PARTICIPANT.GETUSER.GETID, GROUP.GETID, EXPENSE.GETID, VALUE = 0
-    //MODIF MODE => FOR EACH PARTICIPANT, GETDETAIL BY PARTICIPNAT.GETUSER.GETID,
   }
 
   createNewExpense(){

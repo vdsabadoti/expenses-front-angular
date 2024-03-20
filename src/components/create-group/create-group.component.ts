@@ -33,7 +33,12 @@ export class CreateGroupComponent {
 
   public createNewGroup(newGroup:GroupForm){
     this.expensesService.createGroup(newGroup, this.userOnline);
-    this.router.navigate(['/expenses/detail']);
+    this.router.navigate(['/expenses']);
+  }
+
+  public cancelCreation(){
+    this.expensesService.resetParticipants().then();
+    this.router.navigate(['/expenses']).then();
   }
 
 }

@@ -1,19 +1,11 @@
 <section class="text-gray-600 body-font">
     <div class="max-w-sm mx-auto overflow-auto">
       <table class="table-auto w-full text-left whitespace-no-wrap">
-        <thead>
-        <tr>
-          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Expenses</th>
-          <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">Balance</th>
-          <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
-        </tr>
-        </thead>
         <tbody>
         @if (groups$ | async ; as groups) {
           @for (group of groups; track group.id) {
             <tr>
               <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ group.name }}</td>
-              <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ group.balance }}</td>
               <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
                 @if (group.id) {
                 <a routerLink="/expenses/detail" routerLinkActive="active" ariaCurrentWhenActive="page">

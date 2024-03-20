@@ -8,6 +8,7 @@ import {CreateGroupComponent} from "../components/create-group/create-group.comp
 import {ApiTesterComponent} from "../components/api-tester/api-tester.component";
 import {DetailComponent} from "../components/details/detail.component";
 import {CreateExpenseComponent} from "../components/create-expense/create-expense.component";
+import {ModifyExpenseComponent} from "../components/modify-expense/modify-expense.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -17,7 +18,8 @@ export const routes: Routes = [
     { path : '', component: GroupsFlowComponent},
     { path : 'detail', component: GroupComponent },
     { path : 'detail/linedetail', component: DetailComponent},
-    { path : 'detail/newexpense', component: CreateExpenseComponent}
+    { path : 'detail/newexpense', component: CreateExpenseComponent},
+    { path : 'detail/linedetail/modifyexpense', component: ModifyExpenseComponent}
   ]},
   { path: 'create', component : CreateGroupComponent},
   { path : 'testAPI', component : ApiTesterComponent }

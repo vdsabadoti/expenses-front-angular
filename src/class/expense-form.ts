@@ -7,7 +7,7 @@ export class ExpenseForm {
   value:number;
   date:Date;
   label:string;
-  payorId:number ;
+  payorId:number| undefined ;
   detailList: Detail[] | undefined;
   debtOrRefund:boolean;
 
@@ -15,7 +15,7 @@ export class ExpenseForm {
     value:number,
     date:Date,
     label:string,
-    payor: number,
+    payor: number | undefined,
     detailList: Detail[] | undefined,
     debtOrRefund:boolean
   ) {

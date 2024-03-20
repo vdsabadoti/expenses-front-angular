@@ -5,7 +5,7 @@ import {GroupService} from "../../services/group.service";
 import {map, Observable, pipe} from "rxjs";
 import {Group} from "../../class/group";
 import {Detail} from "../../class/detail";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Expense} from "../../class/expense";
 
 @Component({
@@ -14,7 +14,8 @@ import {Expense} from "../../class/expense";
   imports: [
     AsyncPipe,
     GroupStatisticsComponent,
-    DatePipe
+    DatePipe,
+    RouterLink
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'

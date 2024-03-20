@@ -58,9 +58,8 @@ export class GroupService {
     }
 
     //IF OK => set addedParticipants to zero (participants service)
-    this.participantsService.eraseParticipantsForLaterGroup();
     //IF OK => set allusersbackinthegame (users service)
-    await this.usersService.allUsersAreBackInTheGame();
+    await this.resetParticipants();
 
     //IF ERROR -> think about it
 
@@ -69,6 +68,10 @@ export class GroupService {
 
   public setGroupDetail(id:number) : void {
     this.group = this.groupApiService.getGroupById(id);
+  }
+
+  public setExpenseToModify(expenseId:number) : void {
+    //this.expense = this.groupApiService.getExpense(1)
   }
 
   public filterExpensesByMonthAndYear(month:number, year:number) : Observable<Expense[]> | undefined {
@@ -93,6 +96,13 @@ export class GroupService {
 
   public createExpense(expense:Expense, groupId:number){
     this.groupApiService.createExpense(expense, groupId);
+  }
+
+   public async resetParticipants(){
+    //IF OK => set addedParticipants to zero (participants service)
+    this.participantsService.eraseParticipantsForLaterGroup();
+    //IF OK => set allusersbackinthegame (users service)
+    await this.usersService.allUsersAreBackInTheGame();
   }
 
 }
