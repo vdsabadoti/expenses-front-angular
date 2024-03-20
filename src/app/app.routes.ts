@@ -9,11 +9,12 @@ import {ApiTesterComponent} from "../components/api-tester/api-tester.component"
 import {DetailComponent} from "../components/details/detail.component";
 import {CreateExpenseComponent} from "../components/create-expense/create-expense.component";
 import {ModifyExpenseComponent} from "../components/modify-expense/modify-expense.component";
+import {authGuard} from "./auths/auth.guard";
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
-  { path : 'password', component: PasswordComponent},
-  { path : 'expenses', component: GroupParentComponent,
+  { path : 'password', component: PasswordComponent },
+  { path : 'expenses', component: GroupParentComponent, canActivate: [authGuard],
   children: [
     { path : '', component: GroupsFlowComponent},
     { path : 'detail', component: GroupComponent },
@@ -21,6 +22,6 @@ export const routes: Routes = [
     { path : 'detail/newexpense', component: CreateExpenseComponent},
     { path : 'detail/linedetail/modifyexpense', component: ModifyExpenseComponent}
   ]},
-  { path: 'create', component : CreateGroupComponent},
+  { path: 'create', component : CreateGroupComponent, canActivate: [authGuard]},
   { path : 'testAPI', component : ApiTesterComponent }
 ];

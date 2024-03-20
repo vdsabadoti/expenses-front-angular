@@ -37,35 +37,47 @@ export class ModifyExpenseComponent implements OnInit {
   public id: string | null | undefined ;
 
   constructor(private route: ActivatedRoute) {
-    this.expenseService.getGroup()?.subscribe(it => this.group = it);
     this.route.queryParamMap.subscribe((paramMap) => {
       // read param from paramMap
       this.id = paramMap.get('id');
       // use parameter...
     });
-    this.expenseService.getExpense(Number(this.id)).subscribe(it => {
-      this.expense = it
-      console.log(it);
-      }
-    );
-    this.expenseService.getDetails(Number(this.id)).subscribe(it => this.details = it);
   }
 
-  ngOnInit(){
-    if ((this.expense != undefined) && (this.group != undefined)){
+  async ngOnInit(){
+    this.expenseService.getGroup()?.subscribe(it => this.group = it);
+    this.expenseService.getExpense(Number(this.id)).subscribe(it => {
+        this.expense = it
+        console.log('EXPENSE is loaded : ')
+        console.log(it);
+      }
+    );
+    this.expenseService.getDetails(Number(this.id)).subscribe(it => {
+      this.details = it
+      console.log('DETAILS is loaded : ')
+      console.log(it);
 
-      //TRANSFORM DEBT OR REFUND TO BOOLEAN (EXPENSE FROM USES BOOLEAN)
-      let debtOrRefundToBool = false;
-      if (this.expense.debtOrRefund == 0) {
-        debtOrRefundToBool = true;
+      if ((this.expense != undefined) && (this.group != undefined)){
+
+        //TRANSFORM DEBT OR REFUND TO BOOLEAN (EXPENSE FROM USES BOOLEAN)
+        let debtOrRefundToBool = false;
+        if (this.expense.debtOrRefund == 0) {
+          debtOrRefundToBool = true;
+        }
+        console.log('PAYOR ID is loaded : ')
+        console.log(this.expense.payor?.id);
+
+        //CREATE EXEPENSE FORM
+        this.expenseToUpdate = new ExpenseForm(this.expense.value, this.expense.date, this.expense.label, this.expense.payor?.id, this.details, debtOrRefundToBool)
+
+        //LOG IT
+        console.log(this.expenseToUpdate);
+
       }
 
-      //CREATE EXEPENSE FORM
-      this.expenseToUpdate = new ExpenseForm(this.expense.id, this.expense.date, this.expense.label, this.expense.payor?.id, this.details, debtOrRefundToBool)
-      }
+    });
 
-    //LOG IT
-    console.log(this.expenseToUpdate);
+
   }
 
   createNewExpense(){
@@ -102,14 +114,11 @@ export class ModifyExpenseComponent implements OnInit {
   }
 
   dispathValues() {
-    /*
-    if (this.expense) {
-      let individualAmount = this.expense?.value / this.details.length;
+    if ((this.expenseToUpdate != undefined) && (this.details != undefined)) {
+      let individualAmount = this.expenseToUpdate?.value / this.details.length;
       for (let detail of this.details) {
         detail.value = individualAmount;
       }
     }
-
-     */
   }
 }

@@ -8,10 +8,11 @@
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
       <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"> Login </a>
-      &nbsp;&nbsp;
+      &nbsp;&nbsp;@if (loggedUserBoolean){
       <a routerLink="/expenses" routerLinkActive="active" ariaCurrentWhenActive="page"> Groups </a>
       &nbsp;&nbsp;
       <a routerLink="/create" routerLinkActive="active" ariaCurrentWhenActive="page"> Create </a>
+    }
     </nav>
   </div>
 </header>
