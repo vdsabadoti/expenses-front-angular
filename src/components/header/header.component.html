@@ -1,24 +1,43 @@
-<header class="text-gray-600 body-font">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+<header class="text-white body-font">
+  <div class="bg-gray-900 grid grid-cols-5 justify-items-center py-4 px-2">
+    <div class="grid col-start-1 justify-center">
+      @if (loggedUserBoolean){
+      <svg (click)="back()" class="self-center w-[30px] h-[30px] text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/>
       </svg>
-      <span class="ml-3 text-xl">{{ applicationName }}</span>
-    </a>
-    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      &nbsp;&nbsp;@if (loggedUserBoolean){
-      <a routerLink="/expenses" routerLinkActive="active" ariaCurrentWhenActive="page"> Groups </a>
-      &nbsp;&nbsp;
-      <a routerLink="/create" routerLinkActive="active" ariaCurrentWhenActive="page"> Create </a>
-      &nbsp;&nbsp;
-      <button (click)="back()"> Back </button>
-      &nbsp;&nbsp;
-      <a (click)="logout()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"> Logout </a>
-
-    }
-
-
-    </nav>
+      }
+    </div>
+    <div class="grid justify-center col-span-3">
+      <a class="self-center title-font font-medium text-gray-900">
+        <p class="text-center mb-1 text-xl text-white">{{ applicationName }}</p>
+      </a>
+    </div>
+    <div class="grid col-start-5 justify-center">
+      @if (loggedUserBoolean){
+      <svg (click)="logout()" class="self-center w-[30px] h-[30px] text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
+      </svg>
+      }
+    </div>
   </div>
+  <!--
+    @if (loggedUserBoolean){
+        <nav>
+          <div class="grid grid-cols-4 justify-content-between mt-3 mb-3 text-base">
+            <div class="grid justify-center">
+              <a routerLink="/expenses" routerLinkActive="active" ariaCurrentWhenActive="page"> Groups </a>
+            </div>
+            <div class="grid justify-center">
+              <a routerLink="/create" routerLinkActive="active" ariaCurrentWhenActive="page"> Create </a>
+            </div>
+            <div class="grid justify-center">
+              <button (click)="back()"> Back </button>
+            </div>
+            <div class="grid justify-center">
+              <a (click)="logout()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"> Logout </a>
+            </div>
+          </div>
+        </nav>
+    }
+-->
 </header>

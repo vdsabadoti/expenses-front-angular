@@ -84,6 +84,7 @@ export class ModifyExpenseComponent implements OnInit {
   }
 
   saveExpense(){
+
     let expenseId = Number(this.id);
     let debtToNumber = 1; // 1 = debt
     if (this.toggle){
@@ -105,6 +106,7 @@ export class ModifyExpenseComponent implements OnInit {
         }
     }
     console.log(this.newExpense);
+    this.router.navigate(['expenses/detail']).then();
   }
 
   debtOrRefund() {

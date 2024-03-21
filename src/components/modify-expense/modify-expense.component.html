@@ -10,9 +10,7 @@
               <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{group.description}}</p>
             </div>
             <div class="place-self-end">
-              <a (click)="delete()" routerLink="newexpense">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Icons8_flat_delete_generic.svg" alt="" width="50px" height="50px">
-              </a>
+                <img src="https://cdn1.iconfinder.com/data/icons/finance-essentials-vol-02-2/44/add-include-amount-coins-money-512.png" alt="" width="50px" height="50px">
             </div>
           </div>
 
@@ -85,17 +83,20 @@
           }
 
         <div class="grid grid-cols-2 justify-items-stretch p-2">
+
           <div>
             <a href="#">
-              <button type="reset" (click)="cancel()" class="flex mx-auto mt-6 font-bold text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Cancel</button>
+              <button type="submit"  class="flex mx-auto font-bold mt-6 text-white bg-green-900 py-2 px-5 rounded">Save</button>
             </a>
           </div>
 
           <div>
             <a href="#">
-              <button type="submit"  class="flex mx-auto font-bold mt-6 text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Save</button>
+              <button type="reset" (click)="delete()" class="flex mx-auto mt-6 font-bold text-white bg-red-900 py-2 px-5 rounded">Delete</button>
             </a>
           </div>
+
+
         </div>
 
 

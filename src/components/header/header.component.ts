@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {Observable, Subject} from "rxjs";
 import {GuardService} from "../../app/auths/guard.service";
 import {NavigationService} from "../../services/navigation.service";
@@ -18,6 +18,7 @@ export class HeaderComponent {
   private loginService = inject(LoginServiceService);
   private guardService = inject(GuardService)
   private navigation: NavigationService = inject(NavigationService)
+  private router: Router = inject(Router);
 
   private loggedIn: Subject<boolean> = this.guardService.getLoginSubject();
   public loggedUserBoolean: boolean = false;
@@ -26,7 +27,7 @@ export class HeaderComponent {
 
   constructor() {
     //this.idUser = this.loginService.getUserOnline().idUser;
-    this.applicationName = "Group Expenses App"
+    this.applicationName = "GROUP EXPENSES"
     this.loggedIn.subscribe(result => {
       this.loggedUserBoolean = result;
     })
@@ -34,6 +35,7 @@ export class HeaderComponent {
 
   logout(){
     this.guardService.logout();
+    this.router.navigate(['/login'])
   }
 
   back(){

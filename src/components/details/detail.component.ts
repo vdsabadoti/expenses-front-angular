@@ -49,4 +49,7 @@ export class DetailComponent {
     }
   }
 
+  back() {
+    this.navigationService.back();
+  }
 }
