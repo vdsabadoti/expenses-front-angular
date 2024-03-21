@@ -20,6 +20,7 @@ export class GroupApiService {
   private static CREATE_GROUP:string = 'creategroup';
   private static CREATE_EXPENSE:string = 'createexpense';
   private static UPDATE_EXPENSE:string = 'updateexpense';
+  private static DELETE_EXPENSE:string = 'deleteexpense?id=';
   constructor(public http: HttpClient) { }
 
   public getGroupsFromUser(idUser:number): Observable<Group[]> {
@@ -52,6 +53,7 @@ export class GroupApiService {
   }
 
   public createExpense(expense:Expense, groupId:number){
+    console.log('create')
     let url = GroupApiService.URL + GroupApiService.CREATE_EXPENSE;
     let body = new CreateExpenseInterface(groupId, expense);
     console.log(body)
@@ -62,10 +64,20 @@ export class GroupApiService {
   }
 
   public updateExpense(expense:Expense, groupId:number){
+    console.log('update')
     let url = GroupApiService.URL + GroupApiService.UPDATE_EXPENSE;
     let body = new CreateExpenseInterface(groupId, expense);
     console.log(body)
     this.http.post<String>(url, body).subscribe(it =>
+    {
+      console.log(it);
+    })
+  }
+
+  public deleteExpense(expenseId:number){
+    console.log('delete')
+    let url = GroupApiService.URL + GroupApiService.DELETE_EXPENSE + expenseId;
+    this.http.delete<String>(url).subscribe(it =>
     {
       console.log(it);
     })

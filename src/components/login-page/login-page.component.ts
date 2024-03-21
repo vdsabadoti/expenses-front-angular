@@ -1,9 +1,9 @@
 import {Component, inject} from '@angular/core';
-import {LoginServiceService} from "../../services/login-service.service";
 import {ActivatedRoute, RouterLink, RouterLinkActive} from "@angular/router";
 import {User} from "../../class/user";
 import {Observable} from "rxjs";
 import {AsyncPipe} from "@angular/common";
+import {LoginServiceService} from "../../services/login-service.service";
 
 @Component({
   selector: 'app-login-page',

@@ -5,7 +5,6 @@ import {GroupsFlowComponent} from "../components/groups-flow/groups-flow.compone
 import {GroupParentComponent} from "../components/group-parent/group-parent.component";
 import {GroupComponent} from "../components/group/group.component";
 import {CreateGroupComponent} from "../components/create-group/create-group.component";
-import {ApiTesterComponent} from "../components/api-tester/api-tester.component";
 import {DetailComponent} from "../components/details/detail.component";
 import {CreateExpenseComponent} from "../components/create-expense/create-expense.component";
 import {ModifyExpenseComponent} from "../components/modify-expense/modify-expense.component";
@@ -23,6 +22,5 @@ export const routes: Routes = [
     { path : 'detail/newexpense', component: CreateExpenseComponent},
     { path : 'detail/linedetail/modifyexpense', component: ModifyExpenseComponent}
   ]},
-  { path: 'create', component : CreateGroupComponent, canActivate: [authGuard]},
-  { path : 'testAPI', component : ApiTesterComponent }
+  { path: 'create', component : CreateGroupComponent, canActivate: [authGuard]}
 ];

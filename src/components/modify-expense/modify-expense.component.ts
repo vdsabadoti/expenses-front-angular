@@ -3,7 +3,7 @@ import {Group} from "../../class/group";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AsyncPipe, NgForOf} from "@angular/common";
 import {AddParticipantsGroupComponent} from "../add-participants-group/add-participants-group.component";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {ExpenseForm} from "../../class/expense-form";
 import {Detail} from "../../class/detail";
 import {Expense} from "../../class/expense";
@@ -29,6 +29,7 @@ export class ModifyExpenseComponent implements OnInit {
   private groupService : GroupService = inject(GroupService)
   private expenseService: GroupService = inject(GroupService);
   private navigationService : NavigationService = inject(NavigationService)
+  private router : Router = inject(Router);
 
   public group: Group | undefined;
   public expense : Expense | undefined;
@@ -122,5 +123,10 @@ export class ModifyExpenseComponent implements OnInit {
 
   cancel() {
     this.navigationService.back();
+  }
+
+  delete() {
+    this.expenseService.deleteExpense(Number(this.id))
+    this.router.navigate(['expenses/detail']).then();
   }
 }
