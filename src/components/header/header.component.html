@@ -12,8 +12,12 @@
       &nbsp;&nbsp;
       <a routerLink="/create" routerLinkActive="active" ariaCurrentWhenActive="page"> Create </a>
       &nbsp;&nbsp;
+      <button (click)="back()"> Back </button>
+      &nbsp;&nbsp;
       <a (click)="logout()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"> Logout </a>
+
     }
+
 
     </nav>
   </div>

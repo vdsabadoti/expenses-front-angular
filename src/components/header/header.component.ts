@@ -1,9 +1,10 @@
 import {Component, inject} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
-import {LoginServiceService} from "../../services/login-service.service";
 import {Observable, Subject} from "rxjs";
 import {GuardService} from "../../app/auths/guard.service";
+import {NavigationService} from "../../services/navigation.service";
+import {LoginServiceService} from "../../services/login-service.service";
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent {
 
   private loginService = inject(LoginServiceService);
   private guardService = inject(GuardService)
+  private navigation: NavigationService = inject(NavigationService)
 
   private loggedIn: Subject<boolean> = this.guardService.getLoginSubject();
   public loggedUserBoolean: boolean = false;
@@ -32,6 +34,10 @@ export class HeaderComponent {
 
   logout(){
     this.guardService.logout();
+  }
+
+  back(){
+    this.navigation.back();
   }
 
 }

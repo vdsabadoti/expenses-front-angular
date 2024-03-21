@@ -2,7 +2,6 @@ import {Component, inject, OnInit} from '@angular/core';
 import {Group} from "../../class/group";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AsyncPipe, DatePipe, NgForOf} from "@angular/common";
-import {GroupService} from "../../services/group.service";
 import {AddParticipantsGroupComponent} from "../add-participants-group/add-participants-group.component";
 import {RouterLink} from "@angular/router";
 import {Participant} from "../../class/participant";
@@ -10,6 +9,8 @@ import {ExpenseForm} from "../../class/expense-form";
 import {TimeInterval} from "rxjs/internal/operators/timeInterval";
 import {Detail} from "../../class/detail";
 import {Expense} from "../../class/expense";
+import {NavigationService} from "../../services/navigation.service";
+import {GroupService} from "../../services/group.service";
 
 @Component({
   selector: 'app-create-expense',
@@ -27,8 +28,10 @@ import {Expense} from "../../class/expense";
 })
 export class CreateExpenseComponent {
 
+  private groupService: GroupService = inject(GroupService)
+  private navigationService: NavigationService = inject(NavigationService)
+
   public group: Group | undefined;
-  private groupService = inject(GroupService)
   public expense: ExpenseForm | undefined ;
   public details: Detail[] ;
   public toggle : boolean = false;
@@ -86,5 +89,8 @@ export class CreateExpenseComponent {
         detail.value = individualAmount;
       }
     }
+  }
+  cancel() {
+    this.navigationService.back();
   }
 }

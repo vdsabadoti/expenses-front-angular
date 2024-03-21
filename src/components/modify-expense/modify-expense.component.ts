@@ -2,13 +2,13 @@ import {Component, inject, OnInit} from '@angular/core';
 import {Group} from "../../class/group";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AsyncPipe, NgForOf} from "@angular/common";
-import {GroupService} from "../../services/group.service";
 import {AddParticipantsGroupComponent} from "../add-participants-group/add-participants-group.component";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {ExpenseForm} from "../../class/expense-form";
 import {Detail} from "../../class/detail";
 import {Expense} from "../../class/expense";
-import {Observable} from "rxjs";
+import {NavigationService} from "../../services/navigation.service";
+import {GroupService} from "../../services/group.service";
 
 @Component({
   selector: 'app-modify-expense',
@@ -26,14 +26,16 @@ import {Observable} from "rxjs";
 })
 export class ModifyExpenseComponent implements OnInit {
 
+  private groupService : GroupService = inject(GroupService)
+  private expenseService: GroupService = inject(GroupService);
+  private navigationService : NavigationService = inject(NavigationService)
+
   public group: Group | undefined;
   public expense : Expense | undefined;
   public details : Detail[] | undefined;
-  private groupService = inject(GroupService)
   public expenseToUpdate: ExpenseForm | undefined ;
   public toggle : boolean = false;
   private newExpense: Expense | undefined;
-  private expenseService = inject(GroupService);
   public id: string | null | undefined ;
 
   constructor(private route: ActivatedRoute) {
@@ -116,5 +118,9 @@ export class ModifyExpenseComponent implements OnInit {
         detail.value = individualAmount;
       }
     }
+  }
+
+  cancel() {
+    this.navigationService.back();
   }
 }

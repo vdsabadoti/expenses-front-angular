@@ -86,18 +86,15 @@
         <div class="grid grid-cols-2 justify-items-stretch p-2">
           <div>
             <a href="#">
-              <button type="button" class="flex mx-auto mt-6 text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Cancel</button>
-            </a>
-          </div>
-
-          <div>
-            <a href="#">
               <button type="submit"  class="flex mx-auto mt-6 text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Create</button>
             </a>
           </div>
+          <div>
+            <a href="#">
+              <button (click)="cancel()" type="reset" class="flex mx-auto mt-6 text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Cancel</button>
+            </a>
+          </div>
         </div>
-
-
       </form>
       }
       }

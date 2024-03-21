@@ -2,9 +2,6 @@
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       @if (group){
         @if (expenseToUpdate){
-
-
-
           <div class="grid grid-cols-2 justify-items-stretch">
             <div>
               <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
@@ -90,7 +87,7 @@
         <div class="grid grid-cols-2 justify-items-stretch p-2">
           <div>
             <a href="#">
-              <button type="button" class="flex mx-auto mt-6 font-bold text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Cancel</button>
+              <button type="reset" (click)="cancel()" class="flex mx-auto mt-6 font-bold text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Cancel</button>
             </a>
           </div>
 
