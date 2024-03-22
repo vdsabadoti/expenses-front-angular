@@ -2,8 +2,8 @@
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       @if (group){
         @if (expense){
-      <form class="max-w-sm mx-auto" #newExpense="ngForm" (ngSubmit)="createNewExpense()">
-
+      <form class="max-w-sm mx-auto" [formGroup]="formGroup" (ngSubmit)="createNewExpense()">
+       <!-- <form class="max-w-sm mx-auto" #newExpense="ngForm" (ngSubmit)="createNewExpense()"> -->
         <div class="grid grid-cols-1 justify-items-stretch">
           <div>
             <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
@@ -18,21 +18,25 @@
             <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
               <label for="label">Label</label>
             </p>
-            <input [(ngModel)]="expense.label" type="text" id="label" name="label" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+            <!-- <input [(ngModel)]="expense.label" type="text" id="label" name="label" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required> -->
+            <input formControlName="label" type="text" id="label" name="label" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+
           </div>
 
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
               <label for="amount">Amount</label>
             </p>
-            <input [(ngModel)]="expense.value" (change)="dispathValues()" type="number" id="amount" name="amount" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+            <input formControlName="value" (change)="dispathValues()" type="number" id="amount" name="amount" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+            <!-- <input [(ngModel)]="expense.value" (change)="dispathValues()" type="number" id="amount" name="amount" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required> -->
           </div>
 
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
               <label for="date">Date</label>
             </p>
-            <input [(ngModel)]="expense.date" type="date" id="date" name="date" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+            <input formControlName="date" type="date" id="date" name="date" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+            <!-- <input [(ngModel)]="expense.date" type="date" id="date" name="date" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required> -->
           </div>
 
           <div class="flex-1 min-w-0">

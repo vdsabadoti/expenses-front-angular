@@ -53,32 +53,35 @@ export class ModifyExpenseComponent implements OnInit {
         this.expense = it
         console.log('EXPENSE is loaded : ')
         console.log(it);
+
+      this.expenseService.getDetails(Number(this.id)).subscribe(it => {
+        this.details = it
+        console.log('DETAILS is loaded : ')
+        console.log(it);
+
+        if ((this.expense != undefined) && (this.group != undefined)){
+
+          //TRANSFORM DEBT OR REFUND TO BOOLEAN (EXPENSE FROM USES BOOLEAN)
+          let debtOrRefundToBool = false;
+          if (this.expense.debtOrRefund == 0) {
+            debtOrRefundToBool = true;
+          }
+          console.log('PAYOR ID is loaded : ')
+          console.log(this.expense.payor?.id);
+
+          //CREATE EXEPENSE FORM
+          this.expenseToUpdate = new ExpenseForm(this.expense.value, this.expense.date, this.expense.label, this.expense.payor?.id, this.details, debtOrRefundToBool)
+
+          //LOG IT
+          console.log(this.expenseToUpdate);
+
+        }
+
+      });
+
       }
     );
-    this.expenseService.getDetails(Number(this.id)).subscribe(it => {
-      this.details = it
-      console.log('DETAILS is loaded : ')
-      console.log(it);
 
-      if ((this.expense != undefined) && (this.group != undefined)){
-
-        //TRANSFORM DEBT OR REFUND TO BOOLEAN (EXPENSE FROM USES BOOLEAN)
-        let debtOrRefundToBool = false;
-        if (this.expense.debtOrRefund == 0) {
-          debtOrRefundToBool = true;
-        }
-        console.log('PAYOR ID is loaded : ')
-        console.log(this.expense.payor?.id);
-
-        //CREATE EXEPENSE FORM
-        this.expenseToUpdate = new ExpenseForm(this.expense.value, this.expense.date, this.expense.label, this.expense.payor?.id, this.details, debtOrRefundToBool)
-
-        //LOG IT
-        console.log(this.expenseToUpdate);
-
-      }
-
-    });
 
 
   }
