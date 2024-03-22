@@ -126,6 +126,29 @@ export class ModifyExpenseComponent implements OnInit {
     }
   }
 
+  autoComplete(detailId:number) {
+    if (this.expense && this.details) {
+      let restToShare = 0;
+
+      let triggerDetail = this.details.find(detail => detail.id == detailId);
+      let detailsToUpdate = this.details.filter(detail => detail.id != detailId);
+
+      if (triggerDetail != undefined) {
+        restToShare = this.expense.value - triggerDetail.value;
+      }
+      let individualAmount = restToShare / detailsToUpdate.length;
+
+      if (individualAmount > 0) {
+        for (let detail of this.details) {
+          if (detail.id != detailId) {
+            detail.value = individualAmount;
+          }
+        }
+      }
+    }
+  }
+
+
   cancel() {
     this.navigationService.back();
   }

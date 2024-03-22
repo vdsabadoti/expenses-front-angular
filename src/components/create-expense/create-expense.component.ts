@@ -48,9 +48,11 @@ export class CreateExpenseComponent {
     this.groupService.getGroup()?.subscribe(it =>
     {
       this.group = it;
+      let i= 1;
       for (let participant of this.group.participantList) {
-        let detail = new Detail(0, participant.user, 0);
+        let detail = new Detail(i, participant.user, 0);
         this.details.push(detail);
+        i++
       }
       this.expense = new ExpenseForm(0, new Date(),'',1 , this.details, false)
       console.log(this.details)
@@ -119,9 +121,32 @@ export class CreateExpenseComponent {
 
   dispathValues() {
     if (this.expense) {
+      let i = 1;
       let individualAmount = this.expense?.value / this.details.length;
       for (let detail of this.details) {
-        detail.value = individualAmount;
+        detail.value = individualAmount
+      }
+    }
+  }
+
+  autoComplete(detailId:number) {
+    if (this.expense) {
+      let restToShare = 0;
+
+      let triggerDetail = this.details.find(detail => detail.id == detailId);
+      let detailsToUpdate = this.details.filter(detail => detail.id != detailId);
+
+      if (triggerDetail != undefined) {
+        restToShare = this.expense.value - triggerDetail.value;
+      }
+      let individualAmount = restToShare / detailsToUpdate.length;
+
+      if (individualAmount > 0) {
+      for (let detail of this.details) {
+        if (detail.id != detailId) {
+          detail.value = individualAmount;
+        }
+      }
       }
     }
   }

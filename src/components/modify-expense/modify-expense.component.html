@@ -27,7 +27,7 @@
             <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
               <label for="amount">Amount</label>
             </p>
-            <input [(ngModel)]="expenseToUpdate.value" (change)="dispathValues()" type="number" id="amount" name="amount" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+            <input [(ngModel)]="expenseToUpdate.value" [ngModelOptions]="{standalone: true}" (change)="dispathValues()" type="number" id="amount" name="amount" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
           </div>
 
           <div class="flex-1 min-w-0">
@@ -76,7 +76,7 @@
                 <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
                   {{ detail.user.username }}
                 </p>
-                <input [(ngModel)]="detail.value" type="number" id="uservalue" name="uservalue" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+                <input [(ngModel)]="detail.value" [ngModelOptions]="{standalone: true}" (change)="autoComplete(detail.id)" type="number" id="uservalue" name="uservalue" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
               </div>
             </div>
           </div>
