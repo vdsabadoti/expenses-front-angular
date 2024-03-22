@@ -1,4 +1,5 @@
 <section class="text-white body-font">
+  @defer(){
       <div class="w-full text-sm text-left rtl:text-right text-white">
         @if (groups$ | async ; as groups) {
           @for (group of groups; track group.id) {
@@ -33,4 +34,9 @@
          </div>
         </div>
       </a>
+  } @loading {
+  <div class="flex px-5 py-10 justify-items-center">
+    <div class="loader"></div>
+  </div>
+}
 </section>
