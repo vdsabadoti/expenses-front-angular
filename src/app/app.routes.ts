@@ -9,10 +9,12 @@ import {DetailComponent} from "../components/details/detail.component";
 import {CreateExpenseComponent} from "../components/create-expense/create-expense.component";
 import {ModifyExpenseComponent} from "../components/modify-expense/modify-expense.component";
 import {authGuard} from "./auths/auth.guard";
+import {NewUserComponent} from "../components/new-user/new-user.component";
 
 export const routes: Routes = [
   { path: '', component: LoginPageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'newuser', component: NewUserComponent },
   { path : 'password', component: PasswordComponent },
   { path : 'expenses', component: GroupParentComponent, canActivate: [authGuard],
   children: [

@@ -3,7 +3,7 @@ import {Group} from "../../class/group";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AsyncPipe, DatePipe, NgForOf} from "@angular/common";
 import {AddParticipantsGroupComponent} from "../add-participants-group/add-participants-group.component";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {Participant} from "../../class/participant";
 import {ExpenseForm} from "../../class/expense-form";
 import {TimeInterval} from "rxjs/internal/operators/timeInterval";
@@ -30,6 +30,7 @@ export class CreateExpenseComponent {
 
   private groupService: GroupService = inject(GroupService)
   private navigationService: NavigationService = inject(NavigationService)
+  private router : Router = inject(Router)
 
   public group: Group | undefined;
   public expense: ExpenseForm | undefined ;
@@ -90,7 +91,8 @@ export class CreateExpenseComponent {
         this.expense.detailList,
         debtToNumber)
         if (this.group?.id){
-          //this.groupService.createExpense(this.newExpense, this.group.id);
+          this.groupService.createExpense(this.newExpense, this.group.id);
+          this.router.navigate(['/expenses/detail'])
         }
 
 

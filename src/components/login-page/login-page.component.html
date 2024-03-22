@@ -10,6 +10,12 @@
         </button>
       </div>
     }
+    <div class="mb-5 items-center flex justify-content-center">
+      <a routerLink="/newuser" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <button class="flex mx-auto mt-3 text-white bg-green-900 border-0 py-2 px-5 rounded">New user</button>
+      </a>
+    </div>
+
     <div class="flex flex-wrap -mx-4 -mb-10 text-center">
       @for (item of users$ | async ; track item.id){
         <div class="sm:w-1/2 mb-10 px-4 text-white">
@@ -23,6 +29,7 @@
           </a>
         </div>
       }
+    </div>
       <!--
     @for (item of users ; track item.id){
       <div class="sm:w-1/2 mb-10 px-4">
@@ -37,6 +44,6 @@
       </div>
     }
     -->
+
   </div>
-</div>
 </section>

@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {LoginServiceService} from "../../services/login-service.service";
 import {FormsModule} from "@angular/forms";
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {map, Observable} from "rxjs";
 
 @Component({
@@ -17,6 +17,7 @@ export class PasswordComponent {
   public onlineUser:Observable<number> = new Observable<number>();
   public passwordControl:string = '';
   private password:string = 'corsaires';
+  private router:Router = inject(Router);
 
   constructor() {
     this.onlineUser = this.loginService.getUserOnline().pipe(map(user => {return user.id}));
@@ -28,4 +29,7 @@ export class PasswordComponent {
     }
   }
 
+  back() {
+    this.router.navigate(['/login']).then()
+  }
 }
