@@ -7,12 +7,13 @@ import {Group} from "../../class/group";
 import {Expense} from "../../class/expense";
 import {GroupStatisticsComponent} from "../group-statistics/group-statistics.component";
 import {RouterLink} from "@angular/router";
+import {MoneyTransferComponent} from "../money-transfer/money-transfer.component";
 
 @Component({
   selector: 'app-expense-detail',
   standalone: true,
   imports: [
-    AsyncPipe, GroupStatisticsComponent, RouterLink
+    AsyncPipe, GroupStatisticsComponent, RouterLink, MoneyTransferComponent
   ],
   templateUrl: './group.component.html',
   styleUrl: './group.component.css'
@@ -27,6 +28,7 @@ export class GroupComponent {
   @Input() year: number = new Date().getFullYear();
   public monthList: String[] =
     ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  public moneyTransfertBool: boolean = false;
 
   constructor() {
     //this.expense$ = this.firstApiService.callOneExpense();
@@ -52,8 +54,7 @@ export class GroupComponent {
     this.expenses$ = this.expenseService.filterExpensesByMonthAndYear(this.month, this.year);
   }
 
-
-  setGroup() {
-
+  showMoneyTransfert() {
+    this.moneyTransfertBool = !this.moneyTransfertBool;
   }
 }

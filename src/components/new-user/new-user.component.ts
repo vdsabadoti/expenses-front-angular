@@ -19,7 +19,8 @@ export class NewUserComponent {
   public text:string | undefined;
 
   createNewUser() {
-
+    alert('User subscription under validation. You may come back in 48h.');
+    this.router.navigate(['/login'])
   }
 
   cancelCreation() {

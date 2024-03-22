@@ -62,15 +62,15 @@ export class ModifyExpenseComponent implements OnInit {
         if ((this.expense != undefined) && (this.group != undefined)){
 
           //TRANSFORM DEBT OR REFUND TO BOOLEAN (EXPENSE FROM USES BOOLEAN)
-          let debtOrRefundToBool = false;
+          this.toggle = false;
           if (this.expense.debtOrRefund == 0) {
-            debtOrRefundToBool = true;
+            this.toggle = true;
           }
           console.log('PAYOR ID is loaded : ')
           console.log(this.expense.payor?.id);
 
           //CREATE EXEPENSE FORM
-          this.expenseToUpdate = new ExpenseForm(this.expense.value, this.expense.date, this.expense.label, this.expense.payor?.id, this.details, debtOrRefundToBool)
+          this.expenseToUpdate = new ExpenseForm(this.expense.value, this.expense.date, this.expense.label, this.expense.payor?.id, this.details, this.toggle)
 
           //LOG IT
           console.log(this.expenseToUpdate);

@@ -10,6 +10,7 @@ import {CreateExpenseComponent} from "../components/create-expense/create-expens
 import {ModifyExpenseComponent} from "../components/modify-expense/modify-expense.component";
 import {authGuard} from "./auths/auth.guard";
 import {NewUserComponent} from "../components/new-user/new-user.component";
+import {MoneyTransferComponent} from "../components/money-transfer/money-transfer.component";
 
 export const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -19,9 +20,10 @@ export const routes: Routes = [
   { path : 'expenses', component: GroupParentComponent, canActivate: [authGuard],
   children: [
     { path : '', component: GroupsFlowComponent},
-    { path : 'detail', component: GroupComponent },
+    { path : 'detail', component: GroupComponent},
     { path : 'detail/linedetail', component: DetailComponent},
     { path : 'detail/newexpense', component: CreateExpenseComponent},
+    { path : 'detail/moneytransf', component: MoneyTransferComponent},
     { path : 'detail/linedetail/modifyexpense', component: ModifyExpenseComponent}
   ]},
   { path: 'create', component : CreateGroupComponent, canActivate: [authGuard]}

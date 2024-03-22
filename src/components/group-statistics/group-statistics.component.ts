@@ -63,25 +63,25 @@ export class GroupStatisticsComponent implements OnInit, OnChanges {
       let balance = 0;
 
       for (let expense of this.expenses){
-
         if (expense.detailList?.length !== undefined){
+          if (expense.debtOrRefund == 1){
           for(let detail of expense.detailList){
             if (detail.user.id == participant.user.id ){
               totalMonthBalance += detail.value;
               balance += detail.value;
             }
           }
+          }
         }
       }
       this.budgetByMonthList.push(balance / participant.budgetByMonth * 100);
-      this.participantsList.push(participant.user.username);
+      this.participantsList.push(participant.user.username + ' ' + totalMonthBalance.toString() + '%');
       totalMonthBudget += participant.budgetByMonth;
     }
 
     this.budgetByMonthList.push(totalMonthBalance / totalMonthBudget * 100);
-    this.participantsList.push('Total');
+    this.participantsList.push('Total ' + totalMonthBalance + '%');
 
-    if (this.group.participantList.length < 4){
       this.chartOptions = {
         series: this.budgetByMonthList,
         colors: this.applicationColors.slice(-this.budgetByMonthList.length),
@@ -139,5 +139,4 @@ export class GroupStatisticsComponent implements OnInit, OnChanges {
         }
       }
     }
-  }
 }
