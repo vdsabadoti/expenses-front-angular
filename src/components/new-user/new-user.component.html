@@ -1,0 +1,50 @@
+<div class="max-w-sm mx-auto">
+  <div class="mt-3 grid grid-rows-2 justify-content-center justify-items-center rounded-lg bg-gray-800">
+    <div class="grid row-span-1">
+      <svg class="w-[48px] h-[48px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z" clip-rule="evenodd"/>
+      </svg>
+    </div>
+    <div class="grid row-span-1">
+      <h5 class="text-3xl text-center font-bold leading-none text-white">New User</h5>
+    </div>
+  </div>
+</div>
+
+<div class="max-w-sm mx-auto ">
+  <div class="w-full mb-3 mt-2 max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <form class="max-w-sm mx-auto" #newUser="ngForm" (ngSubmit)="createNewUser()">
+      <div class="mb-3">
+        <label for="username" class="block mb-2 body-font text-gray-900">Username</label>
+        <input id="username" [(ngModel)]="text" name="label" type="text" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="block mb-2 body-font text-gray-900">Email</label>
+        <input id="email" [(ngModel)]="text" name="description" type="text" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
+      <div class="mb-3">
+        <label for="quote" class="block mb-2 body-font text-gray-900">Quote</label>
+        <input id="quote" [(ngModel)]="text" name="quote" type="text" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="block mb-2 body-font text-gray-900">Password</label>
+        <input id="password" [(ngModel)]="text" name="password" type="text" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
+      <div class="mb-3">
+        <label for="repeatPassword" class="block mb-2 body-font text-gray-900">Repeat password</label>
+        <input id="repeatPassword" [(ngModel)]="text" name="repeatPassword" type="text" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
+      <div class="mb-3">
+        <label for="imgLink" class="block mb-2 body-font text-gray-900">URL of an image</label>
+        <input id="imgLink" [(ngModel)]="text" name="imgLink" type="text" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
+
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <button type="submit" class="flex mx-auto mt-6 text-white bg-green-900 py-2 px-5 rounded">Create</button>
+        </div>
+        <div>
+          <button type="button" (click)="cancelCreation()" class="flex mx-auto mt-6 text-white bg-gray-900 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Cancel</button>
+        </div>
+      </div>
+    </form>

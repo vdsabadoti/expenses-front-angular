@@ -1,9 +1,9 @@
 import {Component, inject, Input} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {ParticipantsService} from "../../services/participants.service";
 import {Participant} from "../../class/participant";
-import {UserService} from "../../services/user.service";
 import {User} from "../../class/user";
+import {UserService} from "../../services/user.service";
+import {ParticipantsService} from "../../services/participants.service";
 
 @Component({
   selector: 'app-add-participants-line',

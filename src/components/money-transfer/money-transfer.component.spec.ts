@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApiTesterComponent } from './api-tester.component';
+import { MoneyTransferComponent } from './money-transfer.component';
 
-describe('ApiTesterComponent', () => {
-  let component: ApiTesterComponent;
-  let fixture: ComponentFixture<ApiTesterComponent>;
+describe('MoneyTransferComponent', () => {
+  let component: MoneyTransferComponent;
+  let fixture: ComponentFixture<MoneyTransferComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ApiTesterComponent]
+      imports: [MoneyTransferComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ApiTesterComponent);
+    fixture = TestBed.createComponent(MoneyTransferComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,9 +2,6 @@
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       @if (group){
         @if (expenseToUpdate){
-
-
-
           <div class="grid grid-cols-2 justify-items-stretch">
             <div>
               <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
@@ -13,9 +10,7 @@
               <p class="text-sm font-normal text-gray-500 dark:text-gray-400">{{group.description}}</p>
             </div>
             <div class="place-self-end">
-              <a routerLink="newexpense">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Icons8_flat_delete_generic.svg" alt="" width="50px" height="50px">
-              </a>
+                <img src="https://cdn1.iconfinder.com/data/icons/finance-essentials-vol-02-2/44/add-include-amount-coins-money-512.png" alt="" width="50px" height="50px">
             </div>
           </div>
 
@@ -32,7 +27,7 @@
             <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
               <label for="amount">Amount</label>
             </p>
-            <input [(ngModel)]="expenseToUpdate.value" (change)="dispathValues()" type="number" id="amount" name="amount" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+            <input [(ngModel)]="expenseToUpdate.value" [ngModelOptions]="{standalone: true}" (change)="dispathValues()" type="number" id="amount" name="amount" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
           </div>
 
           <div class="flex-1 min-w-0">
@@ -81,24 +76,27 @@
                 <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
                   {{ detail.user.username }}
                 </p>
-                <input [(ngModel)]="detail.value" type="number" id="uservalue" name="uservalue" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
+                <input [(ngModel)]="detail.value" [ngModelOptions]="{standalone: true}" (change)="autoComplete(detail.id)" type="number" id="uservalue" name="uservalue" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="90210" required>
               </div>
             </div>
           </div>
           }
 
         <div class="grid grid-cols-2 justify-items-stretch p-2">
+
           <div>
             <a href="#">
-              <button type="button" class="flex mx-auto mt-6 font-bold text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Cancel</button>
+              <button type="submit"  class="flex mx-auto font-bold mt-6 text-white bg-green-900 py-2 px-5 rounded">Save</button>
             </a>
           </div>
 
           <div>
             <a href="#">
-              <button type="submit"  class="flex mx-auto font-bold mt-6 text-white bg-yellow-500 border-0 py-2 px-5 focus:outline-none hover:bg-yellow-600 rounded">Save</button>
+              <button type="reset" (click)="delete()" class="flex mx-auto mt-6 font-bold text-white bg-red-900 py-2 px-5 rounded">Delete</button>
             </a>
           </div>
+
+
         </div>
 
 

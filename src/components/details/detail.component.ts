@@ -1,12 +1,13 @@
 import {Component, inject} from '@angular/core';
 import {AsyncPipe, DatePipe} from "@angular/common";
 import {GroupStatisticsComponent} from "../group-statistics/group-statistics.component";
-import {GroupService} from "../../services/group.service";
 import {map, Observable, pipe} from "rxjs";
 import {Group} from "../../class/group";
 import {Detail} from "../../class/detail";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Expense} from "../../class/expense";
+import {GroupService} from "../../services/group.service";
+import {NavigationService} from "../../services/navigation.service";
 
 @Component({
   selector: 'app-expense-line-detail',
@@ -23,6 +24,8 @@ import {Expense} from "../../class/expense";
 export class DetailComponent {
 
   private expenseService = inject(GroupService);
+  private navigationService : NavigationService = inject(NavigationService)
+
   public group$:Observable<Group> | undefined;
   public details$:Observable<Detail[]> | undefined;
   public expense$:Observable<Expense> | undefined;
@@ -39,4 +42,14 @@ export class DetailComponent {
     this.expense$ = this.expenseService.getExpense(Number(this.id));
   }
 
+  delete(){
+    if (this.id){
+      this.expenseService.deleteExpense(Number(this.id));
+      this.navigationService.back();
+    }
+  }
+
+  back() {
+    this.navigationService.back();
+  }
 }

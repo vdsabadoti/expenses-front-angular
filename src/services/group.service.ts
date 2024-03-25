@@ -99,7 +99,10 @@ export class GroupService {
   }
 
   public updateExpense(expense:Expense, groupId:number){
-    this.groupApiService.createExpense(expense, groupId);
+    this.groupApiService.updateExpense(expense, groupId);
+  }
+  public deleteExpense(expenseId:number){
+    this.groupApiService.deleteExpense(expenseId);
   }
 
    public async resetParticipants(){

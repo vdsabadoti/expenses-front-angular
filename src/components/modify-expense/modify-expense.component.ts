@@ -2,13 +2,13 @@ import {Component, inject, OnInit} from '@angular/core';
 import {Group} from "../../class/group";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AsyncPipe, NgForOf} from "@angular/common";
-import {GroupService} from "../../services/group.service";
 import {AddParticipantsGroupComponent} from "../add-participants-group/add-participants-group.component";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {ExpenseForm} from "../../class/expense-form";
 import {Detail} from "../../class/detail";
 import {Expense} from "../../class/expense";
-import {Observable} from "rxjs";
+import {NavigationService} from "../../services/navigation.service";
+import {GroupService} from "../../services/group.service";
 
 @Component({
   selector: 'app-modify-expense',
@@ -26,14 +26,17 @@ import {Observable} from "rxjs";
 })
 export class ModifyExpenseComponent implements OnInit {
 
+  private groupService : GroupService = inject(GroupService)
+  private expenseService: GroupService = inject(GroupService);
+  private navigationService : NavigationService = inject(NavigationService)
+  private router : Router = inject(Router);
+
   public group: Group | undefined;
   public expense : Expense | undefined;
   public details : Detail[] | undefined;
-  private groupService = inject(GroupService)
   public expenseToUpdate: ExpenseForm | undefined ;
   public toggle : boolean = false;
   private newExpense: Expense | undefined;
-  private expenseService = inject(GroupService);
   public id: string | null | undefined ;
 
   constructor(private route: ActivatedRoute) {
@@ -50,37 +53,41 @@ export class ModifyExpenseComponent implements OnInit {
         this.expense = it
         console.log('EXPENSE is loaded : ')
         console.log(it);
+
+      this.expenseService.getDetails(Number(this.id)).subscribe(it => {
+        this.details = it
+        console.log('DETAILS is loaded : ')
+        console.log(it);
+
+        if ((this.expense != undefined) && (this.group != undefined)){
+
+          //TRANSFORM DEBT OR REFUND TO BOOLEAN (EXPENSE FROM USES BOOLEAN)
+          this.toggle = false;
+          if (this.expense.debtOrRefund == 0) {
+            this.toggle = true;
+          }
+          console.log('PAYOR ID is loaded : ')
+          console.log(this.expense.payor?.id);
+
+          //CREATE EXEPENSE FORM
+          this.expenseToUpdate = new ExpenseForm(this.expense.value, this.expense.date, this.expense.label, this.expense.payor?.id, this.details, this.toggle)
+
+          //LOG IT
+          console.log(this.expenseToUpdate);
+
+        }
+
+      });
+
       }
     );
-    this.expenseService.getDetails(Number(this.id)).subscribe(it => {
-      this.details = it
-      console.log('DETAILS is loaded : ')
-      console.log(it);
 
-      if ((this.expense != undefined) && (this.group != undefined)){
-
-        //TRANSFORM DEBT OR REFUND TO BOOLEAN (EXPENSE FROM USES BOOLEAN)
-        let debtOrRefundToBool = false;
-        if (this.expense.debtOrRefund == 0) {
-          debtOrRefundToBool = true;
-        }
-        console.log('PAYOR ID is loaded : ')
-        console.log(this.expense.payor?.id);
-
-        //CREATE EXEPENSE FORM
-        this.expenseToUpdate = new ExpenseForm(this.expense.value, this.expense.date, this.expense.label, this.expense.payor?.id, this.details, debtOrRefundToBool)
-
-        //LOG IT
-        console.log(this.expenseToUpdate);
-
-      }
-
-    });
 
 
   }
 
   saveExpense(){
+
     let expenseId = Number(this.id);
     let debtToNumber = 1; // 1 = debt
     if (this.toggle){
@@ -102,6 +109,7 @@ export class ModifyExpenseComponent implements OnInit {
         }
     }
     console.log(this.newExpense);
+    this.router.navigate(['expenses/detail']).then();
   }
 
   debtOrRefund() {
@@ -116,5 +124,37 @@ export class ModifyExpenseComponent implements OnInit {
         detail.value = individualAmount;
       }
     }
+  }
+
+  autoComplete(detailId:number) {
+    if (this.expense && this.details) {
+      let restToShare = 0;
+
+      let triggerDetail = this.details.find(detail => detail.id == detailId);
+      let detailsToUpdate = this.details.filter(detail => detail.id != detailId);
+
+      if (triggerDetail != undefined) {
+        restToShare = this.expense.value - triggerDetail.value;
+      }
+      let individualAmount = restToShare / detailsToUpdate.length;
+
+      if (individualAmount > 0) {
+        for (let detail of this.details) {
+          if (detail.id != detailId) {
+            detail.value = individualAmount;
+          }
+        }
+      }
+    }
+  }
+
+
+  cancel() {
+    this.navigationService.back();
+  }
+
+  delete() {
+    this.expenseService.deleteExpense(Number(this.id))
+    this.router.navigate(['expenses/detail']).then();
   }
 }
