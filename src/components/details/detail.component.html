@@ -1,17 +1,17 @@
 <div class="max-w-sm mx-auto">
   @if (group$ | async; as group){
     @if (expense$ | async; as expense){
-    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
       <div class="grid grid-cols-1 justify-items-stretch">
         <div>
           <div class="inline justify-between">
             <div>
-              <h4 class="mb-3 text-3xl font-semibold text-gray-900 md:text-xl dark:text-black">
+              <h4 class="mb-3 text-3xl font-semibold text-gray-900 md:text-xl ">
                 {{ expense.label }}
               </h4>
             </div>
             <div>
-              <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-black">
+              <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl ">
                   {{ expense.date | date : 'dd/MM/yyyy' }}
               </h5>
             </div>
@@ -25,12 +25,12 @@
       <ul class="my-4 space-y-3">
         @for (detail of details$ | async; track detail.id){
           <li>
-            <a href="#" class="flex items-center p-3 text-base text-black border-2 rounded-lg bg-white hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-              <svg class="w-[30px] h-[30px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <a href="#" class="flex items-center p-3 text-base text-black border-2 rounded-lg bg-white hover:bg-gray-100 group hover:shadow">
+              <svg class="w-[30px] h-[30px] text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
               </svg>
               <span class="flex-1 ms-3 whitespace-nowrap">{{ detail.user.username }}</span>
-              <span class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-black bg-white rounded dark:bg-gray-700 dark:text-gray-400">{{ detail.value }} &euro;</span>
+              <span class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-black bg-white rounded ">{{ detail.value }} &euro;</span>
             </a>
           </li>
         }

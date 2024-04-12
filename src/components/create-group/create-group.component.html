@@ -16,15 +16,15 @@
 </div>
 
 <div class="max-w-sm mx-auto ">
-<div class="w-full mb-3 mt-2 max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+<div class="w-full mb-3 mt-2 max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8">
 <form class="max-w-sm mx-auto" #newGroup="ngForm" (ngSubmit)="createNewGroup(newGroup.value)">
   <div class="mb-3">
     <label for="newExpenseLabelInput" class="block mb-2 body-font text-gray-900">Label</label>
-    <input id="label" [(ngModel)]="model.label" name="label" type="text" id="newExpenseLabelInput" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <input id="label" [(ngModel)]="model.label" name="label" type="text" id="newExpenseLabelInput" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500">
   </div>
   <div class="mb-3">
     <label for="newExpenseDescriptionInput" class="block mb-2 body-font text-gray-900">Quick description</label>
-    <input id="description" [(ngModel)]="model.description" name="description" type="text" id="newExpenseDescriptionInput" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <input id="description" [(ngModel)]="model.description" name="description" type="text" id="newExpenseDescriptionInput" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500">
   </div>
 
   <div class="flex items-center justify-between mb-4">

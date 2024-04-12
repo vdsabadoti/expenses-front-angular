@@ -1,9 +1,10 @@
 import {Component, inject} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive} from "@angular/router";
 import {User} from "../../class/user";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 import {LoginServiceService} from "../../services/login-service.service";
+import {GuardService} from "../../app/auths/guard.service";
 
 @Component({
   selector: 'app-login-page',
@@ -19,6 +20,7 @@ import {LoginServiceService} from "../../services/login-service.service";
 export class LoginPageComponent {
 
   private loginService = inject(LoginServiceService);
+
   public message: string | null = null;
   public users$:Observable<User[]>;
   public users:User[] | undefined;

@@ -4,17 +4,17 @@
       @for (item of lstOfAddedParticipants$ | async ; track item.budgetByMonth){
         <div class="flex items-center">
             <div class="flex-shrink-0">
-              <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
+              <p class="text-sm font-medium text-gray-900 truncate">
                 <img class="w-8 h-8 rounded-full" src="https://www.svgrepo.com/download/2576/money.svg" alt="Neil image">
               </p>
             </div>
-            <div class="flex-1 min-w-0 ms-6 text-base font-semibold text-gray-900 dark:text-white">
-              <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
+            <div class="flex-1 min-w-0 ms-6 text-base font-semibold text-gray-900">
+              <p class="text-sm font-medium text-gray-900 truncate">
                 {{item.user.username}}
               </p>
             </div>
           <div class="flex-1 min-w-0 ms-6 text-base font-semibold text-gray-900 dark:text-white">
-            <p class="text-sm font-medium text-gray-900 truncate dark:text-black">
+            <p class="text-sm font-medium text-gray-900 truncate">
               Budget : {{item.budgetByMonth }}
             </p>
           </div>

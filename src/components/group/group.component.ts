@@ -8,12 +8,13 @@ import {Expense} from "../../class/expense";
 import {GroupStatisticsComponent} from "../group-statistics/group-statistics.component";
 import {RouterLink} from "@angular/router";
 import {MoneyTransferComponent} from "../money-transfer/money-transfer.component";
+import {OrderExpensesByDatePipe} from "../../services/order-expenses-by-date.pipe";
 
 @Component({
   selector: 'app-expense-detail',
   standalone: true,
   imports: [
-    AsyncPipe, GroupStatisticsComponent, RouterLink, MoneyTransferComponent
+    AsyncPipe, GroupStatisticsComponent, RouterLink, MoneyTransferComponent, OrderExpensesByDatePipe
   ],
   templateUrl: './group.component.html',
   styleUrl: './group.component.css'

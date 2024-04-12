@@ -8,7 +8,7 @@ import {User} from "../class/user";
 })
 export class UserApiService {
 
-  private static URL:string = 'http://localhost:8080/';
+  private static URL:string = 'https://localhost/';
   private static GET_ALL_USERS:string = 'getallusers';
   private static GET_USER_BY_ID:string = 'getuser?id='
   constructor(public http: HttpClient) { }

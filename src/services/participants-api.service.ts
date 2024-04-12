@@ -8,7 +8,7 @@ import {Participant} from "../class/participant";
 })
 export class ParticipantsApiService {
 
-  private static URL:string = 'http://localhost:8080/';
+  private static URL:string = 'https://localhost/';
   private static GET_PARTICIPANTS_FROM_GROUP = 'getparticipants?groupid='
 
   constructor(public http: HttpClient) { }
