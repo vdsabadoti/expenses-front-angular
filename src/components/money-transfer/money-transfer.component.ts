@@ -2,11 +2,14 @@ import {Component, inject, Input} from '@angular/core';
 import {GroupService} from "../../services/group.service";
 import {Participant} from "../../class/participant";
 import {Detail} from "../../class/detail";
+import {DecimalPipe} from "@angular/common";
 
 @Component({
   selector: 'app-money-transfer',
   standalone: true,
-  imports: [],
+  imports: [
+    DecimalPipe
+  ],
   templateUrl: './money-transfer.component.html',
   styleUrl: './money-transfer.component.css'
 })

@@ -1,6 +1,25 @@
 <div class="mt-2 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
   <div class="">
     <h5 class="text-base font-semibold text-gray-900 md:text-xl">
+      Monthly budget
+    </h5>
+  </div>
+
+  <div>
+    @for (participant of balanceList; track participant.participant.id){
+      <div class="grid grid-cols-2 p-1">
+        <div class="grid justify-self-start">
+          {{ participant.participant.user.username }}
+        </div>
+        <div class="grid justify-self-end">
+            <span class="bg-gray-200 text-black text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{ participant.participant.budgetByMonth }}&euro;</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="mt-1">
+    <h5 class="text-base font-semibold text-gray-900 md:text-xl">
       Balances
     </h5>
   </div>
@@ -12,9 +31,9 @@
         </div>
         <div class="grid justify-self-end">
           @if (participant.value < 0) {
-            <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{ participant.value }}&euro;</span>
+            <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{ participant.value | number: '1.0-3' }}&euro;</span>
           } @else {
-            <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{ participant.value }}&euro;</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{ participant.value | number: '1.0-3'}}&euro;</span>
           }
         </div>
       </div>
