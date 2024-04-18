@@ -55,7 +55,7 @@ export class ModifyGroupComponent implements OnInit {
   }
 
   saveGroup(){
-    if (this.groupToUpdate?.participants != undefined && this.group != undefined){
+    if (this.groupToUpdate?.participants != undefined && this.group?.id != undefined){
       for (let participant of this.groupToUpdate.participants){
         this.group.budgetByMonth += participant.budgetByMonth;
       }
@@ -63,8 +63,10 @@ export class ModifyGroupComponent implements OnInit {
     this.group.name = this.groupToUpdate.label;
     this.group.description = this.groupToUpdate.description;
     this.groupService.updateGroup(this.group);
+    this.groupService.setGroupDetail(this.group.id);
     }
     console.log(this.group);
+
     this.router.navigate(['expenses/detail']).then();
   }
 

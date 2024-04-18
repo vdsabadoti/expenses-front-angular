@@ -40,7 +40,7 @@ export class GroupStatisticsComponent implements OnInit, OnChanges {
     ];
   }
   ngOnChanges(changes:SimpleChanges): void {
-
+    console.log('onChanges');
     //HYDRATE EXPENSES WITH DETAILS THANKS TO SUBSCRIPTION
     //TODO : instead of hydrating here, hydrate @Input lines so the information is already loaded for this component
     for (let expense of this.expenses){
@@ -75,12 +75,12 @@ export class GroupStatisticsComponent implements OnInit, OnChanges {
         }
       }
       this.budgetByMonthList.push(balance / participant.budgetByMonth * 100);
-      this.participantsList.push(participant.user.username + ' ' + totalMonthBalance.toString() + '%');
+      this.participantsList.push(participant.user.username + ' ' + (balance / participant.budgetByMonth * 100).toString() + '%');
       totalMonthBudget += participant.budgetByMonth;
     }
 
     this.budgetByMonthList.push(totalMonthBalance / totalMonthBudget * 100);
-    this.participantsList.push('Total ' + totalMonthBalance + '%');
+    this.participantsList.push('Total ' + (totalMonthBalance / totalMonthBudget * 100) + '%');
 
       this.chartOptions = {
         series: this.budgetByMonthList,
