@@ -20,10 +20,10 @@ export class GroupService {
   private group: Observable<Group> | undefined;
   private participantsService = inject(ParticipantsService);
   private usersService = inject(UserService);
-  private loginService = inject(LoginServiceService);
   private groupApiService = inject(GroupApiService);
 
   constructor() {
+    console.log('constructor of GroupService');
   }
 
   public getGroups(idUser:number) : Observable<Group[]> {
@@ -32,8 +32,14 @@ export class GroupService {
   }
 
   public getGroup() : Observable<Group> | undefined {
+    console.log('In the service');
+    console.log(this.group);
     return this.group;
   }
+
+  public updateGroup(group : Group ){
+    this.groupApiService.updateGroup(group);
+}
 
   public async createGroup(newExpense:GroupForm, userOnline: User | undefined){
     //TODO : create expense
@@ -67,11 +73,9 @@ export class GroupService {
   }
 
   public setGroupDetail(id:number) : void {
+    console.log('Getting group from ID : ')
+    console.log(id);
     this.group = this.groupApiService.getGroupById(id);
-  }
-
-  public setExpenseToModify(expenseId:number) : void {
-    //this.expense = this.groupApiService.getExpense(1)
   }
 
   public filterExpensesByMonthAndYear(month:number, year:number) : Observable<Expense[]> | undefined {

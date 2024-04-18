@@ -18,6 +18,7 @@ export class GroupApiService {
   private static GET_DETAILS:string = 'getlinedetail?id='
   private static GET_EXPENSE:string = 'getline?id=';
   private static CREATE_GROUP:string = 'creategroup';
+  private static UPDATE_GROUP:string = 'updategroup';
   private static CREATE_EXPENSE:string = 'createexpense';
   private static UPDATE_EXPENSE:string = 'updateexpense';
   private static DELETE_EXPENSE:string = 'deleteexpense?id=';
@@ -46,6 +47,15 @@ export class GroupApiService {
   public createGroup(group:Group){
     console.log(group);
     let url = GroupApiService.URL + GroupApiService.CREATE_GROUP;
+    this.http.post<String>(url, group).subscribe(it =>
+    {
+      console.log(it);
+    })
+  }
+
+  public updateGroup(group:Group){
+    console.log(group);
+    let url = GroupApiService.URL + GroupApiService.UPDATE_GROUP;
     this.http.post<String>(url, group).subscribe(it =>
     {
       console.log(it);

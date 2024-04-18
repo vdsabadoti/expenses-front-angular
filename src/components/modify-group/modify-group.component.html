@@ -1,0 +1,70 @@
+<div class="max-w-sm mx-auto">
+  <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
+    <div class="grid grid-cols-2 justify-items-stretch">
+      <div>
+        <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl">
+          Update group
+        </h5>
+      </div>
+    </div>
+
+    @if (group){
+      @if (groupToUpdate){
+        <form class="max-w-sm mx-auto" #updateGroup="ngForm" (ngSubmit)="saveGroup()">
+          <div class="py-3 sm:py-4">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">
+                <label for="label">Label</label>
+              </p>
+              <input [(ngModel)]="groupToUpdate.label" [ngModelOptions]="{standalone: true}" type="text" id="label" name="label" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="90210" required>
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">
+                <label for="description">Description</label>
+              </p>
+              <input [(ngModel)]="groupToUpdate.description" [ngModelOptions]="{standalone: true}" type="text" id="description" name="label" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="90210" required>
+            </div>
+
+          </div>
+
+          @for (participant of groupToUpdate.participants; track participant.id){
+            <div class="py-3 sm:py-4">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <img class="w-8 h-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/3418/3418886.png" alt="Neil image">
+                </div>
+                <div class="flex-1 min-w-0 ms-4">
+                  <p class="text-sm font-medium text-gray-900 truncate">
+                    {{ participant.user.username }}
+                  </p>
+                  <input [(ngModel)]="participant.budgetByMonth" [ngModelOptions]="{standalone: true}" type="number" id="uservalue" name="uservalue" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="90210" required>
+                </div>
+              </div>
+            </div>
+          }
+
+          <div class="grid grid-cols-2 justify-items-stretch p-2">
+
+            <div>
+              <a href="#">
+                <button type="submit"  class="flex mx-auto font-bold mt-6 text-white bg-green-900 py-2 px-5 rounded">Save</button>
+              </a>
+            </div>
+
+            <div>
+              <a href="#">
+                <button type="button" (click)="deleteGroup()" class="flex mx-auto mt-6 font-bold text-white bg-red-900 py-2 px-5 rounded">Delete</button>
+              </a>
+            </div>
+
+
+          </div>
+
+
+        </form>
+      }
+    }
+  </div>
+</div>
+

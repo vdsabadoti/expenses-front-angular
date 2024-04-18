@@ -11,6 +11,7 @@ import {ModifyExpenseComponent} from "../components/modify-expense/modify-expens
 import {authGuard} from "./auths/auth.guard";
 import {NewUserComponent} from "../components/new-user/new-user.component";
 import {MoneyTransferComponent} from "../components/money-transfer/money-transfer.component";
+import {ModifyGroupComponent} from "../components/modify-group/modify-group.component";
 
 export const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path : 'expenses', component: GroupParentComponent, canActivate: [authGuard],
   children: [
     { path : '', component: GroupsFlowComponent},
+    { path : 'detail/modify', component : ModifyGroupComponent },
     { path : 'detail', component: GroupComponent},
     { path : 'detail/linedetail', component: DetailComponent},
     { path : 'detail/newexpense', component: CreateExpenseComponent},
