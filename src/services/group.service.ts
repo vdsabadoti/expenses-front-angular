@@ -101,8 +101,9 @@ export class GroupService {
     return this.groupApiService.getExpense(expenseId);
   }
 
-  public createExpense(expense:Expense, groupId:number){
+  public async createExpense(expense:Expense, groupId:number){
     this.groupApiService.createExpense(expense, groupId);
+    await new Promise(f => setTimeout(f, 1000));
   }
 
   public updateExpense(expense:Expense, groupId:number){

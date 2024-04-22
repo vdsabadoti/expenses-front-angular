@@ -70,7 +70,7 @@ export class ModifyGroupComponent implements OnInit {
     if (this.group?.id){
       this.groupService.deleteGroup(this.group.id);
     }
-    this.navigationService.back();
+    this.router.navigate(['expenses']).then();
   }
 
   retour(){
