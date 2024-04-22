@@ -42,7 +42,7 @@ export class GroupService {
 }
 
   public async createGroup(newExpense:GroupForm, userOnline: User | undefined){
-    //TODO : create expense
+    //TODO : create group
 
     //INIT VARIABLES : budget by month and user
     let totalBudgetByMonth = 0;
@@ -107,6 +107,10 @@ export class GroupService {
   }
   public deleteExpense(expenseId:number){
     this.groupApiService.deleteExpense(expenseId);
+  }
+
+  public deleteGroup(groupId:number){
+    this.groupApiService.deleteGroup(groupId);
   }
 
    public async resetParticipants(){

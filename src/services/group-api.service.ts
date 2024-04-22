@@ -22,6 +22,7 @@ export class GroupApiService {
   private static CREATE_EXPENSE:string = 'createexpense';
   private static UPDATE_EXPENSE:string = 'updateexpense';
   private static DELETE_EXPENSE:string = 'deleteexpense?id=';
+  private static DELETE_GROUP:string = 'deletegroup?id=';
   constructor(public http: HttpClient) { }
 
   public getGroupsFromUser(idUser:number): Observable<Group[]> {
@@ -87,6 +88,15 @@ export class GroupApiService {
   public deleteExpense(expenseId:number){
     console.log('delete')
     let url = GroupApiService.URL + GroupApiService.DELETE_EXPENSE + expenseId;
+    this.http.delete<String>(url).subscribe(it =>
+    {
+      console.log(it);
+    })
+  }
+
+  public deleteGroup(groupId:number){
+    console.log('delete group')
+    let url = GroupApiService.URL + GroupApiService.DELETE_GROUP + groupId;
     this.http.delete<String>(url).subscribe(it =>
     {
       console.log(it);

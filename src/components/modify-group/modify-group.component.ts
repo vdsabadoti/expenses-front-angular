@@ -71,7 +71,10 @@ export class ModifyGroupComponent implements OnInit {
   }
 
   deleteGroup(){
-
+    if (this.group?.id){
+      this.groupService.deleteGroup(this.group.id);
+    }
+    this.navigationService.back();
   }
 
   retour(){
