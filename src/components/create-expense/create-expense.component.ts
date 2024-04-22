@@ -132,7 +132,7 @@ export class CreateExpenseComponent {
   }
 
   autoComplete(detailId:number) {
-    if (this.expense) {
+    /*if (this.expense) {
       let restToShare = 0;
 
       let triggerDetail = this.details.find(detail => detail.id == detailId);
@@ -150,7 +150,7 @@ export class CreateExpenseComponent {
         }
       }
       }
-    }
+    }*/
   }
   cancel() {
     this.navigationService.back();
