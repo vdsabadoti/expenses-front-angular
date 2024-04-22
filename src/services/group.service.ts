@@ -67,6 +67,9 @@ export class GroupService {
     //IF OK => set allusersbackinthegame (users service)
     await this.resetParticipants();
 
+    //TODO replace await... but how ?
+    await new Promise(f => setTimeout(f, 1000));
+
     //IF ERROR -> think about it
 
     console.log(this.groups);

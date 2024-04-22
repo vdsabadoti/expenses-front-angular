@@ -33,8 +33,13 @@ export class LoginServiceService {
       this.userOnline = id;
     }
 
-    public getUserOnline() : Observable<User> {
-      return this.users$.pipe(map((items: User[]) => items[this.userOnline]));
+    public getUserOnline() : Observable<User | undefined> {
+      //return this.users$.pipe(map((items: User[]) => items[this.userOnline]));
+      return this.users$.pipe(map(users => users.find(user => user.id = this.userOnline)));
+    }
+
+    public getIdUserOnline() : number {
+      return this.userOnline;
     }
 
 

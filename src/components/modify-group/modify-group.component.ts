@@ -6,6 +6,8 @@ import {Group} from "../../class/group";
 import {ModifyGroupForm} from "../../class/modify-group-form";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AsyncPipe} from "@angular/common";
+import {User} from "../../class/user";
+import {LoginServiceService} from "../../services/login-service.service";
 
 @Component({
   selector: 'app-modify-group',
@@ -23,21 +25,16 @@ export class ModifyGroupComponent implements OnInit {
   private groupService : GroupService = inject(GroupService)
   private navigationService : NavigationService = inject(NavigationService)
   private router : Router = inject(Router);
+  private loginService = inject(LoginServiceService);
 
   public groupToUpdate: ModifyGroupForm | undefined ;
   public group: Group | undefined;
+  public idUserOnline : number | undefined;
 
   private id: string | null | undefined;
 
-  constructor(/*private route: ActivatedRoute*/) {
-    console.log('constructor');
-    /*
-    this.route.queryParamMap.subscribe((paramMap) => {
-      // read param from paramMap
-      this.id = paramMap.get('id');
-      // use parameter...
-    });
-     */
+  constructor() {
+    this.idUserOnline = this.loginService.getIdUserOnline();
   }
 
   async ngOnInit(){
@@ -51,7 +48,6 @@ export class ModifyGroupComponent implements OnInit {
         this.groupToUpdate.participants = it.participantList;
       }
     );
-    console.log(this.group);
   }
 
   saveGroup(){

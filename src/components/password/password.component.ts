@@ -14,13 +14,18 @@ import {map, Observable} from "rxjs";
 export class PasswordComponent {
 
   private loginService = inject(LoginServiceService);
-  public onlineUser:Observable<number> = new Observable<number>();
+  public onlineUser:Observable<number | undefined> = new Observable<number>();
   public passwordControl:string = '';
   private password:string = 'corsaires';
   private router:Router = inject(Router);
 
   constructor() {
-    this.onlineUser = this.loginService.getUserOnline().pipe(map(user => {return user.id}));
+    this.onlineUser = this.loginService.getUserOnline().pipe(map(user => {
+      if (user != undefined){
+        return user.id
+      }
+      return undefined
+    }));
   }
 
   public passwordControlFunction() : void {
