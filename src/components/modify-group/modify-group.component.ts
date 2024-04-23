@@ -33,6 +33,8 @@ export class ModifyGroupComponent implements OnInit {
 
   private id: string | null | undefined;
 
+  public valid : boolean = true;
+
   constructor() {
     this.idUserOnline = this.loginService.getIdUserOnline();
   }
@@ -58,12 +60,19 @@ export class ModifyGroupComponent implements OnInit {
     this.group.participantList = this.groupToUpdate.participants;
     this.group.name = this.groupToUpdate.label;
     this.group.description = this.groupToUpdate.description;
-    this.groupService.updateGroup(this.group);
-    this.groupService.setGroupDetail(this.group.id);
+
+    if (this.group.name != '') {
+      this.groupService.updateGroup(this.group).then(r => {
+        this.router.navigate(['expenses/detail']).then();
+    }
+      );
+
+    }
+    else {
+      this.valid = false;
+    }
     }
     console.log(this.group);
-
-    this.router.navigate(['expenses/detail']).then();
   }
 
   deleteGroup(){

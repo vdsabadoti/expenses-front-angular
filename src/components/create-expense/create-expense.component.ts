@@ -76,6 +76,7 @@ export class CreateExpenseComponent {
 
    createNewExpense(){
     this.errorMessage = [];
+    this.valid = true;
     let debtToNumber = 1; // 1 = debt
     if (this.toggle){
       debtToNumber = 0;

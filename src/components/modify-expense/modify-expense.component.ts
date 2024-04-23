@@ -39,6 +39,9 @@ export class ModifyExpenseComponent implements OnInit {
   private newExpense: Expense | undefined;
   public id: string | null | undefined ;
 
+  public valid: boolean = true;
+  public errorMessage: String[] = [];
+
   constructor(private route: ActivatedRoute) {
     this.route.queryParamMap.subscribe((paramMap) => {
       // read param from paramMap
@@ -88,28 +91,62 @@ export class ModifyExpenseComponent implements OnInit {
 
   saveExpense(){
 
+    this.errorMessage = [];
+    this.valid = true;
+
     let expenseId = Number(this.id);
     let debtToNumber = 1; // 1 = debt
     if (this.toggle){
       debtToNumber = 0;
     }
-    if ((this.expenseToUpdate != undefined) && (this.group != undefined) && (this.expense != undefined)) {
-      let payorId = this.expense.payor?.id;
-      let payor = this.group.participantList.find(participant => participant.user.id == payorId);
-      this.newExpense = new Expense(
-        expenseId,
-        this.expenseToUpdate.value,
-        this.expenseToUpdate.date,
-        this.expenseToUpdate.label,
-        payor?.user,
-        this.expenseToUpdate.detailList,
-        debtToNumber)
-        if (this.group?.id){
-          this.groupService.updateExpense(this.newExpense, this.group.id);
-        }
+
+    if (this.expenseToUpdate?.value == 0){
+      this.errorMessage.push("Value is required");
+      this.valid = false;
     }
-    console.log(this.newExpense);
-    this.router.navigate(['expenses/detail']).then();
+
+    if (this.expenseToUpdate?.payorId == 0){
+      this.errorMessage.push("Payor is required");
+      this.valid = false;
+    }
+
+    if (this.expenseToUpdate?.label == ''){
+      this.valid = false;
+      this.errorMessage.push("Label is required");
+    }
+
+    if (this.expenseToUpdate?.detailList != undefined){
+      let sum = 0;
+      for (let detail of this.expenseToUpdate.detailList){
+        sum += detail.value;
+      }
+      if (sum != this.expenseToUpdate.value){
+        this.valid = false;
+        this.errorMessage.push("You must calculate again...");
+      }
+    }
+
+    if (this.valid) {
+      if ((this.expenseToUpdate != undefined) && (this.group != undefined) && (this.expense != undefined)) {
+        let payorId = this.expense.payor?.id;
+        let payor = this.group.participantList.find(participant => participant.user.id == payorId);
+        this.newExpense = new Expense(
+          expenseId,
+          this.expenseToUpdate.value,
+          this.expenseToUpdate.date,
+          this.expenseToUpdate.label,
+          payor?.user,
+          this.expenseToUpdate.detailList,
+          debtToNumber);
+        if (this.group?.id) {
+          this.groupService.updateExpense(this.newExpense, this.group.id).then( r => {
+            this.router.navigate(['expenses/detail']).then();
+            console.log(this.newExpense);
+          }
+          );
+        }
+      }
+    }
   }
 
   debtOrRefund() {
@@ -127,7 +164,7 @@ export class ModifyExpenseComponent implements OnInit {
   }
 
   autoComplete(detailId:number) {
-    if (this.expense && this.details) {
+    /*if (this.expense && this.details) {
       let restToShare = 0;
 
       let triggerDetail = this.details.find(detail => detail.id == detailId);
@@ -145,7 +182,7 @@ export class ModifyExpenseComponent implements OnInit {
           }
         }
       }
-    }
+    }*/
   }
 
 

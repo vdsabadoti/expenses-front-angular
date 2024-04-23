@@ -37,8 +37,12 @@ export class GroupService {
     return this.group;
   }
 
-  public updateGroup(group : Group ){
+  public async updateGroup(group : Group ){
     this.groupApiService.updateGroup(group);
+    if (group.id != undefined){
+      this.setGroupDetail(group.id);
+    }
+    await new Promise(f => setTimeout(f, 500));
 }
 
   public async createGroup(newExpense:GroupForm, userOnline: User | undefined){
@@ -106,8 +110,9 @@ export class GroupService {
     await new Promise(f => setTimeout(f, 1000));
   }
 
-  public updateExpense(expense:Expense, groupId:number){
+  public async updateExpense(expense:Expense, groupId:number){
     this.groupApiService.updateExpense(expense, groupId);
+    await new Promise(f => setTimeout(f, 1000));
   }
   public deleteExpense(expenseId:number){
     this.groupApiService.deleteExpense(expenseId);

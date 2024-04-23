@@ -101,6 +101,12 @@
 
 
       </form>
+
+          <div [hidden]="valid" class="alert alert-danger">
+            @for (error of errorMessage; track errorMessage){
+              <p>{{ error }}</p>
+            }
+          </div>
       }
       }
   </div>
