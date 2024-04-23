@@ -13,7 +13,8 @@ import {CreateExpenseInterface} from "../class/create-expense-interface";
 export class GroupApiService {
 
   private static URL:string = 'https://localhost/';
-  private static GET_ALL_GROUPS:string = 'getexpenses?id=';
+  //private static GET_ALL_GROUPS:string = 'getexpenses?id=';
+  private static GET_ALL_GROUPS:string = 'getexpenses/';
   private static GET_GROUP_BY_ID:string = 'getsingleexpense?id=';
   private static GET_DETAILS:string = 'getlinedetail?id='
   private static GET_EXPENSE:string = 'getline?id=';
