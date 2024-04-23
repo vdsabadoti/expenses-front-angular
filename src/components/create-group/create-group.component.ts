@@ -8,6 +8,8 @@ import {User} from "../../class/user";
 import {NavigationService} from "../../services/navigation.service";
 import { LoginServiceService } from '../../services/login-service.service';
 import {GroupService} from "../../services/group.service";
+import {ParticipantsService} from "../../services/participants.service";
+import {count, firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-create-expense',
@@ -20,10 +22,13 @@ export class CreateGroupComponent {
 
   private loginService : LoginServiceService = inject(LoginServiceService);
   private expensesService : GroupService = inject(GroupService);
-  private navigationService : NavigationService = inject(NavigationService)
+  private navigationService : NavigationService = inject(NavigationService);
+  private participantsService : ParticipantsService = inject(ParticipantsService);
 
   public model:GroupForm = new GroupForm('', '');
   private userOnline : User | undefined;
+  public valid:boolean = true;
+
   constructor(private router:Router) {
     this.loginService.getUserOnline().subscribe((it: User | undefined) =>
     {
@@ -32,9 +37,14 @@ export class CreateGroupComponent {
   }
 
   public async createNewGroup(newGroup:GroupForm){
-    this.expensesService.createGroup(newGroup, this.userOnline).then(
-      () => this.router.navigate(['/expenses'])
-    );
+    console.log('click');
+    if (newGroup.label != '' && this.participantsService.listParticipantsOfThisNewGroup().length != 0){
+      this.expensesService.createGroup(newGroup, this.userOnline).then(
+        () => this.router.navigate(['/expenses'])
+      );
+    } else {
+      this.valid = false ;
+    }
   }
 
   public cancelCreation(){

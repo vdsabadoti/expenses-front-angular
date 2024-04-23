@@ -40,8 +40,8 @@ export class CreateExpenseComponent {
   private expenseFormControls: any;
   public formGroup: FormGroup<any>;
 
-  // private participants: Participant[];
-  // private loginService = inject(LoginServiceService);
+  public errorMessage:String[] = [];
+  public valid : boolean = true;
 
   constructor() {
 
@@ -55,7 +55,7 @@ export class CreateExpenseComponent {
         this.details.push(detail);
         i++
       }
-      this.expense = new ExpenseForm(0, new Date(),'',1 , this.details, false)
+      this.expense = new ExpenseForm(0, new Date(),'',0 , this.details, false)
       console.log(this.details)
     })
 
@@ -75,6 +75,7 @@ export class CreateExpenseComponent {
   }
 
    createNewExpense(){
+    this.errorMessage = [];
     let debtToNumber = 1; // 1 = debt
     if (this.toggle){
       debtToNumber = 0;
@@ -82,19 +83,53 @@ export class CreateExpenseComponent {
     if ((this.expense != undefined) && (this.group != undefined)) {
       let payorId = this.expense.payorId;
       let payor = this.group.participantList.find(participant => participant.id == payorId);
-      this.newExpense = new Expense(
-        0,
-        this.expense.value,
-        this.expense.date,
-        this.expense.label,
-        payor?.user,
-        this.expense.detailList,
-        debtToNumber)
-        if (this.group?.id){
-          this.groupService.createExpense(this.newExpense, this.group.id);
-          this.router.navigate(['/expenses/detail'])
-        }
+      this.valid = true;
+      //form verifications
+      if (this.expense.value == 0){
+        this.errorMessage.push("Value is required");
+        this.valid = false;
+      }
 
+      if (this.expense.payorId == 0){
+        this.errorMessage.push("Payor is required");
+        this.valid = false;
+      }
+
+      if (this.expense.label == ''){
+        this.valid = false;
+        this.errorMessage.push("Label is required");
+      }
+
+      if (this.expense.detailList != undefined){
+        let sum = 0;
+        for (let detail of this.expense.detailList){
+          sum += detail.value;
+        }
+        if (sum != this.expense.value){
+          this.valid = false;
+          this.errorMessage.push("You must calculate again...");
+        }
+      }
+
+      if (this.valid) {
+        this.newExpense = new Expense(
+          0,
+          this.expense.value,
+          this.expense.date,
+          this.expense.label,
+          payor?.user,
+          this.expense.detailList,
+          debtToNumber)
+        if (this.group?.id) {
+          this.groupService.createExpense(this.newExpense, this.group.id).then(r => {
+            this.router.navigate(['/expenses/detail']).then();
+            }
+          );
+        }
+      } else
+      {
+        console.log('error');
+      }
 
         //FORM CONTROL specifics ----------------------------------------------------------------------------------------------------
         this.expenseFormControls.label.valueChanges.subscribe((value: string) => {

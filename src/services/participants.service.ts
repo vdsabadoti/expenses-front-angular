@@ -11,7 +11,6 @@ export class ParticipantsService {
 
   private _participantsOfANewGroup: BehaviorSubject<Participant[]> = new BehaviorSubject<Participant[]>([]);
   public readonly $data: Observable<Participant[]> = this._participantsOfANewGroup.asObservable();
-  private loginService = inject(LoginServiceService);
   private participantsApiService = inject(ParticipantsApiService);
 
   constructor() { }
