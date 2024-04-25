@@ -14,16 +14,16 @@ export class GroupApiService {
 
   private static URL:string = 'https://localhost/';
   //private static GET_ALL_GROUPS:string = 'getexpenses?id=';
-  private static GET_ALL_GROUPS:string = 'getexpenses/';
-  private static GET_GROUP_BY_ID:string = 'getsingleexpense?id=';
-  private static GET_DETAILS:string = 'getlinedetail?id='
-  private static GET_EXPENSE:string = 'getline?id=';
+  private static GET_ALL_GROUPS:string = 'getgroups/';
+  private static GET_GROUP_BY_ID:string = 'getgroupbyid/';
+  private static GET_DETAILS:string = 'getdetails/'
+  private static GET_EXPENSE:string = 'getexpensebyid/';
   private static CREATE_GROUP:string = 'creategroup';
   private static UPDATE_GROUP:string = 'updategroup';
   private static CREATE_EXPENSE:string = 'createexpense';
   private static UPDATE_EXPENSE:string = 'updateexpense';
-  private static DELETE_EXPENSE:string = 'deleteexpense?id=';
-  private static DELETE_GROUP:string = 'deletegroup?id=';
+  private static DELETE_EXPENSE:string = 'deleteexpense/';
+  private static DELETE_GROUP:string = 'deletegroup/';
   constructor(public http: HttpClient) { }
 
   public getGroupsFromUser(idUser:number): Observable<Group[]> {

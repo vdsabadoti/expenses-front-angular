@@ -29,8 +29,4 @@ export class ParticipantsService {
     return this._participantsOfANewGroup.getValue();
   }
 
-  public getParticipantsOfGroup(groupId:number) : Observable<Participant[]> {
-    return this.participantsApiService.getParticipantsFromGroup(groupId);
-  }
-
 }
