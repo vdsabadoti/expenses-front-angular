@@ -12,9 +12,11 @@ import {authGuard} from "./auths/auth.guard";
 import {NewUserComponent} from "../components/new-user/new-user.component";
 import {MoneyTransferComponent} from "../components/money-transfer/money-transfer.component";
 import {ModifyGroupComponent} from "../components/modify-group/modify-group.component";
+import {DashboardAdminComponent} from "../components/dashboard-admin/dashboard-admin.component";
 
 export const routes: Routes = [
   { path: '', component: LoginPageComponent },
+  { path: 'dash', component: DashboardAdminComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'newuser', component: NewUserComponent },
   { path : 'password', component: PasswordComponent },
