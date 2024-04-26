@@ -11,7 +11,6 @@ export class GuardService {
   constructor() {
   }
 
-
   isAuthenticated(){
     return this.loggedUserBoolean;
   }
