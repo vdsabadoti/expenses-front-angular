@@ -9,12 +9,12 @@ import {Participant} from "../../class/participant";
 export class ParticipantsApiService {
 
   private static URL:string = 'https://localhost/';
-  private static GET_PARTICIPANTS_FROM_GROUP = 'getparticipants?groupid='
+  private static GET_PARTICIPANTS_FROM_GROUP_DEPRECATED = 'getparticipants?groupid='
 
   constructor(public http: HttpClient) { }
 
   public getParticipantsFromGroup(groupId:number) : Observable<Participant[]>{
-    let url = ParticipantsApiService.URL + ParticipantsApiService.GET_PARTICIPANTS_FROM_GROUP + groupId;
+    let url = ParticipantsApiService.URL + ParticipantsApiService.GET_PARTICIPANTS_FROM_GROUP_DEPRECATED + groupId;
     return this.http.get<Participant[]>(url)
   }
 

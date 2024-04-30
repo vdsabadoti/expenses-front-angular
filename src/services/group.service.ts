@@ -14,11 +14,13 @@ import {Participant} from "../class/participant";
   providedIn: 'root'
 })
 export class GroupService {
-  //EXPENSES FROM THE USER : TO HYDRATE WITH EXPENSES FROM DB
+
   private groups: Observable<Group[]> | undefined;
   private group: Observable<Group> | undefined;
   private participantsService = inject(ParticipantsService);
   private usersService = inject(UserService);
+
+  //DATA
   private groupApiService = inject(GroupApiService);
 
   constructor() {
@@ -26,7 +28,7 @@ export class GroupService {
   }
 
   public getGroups(idUser:number) : Observable<Group[]> {
-    this.groups = this.groupApiService.getGroupsFromUser(idUser);
+    this.groups = this.groupApiService.getGroupsFromUserDeprecated(idUser);
     return this.groups;
   }
 
@@ -113,6 +115,7 @@ export class GroupService {
     this.groupApiService.updateExpense(expense, groupId);
     await new Promise(f => setTimeout(f, 1000));
   }
+
   public deleteExpense(expenseId:number){
     this.groupApiService.deleteExpense(expenseId);
   }

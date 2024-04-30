@@ -1,10 +1,9 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive} from "@angular/router";
 import {User} from "../../class/user";
 import {Observable, Subject} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 import {LoginServiceService} from "../../services/login-service.service";
-import {GuardService} from "../../app/auths/guard.service";
 
 @Component({
   selector: 'app-login-page',
@@ -22,7 +21,6 @@ export class LoginPageComponent {
   private loginService = inject(LoginServiceService);
 
   public message: string | null = null;
-  public users$:Observable<User[]>;
   public users:User[] | undefined;
   public user:string = "https://assetsio.reedpopcdn.com/Spider-Banner_AVVWjOb.jpg?width=880&quality=80&format=jpg&dpr=2&auto=webp";
 
@@ -33,15 +31,16 @@ export class LoginPageComponent {
       this.message = paramMap.get('message');
       // use parameter...
     });
-
-    this.users$ = this.loginService.getUsers();
-    this.users = this.loginService.getUsersAvailable();
+    this.loginService.getUsers().subscribe(
+      res => {
+        this.users = res;
+      }
+    )
   }
 
   public updateUserOnline(id:number) : void {
     console.log("Id is " +  id)
     this.loginService.setUserOnline(id);
   }
-
 
 }
