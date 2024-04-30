@@ -17,15 +17,17 @@ export class LoginServiceService {
   private userOnline: number = 0;
 
   constructor() {
-    this.users$ = this.userService.getUsersFromDatabaseAsObservable();
-    this.userService.getUsersFromDatabaseAsObservable().subscribe(it =>
+    this.users$ = this.userService.getAllUsers();
+    this.userService.getAllUsers().subscribe(it =>
     this.users = it)
   }
+
     public getUsers() : Observable<User[]>{
       return this.users$;
     }
-    public getUsersAvailable() : User[]| undefined{
-      return this.users;
+
+    public getUsersAvailable() {
+      return this.userService.getUsersFromDataBase();
     }
 
     public setUserOnline(id:number) : void {

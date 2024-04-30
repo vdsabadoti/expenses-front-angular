@@ -14,7 +14,7 @@ export class UserService {
   //START OF THE APPLICATION : ALL USERS FROM DB ARE AVAILABLE
   //FOR A NEW EXPENSE
   constructor() {
-    this._usersAvailable = new BehaviorSubject<Observable<User[]>>(this.getUsersFromDatabaseAsObservable());
+    this._usersAvailable = new BehaviorSubject<Observable<User[]>>(this.getAllUsers());
   }
 
   //WHEN CREATING AN EXPENSE, EVERY TIME WE ADD A PARTICIPANT
@@ -33,31 +33,20 @@ export class UserService {
   //ALL THE USERS THAT WERE DROPPED OUT
   //CAUSE CHOSEN FOR THE EXPENSE
   public async allUsersAreBackInTheGame() {
-    let usersFromDataBase:Observable<User[]> = this.getUsersFromDatabaseAsObservable();
+    let usersFromDataBase:Observable<User[]> = this.getAllUsers();
     this._usersAvailable.next(usersFromDataBase);
   }
 
-
-  //GET ALL THE USERS FROM DATABASE (option 1 => KO)
-  //EX. FOR THE LOGIN PAGE
-  //==> KO synchro, returns []
-  public getUsersFromDataBase(){
-    let response:User[] = [];
-    this.userApiService.getAllUsers().subscribe(value => {
-      response = value;
-    });
-    return response;
+   public getUsersFromDataBase(){
+    return this.userApiService.getAllUsers()
   }
 
-  //GET USERS FROM DATABASE (option 2 => OK)
-  //EX. FOR THE LOGIN PAGE
-  //==> OK cause observable, so the component does subscription with ASYNC
-  public getUsersFromDatabaseAsObservable(): Observable<User[]> {
-    return this.userApiService.getAllUsers();
+
+  public getAllUsers(): Observable<User[]> {
+    return this.userApiService.getAllUsersDeprecated();
   }
 
-  //GET ONE USER FROM DB
-  //OBSERVABLE
+
   public getUserFromDatabaseAsObservable(id:number): Observable<User> {
     return this.userApiService.getUserById(id);
   }

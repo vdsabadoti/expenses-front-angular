@@ -27,15 +27,11 @@ export class LoginPageComponent {
 
   constructor(private route: ActivatedRoute) {
     this.route.queryParamMap.subscribe((paramMap) => {
-      // read param from paramMap
       this.message = paramMap.get('message');
-      // use parameter...
     });
-    this.loginService.getUsers().subscribe(
-      res => {
-        this.users = res;
-      }
-    )
+    this.loginService.getUsersAvailable().subscribe( res => {
+      this.users = res.data;
+    })
   }
 
   public updateUserOnline(id:number) : void {
