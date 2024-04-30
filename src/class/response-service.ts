@@ -1,6 +1,6 @@
 export interface ResponseService<T> {
 
-  code:String;
+  code:string;
   message:String;
   data:T;
 

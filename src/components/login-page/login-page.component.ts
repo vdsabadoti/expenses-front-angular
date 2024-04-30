@@ -21,17 +21,30 @@ export class LoginPageComponent {
   private loginService = inject(LoginServiceService);
 
   public message: string | null = null;
-  public users:User[] | undefined;
-  public user:string = "https://assetsio.reedpopcdn.com/Spider-Banner_AVVWjOb.jpg?width=880&quality=80&format=jpg&dpr=2&auto=webp";
+  public users: User[] | undefined ;
+  public user: string = "https://assetsio.reedpopcdn.com/Spider-Banner_AVVWjOb.jpg?width=880&quality=80&format=jpg&dpr=2&auto=webp";
 
+  public errorMessage : String | undefined;
 
   constructor(private route: ActivatedRoute) {
+
     this.route.queryParamMap.subscribe((paramMap) => {
       this.message = paramMap.get('message');
     });
-    this.loginService.getUsersAvailable().subscribe( res => {
-      this.users = res.data;
-    })
+
+    //goodbye async pipe => we need to deal with errors...
+    this.loginService.getUsersAvailable().subscribe(
+      res => {
+        if (res.code != "200"){
+          this.users = undefined;
+          this.errorMessage = res.message;
+          return;
+        }
+        this.users = res.data;
+        return;
+      }
+    );
+
   }
 
   public updateUserOnline(id:number) : void {
