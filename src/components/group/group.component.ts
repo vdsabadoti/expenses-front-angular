@@ -1,6 +1,5 @@
 import {Component, inject, Input} from '@angular/core';
 import {GroupService} from "../../services/group.service";
-import {FirstApiService} from "../../services/first-api.service";
 import {Observable} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 import {Group} from "../../class/group";

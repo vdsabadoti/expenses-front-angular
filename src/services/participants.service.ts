@@ -1,8 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Participant} from "../class/participant";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {LoginServiceService} from "./login-service.service";
-import {ParticipantsApiService} from "./participants-api.service";
+import {BehaviorSubject, Observable} from "rxjs";
+import {ParticipantsApiService} from "./api/participants-api.service";
 
 @Injectable({
   providedIn: 'root'

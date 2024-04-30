@@ -1,6 +1,5 @@
 import {inject, Injectable} from '@angular/core';
 import {User} from "../class/user";
-import {UserApiService} from "./user-api.service";
 import {UserService} from "./user.service";
 import {map, Observable} from "rxjs";
 import {GuardService} from "../app/auths/guard.service";

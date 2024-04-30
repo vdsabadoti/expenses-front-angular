@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Group} from "../class/group";
-import {User} from "../class/user";
-import {Detail} from "../class/detail";
-import {Expense} from "../class/expense";
-import {CreateExpenseInterface} from "../class/create-expense-interface";
+import {Group} from "../../class/group";
+import {Detail} from "../../class/detail";
+import {Expense} from "../../class/expense";
+import {CreateExpenseInterface} from "../../class/create-expense-interface";
 
 @Injectable({
   providedIn: 'root'
