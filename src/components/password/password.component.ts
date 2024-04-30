@@ -3,11 +3,13 @@ import {LoginServiceService} from "../../services/login-service.service";
 import {FormsModule} from "@angular/forms";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {map, Observable} from "rxjs";
+import {AsyncPipe, JsonPipe} from "@angular/common";
+
 
 @Component({
   selector: 'app-password',
   standalone: true,
-  imports: [FormsModule, RouterLink, RouterLinkActive],
+  imports: [FormsModule, RouterLink, RouterLinkActive, AsyncPipe, JsonPipe],
   templateUrl: './password.component.html',
   styleUrl: './password.component.css'
 })
@@ -20,12 +22,14 @@ export class PasswordComponent {
   private router:Router = inject(Router);
 
   constructor() {
+
     this.onlineUser = this.loginService.getUserOnline().pipe(map(user => {
       if (user != undefined){
         return user.id
       }
       return undefined
     }));
+
   }
 
   public passwordControlFunction() : void {
