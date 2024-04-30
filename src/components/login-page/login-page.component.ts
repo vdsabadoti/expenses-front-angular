@@ -44,7 +44,6 @@ export class LoginPageComponent {
         return;
       }
     );
-
   }
 
   public updateUserOnline(id:number) : void {

@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {User} from "../class/user";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {UserApiService} from "./api/user-api.service";
+import {ResponseService} from "../class/response-service";
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class UserService {
     this._usersAvailable.next(usersFromDataBase);
   }
 
-   public getUsersFromDataBase(){
+   public getUsersFromDataBase() : Observable<ResponseService<User[]>> {
     return this.userApiService.getAllUsers()
   }
 
