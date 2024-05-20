@@ -5,6 +5,7 @@ import {Observable, Subject} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 import {LoginServiceService} from "../../services/login-service.service";
 import {GuardService} from "../../app/auths/guard.service";
+import {LoginInterface} from "../../class/login-interface";
 
 @Component({
   selector: 'app-login-page',
@@ -41,6 +42,7 @@ export class LoginPageComponent {
   public updateUserOnline(id:number) : void {
     console.log("Id is " +  id)
     this.loginService.setUserOnline(id);
+
   }
 
 
