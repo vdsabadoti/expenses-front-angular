@@ -5,6 +5,7 @@ import {Observable, Subject} from "rxjs";
 import {GuardService} from "../../app/auths/guard.service";
 import {NavigationService} from "../../services/navigation.service";
 import {LoginServiceService} from "../../services/login-service.service";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,7 @@ import {LoginServiceService} from "../../services/login-service.service";
 })
 export class HeaderComponent {
 
-  private loginService = inject(LoginServiceService);
+  private storageService = inject(StorageService)
   private guardService = inject(GuardService)
   private navigation: NavigationService = inject(NavigationService)
   private router: Router = inject(Router);
@@ -35,6 +36,7 @@ export class HeaderComponent {
 
   logout(){
     this.guardService.logout();
+    this.storageService.clean();
     this.router.navigate(['/login'])
   }
 
